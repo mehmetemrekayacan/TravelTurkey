@@ -10,7 +10,7 @@ Modern ve kullanıcı dostu Türkiye turizm uygulaması. React Native CLI ile ge
 ## ✨ Özellikler
 
 - 🏛️ **Tarihi Yerler**: Antik şehirler, müzeler, kültürel mekanlar
-- 🌊 **Doğal Güzellikler**: Sahiller, dağlar, milli parklar  
+- 🌊 **Doğal Güzellikler**: Sahiller, dağlar, milli parklar
 - 🎈 **Aktiviteler**: Balon turu, dalış, yürüyüş rotaları
 - 🏨 **Konaklama**: Otel rezervasyonları ve öneriler
 - 📱 **Modern UI**: Türkiye temalı renk paleti
@@ -19,7 +19,7 @@ Modern ve kullanıcı dostu Türkiye turizm uygulaması. React Native CLI ile ge
 ## 🚀 Teknolojiler
 
 - **React Native 0.80.0** - Cross-platform mobil geliştirme
-- **TypeScript 5.0.4** - Type-safe kod geliştirme  
+- **TypeScript 5.0.4** - Type-safe kod geliştirme
 - **React Navigation** - Sayfa yönlendirme
 - **Styled Components** - Modern stil yönetimi
 - **ESLint + Prettier** - Kod kalitesi
@@ -30,7 +30,7 @@ Modern ve kullanıcı dostu Türkiye turizm uygulaması. React Native CLI ile ge
 
 ### Gereksinimler
 
-- Node.js 18+ 
+- Node.js 18+
 - React Native CLI
 - Android Studio (Android için)
 - Xcode (iOS için - sadece macOS)

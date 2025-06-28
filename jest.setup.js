@@ -4,7 +4,10 @@
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');
 
 // Mock StatusBar
-jest.mock('react-native/Libraries/Components/StatusBar/StatusBar', () => 'StatusBar');
+jest.mock(
+  'react-native/Libraries/Components/StatusBar/StatusBar',
+  () => 'StatusBar',
+);
 
 // Console warnings'ları suppress et (test output'unu temizlemek için)
 global.console = {

@@ -17,22 +17,26 @@ TravelTurkey projesine katkıda bulunmak istediğiniz için teşekkürler! Bu d�
 ## 📝 Geliştirme Süreci
 
 ### 1. Branch Oluşturma
+
 ```bash
 # Feature branch oluştur
 git checkout -b feature/yeni-ozellik
 
-# Bug fix branch oluştur  
+# Bug fix branch oluştur
 git checkout -b fix/bug-adi
 ```
 
 ### 2. Kod Standardları
+
 - **TypeScript** kullanın
 - **ESLint** kurallarına uyun
 - **Prettier** formatını kullanın
 - **Jest** testleri yazın
 
 ### 3. Commit Mesajları
+
 Conventional Commits formatını kullanın:
+
 ```
 feat: yeni özellik eklendi
 fix: bug düzeltildi
@@ -44,6 +48,7 @@ chore: build process güncellendi
 ```
 
 ### 4. Test Etme
+
 ```bash
 # Linting
 npm run lint
@@ -61,6 +66,7 @@ npm run android
 ## 🔄 Pull Request Süreci
 
 1. **Branch'inizi güncel tutun**:
+
    ```bash
    git checkout main
    git pull origin main
@@ -69,6 +75,7 @@ npm run android
    ```
 
 2. **PR oluşturun**:
+
    - Açıklayıcı başlık yazın
    - Değişiklikleri detaylı açıklayın
    - Ekran görüntüleri ekleyin (UI değişiklikleri için)
@@ -106,6 +113,7 @@ npm run android
 ## 🌍 Çeviri Katkıları
 
 Türkçe ve İngilizce dil desteği için:
+
 - `src/locales/` klasöründe çeviri dosyaları
 - i18n formatında key-value yapısı
 - Kültürel uyum (Türk kültürü referansları)
