@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Android",
+      "cwd": "${workspaceFolder}",
+      "type": "reactnative",
+      "request": "launch",
+      "platform": "android",
+      "target": "device"
+    },
+    {
+      "name": "Attach to Hermes",
+      "cwd": "${workspaceFolder}",
+      "type": "reactnativedirect",
+      "request": "attach"
+    },
+    {
+      "name": "Debug Metro",
+      "cwd": "${workspaceFolder}",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/react-native",
+      "args": ["start"],
+      "console": "integratedTerminal"
+    }
+  ]
+}
