@@ -1,12 +1,41 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 🇹🇷 TravelTurkey - Türkiye Turizm Uygulaması
 
-# Getting Started
+[![CI Status](https://github.com/mehmetemrekayacan/TravelTurkey/workflows/TravelTurkey%20CI/badge.svg)](https://github.com/mehmetemrekayacan/TravelTurkey/actions)
+[![React Native](https://img.shields.io/badge/React%20Native-0.80.0-blue.svg)](https://reactnative.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0.4-blue.svg)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+Modern ve kullanıcı dostu Türkiye turizm uygulaması. React Native CLI ile geliştirilmiş, TypeScript destekli mobil uygulama.
 
-## Step 1: Start Metro
+## ✨ Özellikler
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- 🏛️ **Tarihi Yerler**: Antik şehirler, müzeler, kültürel mekanlar
+- 🌊 **Doğal Güzellikler**: Sahiller, dağlar, milli parklar  
+- 🎈 **Aktiviteler**: Balon turu, dalış, yürüyüş rotaları
+- 🏨 **Konaklama**: Otel rezervasyonları ve öneriler
+- 📱 **Modern UI**: Türkiye temalı renk paleti
+- 🔄 **Real-time**: Canlı hava durumu ve günceller
+
+## 🚀 Teknolojiler
+
+- **React Native 0.80.0** - Cross-platform mobil geliştirme
+- **TypeScript 5.0.4** - Type-safe kod geliştirme  
+- **React Navigation** - Sayfa yönlendirme
+- **Styled Components** - Modern stil yönetimi
+- **ESLint + Prettier** - Kod kalitesi
+- **Jest** - Unit testler
+- **GitHub Actions** - CI/CD pipeline
+
+## 📱 Kurulum
+
+### Gereksinimler
+
+- Node.js 18+ 
+- React Native CLI
+- Android Studio (Android için)
+- Xcode (iOS için - sadece macOS)
+
+### Proje Kurulumu
 
 To start the Metro dev server, run the following command from the root of your React Native project:
 
