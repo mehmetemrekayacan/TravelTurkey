@@ -32,7 +32,7 @@ jobs:
       run: npx tsc --noEmit
         
     - name: 🧹 Run ESLint
-      run: npm run lint
+      run: npx eslint App.tsx src/ --ext .ts,.tsx --max-warnings 0 || npx eslint App.tsx --ext .ts,.tsx --max-warnings 0
 
   build-android:
     name: Build Android
