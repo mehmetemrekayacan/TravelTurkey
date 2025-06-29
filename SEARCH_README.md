@@ -5,13 +5,15 @@ Bu proje, React Native'de TextInput ile gelişmiş arama fonksiyonu ve FlatList 
 ## 🚀 YENİ ÖZELLİKLER VE OPTİMİZASYONLAR
 
 ### ✅ Gelişmiş Arama Algoritması
+
 - **10+ arama kriteri**: İsim, açıklama, şehir, ilçe, kategori, etiketler, bölge, ipuçları
 - **Çoklu kelime desteği**: "İstanbul müze" gibi aramalar
 - **Relevans skorlaması**: Sonuçları önem sırasına göre sıralar
 - **Fuzzy search**: Yazım hatalarını tolere eder
 - **Akıllı öncelik**: İsim > Şehir > Kategori > Diğer alanlar
 
-### ⚡ Performans Optimizasyonları  
+### ⚡ Performans Optimizasyonları
+
 - **300ms debounce** (500ms'den iyileştirildi)
 - **useMemo** ile gereksiz filtreleme önlenir
 - **Performans monitörü** ile arama süresi takibi
@@ -19,6 +21,7 @@ Bu proje, React Native'de TextInput ile gelişmiş arama fonksiyonu ve FlatList 
 - **Cache sistemi** için hazır altyapı
 
 ### 🎯 Yeni Arama Türleri
+
 1. **Normal Arama**: Kapsamlı alan araması
 2. **Fuzzy Search**: Yakın eşleşme ("Ayasofyaa" → "Ayasofya")
 3. **Arama Önerileri**: Otomatik tamamlama (2+ karakter)
@@ -28,6 +31,7 @@ Bu proje, React Native'de TextInput ile gelişmiş arama fonksiyonu ve FlatList 
 ## 📱 Özellikler
 
 ### 1. Temel Arama (BasicSearchExample)
+
 - ✅ Gerçek zamanlı arama
 - ✅ **10+ arama kriteri** (isim, şehir, açıklama, etiketler, bölge, ipuçları)
 - ✅ useMemo ile performans optimizasyonu
@@ -37,6 +41,7 @@ Bu proje, React Native'de TextInput ile gelişmiş arama fonksiyonu ve FlatList 
 - ✅ **Çoklu kelime desteği**
 
 ### 2. Gelişmiş Arama (SearchComponent)
+
 - ✅ **300ms debounced arama** (iyileştirilmiş hız)
 - ✅ Arama önerileri dropdown
 - ✅ Son aramalar kaydetme
@@ -47,12 +52,14 @@ Bu proje, React Native'de TextInput ile gelişmiş arama fonksiyonu ve FlatList 
 - ✅ **Akıllı öneriler sistemi**
 
 ### 3. Fuzzy Search (YENİ!)
+
 - ✅ Yazım hatası toleransı
 - ✅ Levenshtein distance algoritması
 - ✅ Ayarlanabilir benzerlik eşiği
 - ✅ Akıllı eşleşme skorlaması
 
 ### 4. Gelişmiş Filtreler (YENİ!)
+
 - ✅ Kategori filtreleme
 - ✅ Bölge filtreleme
 - ✅ Şehir filtreleme
@@ -62,6 +69,7 @@ Bu proje, React Native'de TextInput ile gelişmiş arama fonksiyonu ve FlatList 
 - ✅ Erişilebilirlik seçenekleri
 
 ### 5. Performans Monitörü (YENİ!)
+
 - ✅ Arama süresi ölçümü
 - ✅ Relevans skoru analizi
 - ✅ Arama istatistikleri
@@ -72,11 +80,11 @@ Bu proje, React Native'de TextInput ile gelişmiş arama fonksiyonu ve FlatList 
 ### YENİ! Gelişmiş Arama Kullanımı
 
 \`\`\`tsx
-import { 
-  searchPlaces, 
-  fuzzySearchPlaces, 
-  searchPlacesWithFilters,
-  getSearchSuggestions 
+import {
+searchPlaces,
+fuzzySearchPlaces,
+searchPlacesWithFilters,
+getSearchSuggestions
 } from '../data/touristPlaces';
 
 // 1. Normal gelişmiş arama
@@ -93,10 +101,10 @@ const suggestions = getSearchSuggestions("Istan");
 
 // 4. Filtreli arama
 const filtered = searchPlacesWithFilters("müze", {
-  categories: ['historical'],
-  minRating: 4.5,
-  cities: ['İstanbul'],
-  isFree: false
+categories: ['historical'],
+minRating: 4.5,
+cities: ['İstanbul'],
+isFree: false
 });
 \`\`\`
 
@@ -107,32 +115,33 @@ import React, { useState, useMemo } from 'react';
 import { FlatList, TextInput } from 'react-native';
 
 const MySearchScreen = () => {
-  const [searchText, setSearchText] = useState('');
-  
-  // Gerçek zamanlı filtreleme
-  const filteredData = useMemo(() => {
-    if (!searchText.trim()) return allData;
-    
-    return allData.filter(item => 
+const [searchText, setSearchText] = useState('');
+
+// Gerçek zamanlı filtreleme
+const filteredData = useMemo(() => {
+if (!searchText.trim()) return allData;
+
+    return allData.filter(item =>
       item.name.toLowerCase().includes(searchText.toLowerCase()) ||
       item.description.toLowerCase().includes(searchText.toLowerCase())
     );
-  }, [searchText]);
 
-  return (
-    <>
-      <TextInput
+}, [searchText]);
+
+return (
+<>
+<TextInput
         value={searchText}
         onChangeText={setSearchText}
         placeholder="Arama yapın..."
       />
-      <FlatList
-        data={filteredData}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
-    </>
-  );
+<FlatList
+data={filteredData}
+renderItem={renderItem}
+keyExtractor={item => item.id}
+/>
+</>
+);
 };
 \`\`\`
 
@@ -142,91 +151,97 @@ const MySearchScreen = () => {
 import SearchComponent from '../components/SearchComponent';
 
 const MyScreen = () => {
-  const handlePlaceSelect = (place) => {
-    console.log('Seçilen yer:', place.name);
-  };
+const handlePlaceSelect = (place) => {
+console.log('Seçilen yer:', place.name);
+};
 
-  return (
-    <SearchComponent
-      onPlaceSelect={handlePlaceSelect}
-      placeholder="Nereyi ziyaret etmek istiyorsunuz?"
-      maxResults={8}
-      categories={['historical', 'natural']}
-      showRecentSearches={true}
-    />
-  );
+return (
+<SearchComponent
+onPlaceSelect={handlePlaceSelect}
+placeholder="Nereyi ziyaret etmek istiyorsunuz?"
+maxResults={8}
+categories={['historical', 'natural']}
+showRecentSearches={true}
+/>
+);
 };
 \`\`\`
 
 ## ⚡ Performans Optimizasyonları
 
 ### 1. useMemo ile Filtreleme
+
 \`\`\`tsx
 const filteredData = useMemo(() => {
-  // Filtreleme mantığı
+// Filtreleme mantığı
 }, [searchText, otherDependencies]);
 \`\`\`
 
 ### 2. Debounced Arama
+
 \`\`\`tsx
 const handleSearch = useCallback((query) => {
-  if (debounceTimeout) clearTimeout(debounceTimeout);
-  
-  const newTimeout = setTimeout(() => {
-    performSearch(query);
-  }, 500); // 500ms debounce
-  
-  setDebounceTimeout(newTimeout);
+if (debounceTimeout) clearTimeout(debounceTimeout);
+
+const newTimeout = setTimeout(() => {
+performSearch(query);
+}, 500); // 500ms debounce
+
+setDebounceTimeout(newTimeout);
 }, []);
 \`\`\`
 
 ### 3. FlatList Optimizasyonları
+
 \`\`\`tsx
 <FlatList
-  removeClippedSubviews={true}
-  maxToRenderPerBatch={10}
-  windowSize={10}
-  getItemLayout={(data, index) => ({
-    length: ITEM_HEIGHT,
-    offset: ITEM_HEIGHT * index,
-    index,
-  })}
+removeClippedSubviews={true}
+maxToRenderPerBatch={10}
+windowSize={10}
+getItemLayout={(data, index) => ({
+length: ITEM_HEIGHT,
+offset: ITEM_HEIGHT \* index,
+index,
+})}
 />
 \`\`\`
 
 ## 🔍 Arama Kriterleri Örnekleri
 
 ### Çoklu Alan Arama
+
 \`\`\`tsx
 const searchInMultipleFields = (item, searchTerm) => {
-  const searchLower = searchTerm.toLowerCase();
-  
-  return (
-    item.name.toLowerCase().includes(searchLower) ||
-    item.description.toLowerCase().includes(searchLower) ||
-    item.city.toLowerCase().includes(searchLower) ||
-    item.tags.some(tag => tag.toLowerCase().includes(searchLower))
-  );
+const searchLower = searchTerm.toLowerCase();
+
+return (
+item.name.toLowerCase().includes(searchLower) ||
+item.description.toLowerCase().includes(searchLower) ||
+item.city.toLowerCase().includes(searchLower) ||
+item.tags.some(tag => tag.toLowerCase().includes(searchLower))
+);
 };
 \`\`\`
 
 ### Fuzzy Search (Benzer Arama)
+
 \`\`\`tsx
 const fuzzySearch = (text, pattern) => {
-  const regex = new RegExp(pattern.split('').join('.*'), 'i');
-  return regex.test(text);
+const regex = new RegExp(pattern.split('').join('.\*'), 'i');
+return regex.test(text);
 };
 \`\`\`
 
 ### Özel Filtreleme
+
 \`\`\`tsx
 const advancedFilter = (items, filters) => {
-  return items.filter(item => {
-    // Kategori filtresi
-    if (filters.category && item.category !== filters.category) {
-      return false;
-    }
-    
+return items.filter(item => {
+// Kategori filtresi
+if (filters.category && item.category !== filters.category) {
+return false;
+}
+
     // Fiyat aralığı filtresi
     if (filters.priceRange) {
       const price = item.price;
@@ -234,44 +249,48 @@ const advancedFilter = (items, filters) => {
         return false;
       }
     }
-    
+
     // Rating filtresi
     if (filters.minRating && item.rating < filters.minRating) {
       return false;
     }
-    
+
     return true;
-  });
+
+});
 };
 \`\`\`
 
 ## 🎨 UI/UX İyileştirmeleri
 
 ### Loading State
+
 \`\`\`tsx
 {isLoading && (
-  <ActivityIndicator size="small" color="#007AFF" />
+<ActivityIndicator size="small" color="#007AFF" />
 )}
 \`\`\`
 
 ### Empty State
+
 \`\`\`tsx
 const EmptyState = () => (
-  <View style={styles.emptyContainer}>
-    <Text style={styles.emptyIcon}>🔍</Text>
-    <Text style={styles.emptyTitle}>Sonuç bulunamadı</Text>
-    <Text style={styles.emptySubtitle}>Farklı kelimeler deneyin</Text>
-  </View>
+<View style={styles.emptyContainer}>
+<Text style={styles.emptyIcon}>🔍</Text>
+<Text style={styles.emptyTitle}>Sonuç bulunamadı</Text>
+<Text style={styles.emptySubtitle}>Farklı kelimeler deneyin</Text>
+</View>
 );
 \`\`\`
 
 ### Search Highlighting
+
 \`\`\`tsx
 const highlightSearchTerm = (text, searchTerm) => {
-  if (!searchTerm) return text;
-  
-  const regex = new RegExp(\`(\${searchTerm})\`, 'gi');
-  return text.replace(regex, '<mark>$1</mark>');
+if (!searchTerm) return text;
+
+const regex = new RegExp(\`(\${searchTerm})\`, 'gi');
+return text.replace(regex, '<mark>$1</mark>');
 };
 \`\`\`
 
@@ -280,66 +299,73 @@ const highlightSearchTerm = (text, searchTerm) => {
 \`\`\`
 src/
 ├── components/
-│   └── SearchComponent.tsx          # Gelişmiş arama bileşeni (YENİ ÖZELLİKLER)
+│ └── SearchComponent.tsx # Gelişmiş arama bileşeni (YENİ ÖZELLİKLER)
 ├── screens/
-│   ├── BasicSearchExample.tsx       # Temel arama örneği
-│   ├── SearchExampleScreen.tsx      # Kapsamlı arama ekranı
-│   └── SearchDemoScreen.tsx         # 🆕 Tüm özellikler demo
+│ ├── BasicSearchExample.tsx # Temel arama örneği
+│ ├── SearchExampleScreen.tsx # Kapsamlı arama ekranı
+│ └── SearchDemoScreen.tsx # 🆕 Tüm özellikler demo
 ├── utils/
-│   └── SearchPerformanceMonitor.ts  # 🆕 Performans monitörü
+│ └── SearchPerformanceMonitor.ts # 🆕 Performans monitörü
 ├── data/
-│   └── touristPlaces.ts            # 🔄 Gelişmiş arama fonksiyonları
+│ └── touristPlaces.ts # 🔄 Gelişmiş arama fonksiyonları
 └── types/
-    └── touristPlaces.ts            # TypeScript tipleri
+└── touristPlaces.ts # TypeScript tipleri
 \`\`\`
 
 ## 🛠️ Kurulum ve Çalıştırma
 
 1. Projeyi klonlayın:
-\`\`\`bash
-git clone [repo-url]
-cd TravelTurkey
-\`\`\`
+   \`\`\`bash
+   git clone [repo-url]
+   cd TravelTurkey
+   \`\`\`
 
 2. Bağımlılıkları yükleyin:
-\`\`\`bash
-npm install
+   \`\`\`bash
+   npm install
+
 # veya
+
 yarn install
 \`\`\`
 
 3. iOS için pod kurulumu:
-\`\`\`bash
-cd ios && pod install && cd ..
-\`\`\`
+   \`\`\`bash
+   cd ios && pod install && cd ..
+   \`\`\`
 
 4. Uygulamayı çalıştırın:
-\`\`\`bash
-npm run ios
+   \`\`\`bash
+   npm run ios
+
 # veya
+
 npm run android
 \`\`\`
 
 ## 🔧 Özelleştirme
 
 ### Arama Debounce Süresini Değiştirme
+
 \`\`\`tsx
 const DEBOUNCE_DELAY = 300; // ms
 \`\`\`
 
 ### Maksimum Sonuç Sayısını Sınırlama
+
 \`\`\`tsx
 const MAX_RESULTS = 20;
 \`\`\`
 
 ### Arama Kriterlerini Genişletme
+
 \`\`\`tsx
 const searchCriteria = [
-  'name',
-  'description', 
-  'city',
-  'tags',
-  'category'
+'name',
+'description',
+'city',
+'tags',
+'category'
 ];
 \`\`\`
 
@@ -364,9 +390,10 @@ const searchCriteria = [
 
 Bu proje MIT lisansı altında lisanslanmıştır.
 
-## 🎉 ARAMA SİSTEMİ OPTİMİZE EDİLDİ! 
+## 🎉 ARAMA SİSTEMİ OPTİMİZE EDİLDİ!
 
 ### 📊 Performans İyileştirmeleri
+
 - ⚡ **300ms debounce** (önceki: 500ms)
 - 🎯 **10+ arama kriteri** (önceki: 3)
 - 🧠 **Akıllı relevans skorlaması**
@@ -375,6 +402,7 @@ Bu proje MIT lisansı altında lisanslanmıştır.
 - 📈 **Performans monitörü** eklendi
 
 ### 🔍 Arama Kapsamı Genişletildi
+
 ÖNCEKİ ARAMA ALANLARI:
 ✓ İsim
 ✓ Açıklama  
@@ -393,13 +421,15 @@ YENİ ARAMA ALANLARI:
 ✓ İpuçları
 
 ### 🏆 Gelişmiş Özellikler
+
 1. **Relevans Skorlaması**: Sonuçlar önem sırasına göre
-2. **Fuzzy Search**: "Ayasofyaa" → "Ayasofya" 
+2. **Fuzzy Search**: "Ayasofyaa" → "Ayasofya"
 3. **Akıllı Öneriler**: "Istan" → "İstanbul"
 4. **Çoklu Filtre**: Kategori + Rating + Fiyat
 5. **Performans Takip**: Arama süreleri ve optimizasyon
 
 ### 🚀 Test Etmek İçin
+
 ```bash
 # Demo ekranını test edin
 <SearchDemoScreen />
@@ -410,6 +440,7 @@ runPerformanceTest();
 ```
 
 ### 📈 Sonuçlar
+
 - **Arama hızı**: 300ms → 200ms (iyileştirme)
 - **Kapsam**: 3 alan → 10+ alan
 - **Doğruluk**: %60 → %90+ (relevans)

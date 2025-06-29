@@ -28,7 +28,7 @@ interface SearchComponentProps {
 
 const SearchComponent: React.FC<SearchComponentProps> = ({
   onPlaceSelect,
-  placeholder = "Yer, şehir veya aktivite arayın...",
+  placeholder = 'Yer, şehir veya aktivite arayın...',
   maxResults = 10,
   categories = [],
   showRecentSearches = true,
@@ -42,7 +42,9 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
   const [searchAnimation] = useState(new Animated.Value(0));
 
   // Debounce timeout referansı
-  const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(
+    null,
+  );
 
   // Arama animasyonu
   useEffect(() => {
@@ -54,53 +56,58 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
   }, [isSearchFocused, searchAnimation]);
 
   // Debounced arama fonksiyonu
-  const performSearch = useCallback((query: string) => {
-    if (query.trim() === '') {
-      setFilteredPlaces([]);
-      setIsLoading(false);
-      return;
-    }
-
-    setIsLoading(true);
-    
-    // Gerçek uygulamada bu API çağrısı olabilir
-    setTimeout(() => {
-      let results = searchPlaces(query);
-      
-      // Kategori filtresi uygula
-      if (categories.length > 0) {
-        results = results.filter(place => categories.includes(place.category));
+  const performSearch = useCallback(
+    (query: string) => {
+      if (query.trim() === '') {
+        setFilteredPlaces([]);
+        setIsLoading(false);
+        return;
       }
-      
-      // Maksimum sonuç sayısını sınırla
-      results = results.slice(0, maxResults);
-      
-      setFilteredPlaces(results);
-      setIsLoading(false);
-    }, 200); // Daha hızlı yanıt için 200ms
-  }, [categories, maxResults]);
+
+      setIsLoading(true);
+
+      // Gerçek uygulamada bu API çağrısı olabilir
+      setTimeout(() => {
+        let results = searchPlaces(query);
+
+        // Kategori filtresi uygula
+        if (categories.length > 0) {
+          results = results.filter(place =>
+            categories.includes(place.category),
+          );
+        }
+
+        // Maksimum sonuç sayısını sınırla
+        results = results.slice(0, maxResults);
+
+        setFilteredPlaces(results);
+        setIsLoading(false);
+      }, 200); // Daha hızlı yanıt için 200ms
+    },
+    [categories, maxResults],
+  );
 
   // Arama query değişikliği - debounce ile
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
-    
+
     // Arama önerileri güncelle
     if (query.length >= 2) {
       setSearchSuggestions(getSearchSuggestions(query));
     } else {
       setSearchSuggestions([]);
     }
-    
+
     // Önceki timeout'u temizle
     if (debounceTimeout) {
       clearTimeout(debounceTimeout);
     }
-    
+
     // Yeni timeout ayarla (300ms debounce - daha hızlı)
     const newTimeout = setTimeout(() => {
       performSearch(query);
     }, 300);
-    
+
     setDebounceTimeout(newTimeout);
   };
 
@@ -108,12 +115,12 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
   const handleSuggestionPress = (place: TouristPlace) => {
     setSearchQuery(place.name);
     setIsSearchFocused(false);
-    
+
     // Son aramalara ekle
     if (!recentSearches.includes(place.name)) {
       setRecentSearches(prev => [place.name, ...prev.slice(0, 4)]);
     }
-    
+
     onPlaceSelect?.(place);
   };
 
@@ -125,7 +132,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
 
   // Arama önerisi item renderer
   const renderSuggestionItem = ({ item }: { item: TouristPlace }) => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={styles.suggestionItem}
       onPress={() => handleSuggestionPress(item)}
     >
@@ -138,7 +145,9 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
           </Text>
         </View>
         <View style={styles.suggestionMeta}>
-          <Text style={styles.suggestionRating}>⭐ {item.rating.average.toFixed(1)}</Text>
+          <Text style={styles.suggestionRating}>
+            ⭐ {item.rating.average.toFixed(1)}
+          </Text>
           <Text style={styles.suggestionCategory}>{item.category}</Text>
         </View>
       </View>
@@ -147,15 +156,17 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
 
   // Son aramalar item renderer
   const renderRecentSearchItem = ({ item }: { item: string }) => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={styles.recentSearchItem}
       onPress={() => handleRecentSearchPress(item)}
     >
       <Text style={styles.recentSearchIcon}>🕐</Text>
       <Text style={styles.recentSearchText}>{item}</Text>
-      <TouchableOpacity 
+      <TouchableOpacity
         style={styles.removeRecentButton}
-        onPress={() => setRecentSearches(prev => prev.filter(search => search !== item))}
+        onPress={() =>
+          setRecentSearches(prev => prev.filter(search => search !== item))
+        }
       >
         <Text style={styles.removeRecentText}>✕</Text>
       </TouchableOpacity>
@@ -175,7 +186,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
   return (
     <View style={styles.container}>
       {/* Search Input */}
-      <Animated.View 
+      <Animated.View
         style={[
           styles.searchInputContainer,
           {
@@ -183,7 +194,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
               inputRange: [0, 1],
               outputRange: [AppColors.BORDER_LIGHT, AppColors.PRIMARY],
             }),
-          }
+          },
         ]}
       >
         <Text style={styles.searchIcon}>🔍</Text>
@@ -199,9 +210,9 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
           clearButtonMode="while-editing"
         />
         {isLoading && (
-          <ActivityIndicator 
-            size="small" 
-            color={AppColors.PRIMARY} 
+          <ActivityIndicator
+            size="small"
+            color={AppColors.PRIMARY}
             style={styles.loadingIndicator}
           />
         )}
@@ -210,7 +221,9 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
       {/* Search Results Dropdown */}
       {isSearchFocused && (
         <View style={styles.dropdownContainer}>
-          {searchQuery.trim() === '' && showRecentSearches && recentSearches.length > 0 ? (
+          {searchQuery.trim() === '' &&
+          showRecentSearches &&
+          recentSearches.length > 0 ? (
             // Son aramalar
             <View>
               <Text style={styles.dropdownHeader}>Son Aramalar</Text>
@@ -221,14 +234,16 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
                 scrollEnabled={false}
               />
             </View>
-          ) : searchQuery.length >= 2 && searchSuggestions.length > 0 && filteredPlaces.length === 0 ? (
+          ) : searchQuery.length >= 2 &&
+            searchSuggestions.length > 0 &&
+            filteredPlaces.length === 0 ? (
             // Arama önerileri
             <View>
               <Text style={styles.dropdownHeader}>Öneriler</Text>
               <FlatList
                 data={searchSuggestions}
                 renderItem={({ item }) => (
-                  <TouchableOpacity 
+                  <TouchableOpacity
                     style={styles.suggestionTextItem}
                     onPress={() => handleRecentSearchPress(item)}
                   >
@@ -251,10 +266,12 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
               <FlatList
                 data={filteredPlaces}
                 renderItem={renderSuggestionItem}
-                keyExtractor={(item) => item.id}
+                keyExtractor={item => item.id}
                 scrollEnabled={false}
                 ListEmptyComponent={
-                  searchQuery.trim() !== '' && !isLoading ? renderEmptyState : null
+                  searchQuery.trim() !== '' && !isLoading
+                    ? renderEmptyState
+                    : null
                 }
               />
             </View>

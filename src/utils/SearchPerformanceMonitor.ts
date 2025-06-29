@@ -31,7 +31,7 @@ export class SearchPerformanceMonitor {
   // Arama performansını ölç
   measureSearch(
     searchFunction: () => TouristPlace[],
-    query: string
+    query: string,
   ): { results: TouristPlace[]; metrics: SearchPerformanceMetrics } {
     const startTime = performance.now();
     const results = searchFunction();
@@ -59,7 +59,10 @@ export class SearchPerformanceMonitor {
   }
 
   // Ortalama relevans skoru hesapla
-  private calculateAverageRelevance(results: TouristPlace[], query: string): number {
+  private calculateAverageRelevance(
+    results: TouristPlace[],
+    query: string,
+  ): number {
     if (results.length === 0) return 0;
 
     const totalRelevance = results.reduce((sum, place) => {
@@ -103,11 +106,22 @@ export class SearchPerformanceMonitor {
       };
     }
 
-    const totalTime = this.metrics.reduce((sum, m) => sum + m.searchDuration, 0);
-    const totalResults = this.metrics.reduce((sum, m) => sum + m.resultCount, 0);
-    const totalRelevance = this.metrics.reduce((sum, m) => sum + m.relevanceScore, 0);
+    const totalTime = this.metrics.reduce(
+      (sum, m) => sum + m.searchDuration,
+      0,
+    );
+    const totalResults = this.metrics.reduce(
+      (sum, m) => sum + m.resultCount,
+      0,
+    );
+    const totalRelevance = this.metrics.reduce(
+      (sum, m) => sum + m.relevanceScore,
+      0,
+    );
 
-    const sortedByTime = [...this.metrics].sort((a, b) => a.searchDuration - b.searchDuration);
+    const sortedByTime = [...this.metrics].sort(
+      (a, b) => a.searchDuration - b.searchDuration,
+    );
 
     return {
       averageSearchTime: totalTime / this.metrics.length,
@@ -133,34 +147,36 @@ export class SearchPerformanceMonitor {
 
     this.metrics.forEach(metric => {
       const query = metric.query.toLowerCase();
-      
+
       // Query frequency
       queryFrequency[query] = (queryFrequency[query] || 0) + 1;
 
       // Category analysis
       categories.forEach(category => {
         if (category.name.toLowerCase().includes(query)) {
-          categorySearches[category.name] = (categorySearches[category.name] || 0) + 1;
+          categorySearches[category.name] =
+            (categorySearches[category.name] || 0) + 1;
         }
       });
 
       // City analysis
       touristPlaces.forEach(place => {
         if (place.address.city.toLowerCase().includes(query)) {
-          citySearches[place.address.city] = (citySearches[place.address.city] || 0) + 1;
+          citySearches[place.address.city] =
+            (citySearches[place.address.city] || 0) + 1;
         }
       });
     });
 
     return {
       topQueries: Object.entries(queryFrequency)
-        .sort(([,a], [,b]) => b - a)
+        .sort(([, a], [, b]) => b - a)
         .slice(0, 10),
       topCategories: Object.entries(categorySearches)
-        .sort(([,a], [,b]) => b - a)
+        .sort(([, a], [, b]) => b - a)
         .slice(0, 5),
       topCities: Object.entries(citySearches)
-        .sort(([,a], [,b]) => b - a)
+        .sort(([, a], [, b]) => b - a)
         .slice(0, 5),
     };
   }
@@ -169,7 +185,7 @@ export class SearchPerformanceMonitor {
 // Arama performansını optimize etmek için öneriler
 export const getSearchOptimizationSuggestions = (
   averageSearchTime: number,
-  averageResultCount: number
+  averageResultCount: number,
 ): string[] => {
   const suggestions: string[] = [];
 
@@ -178,7 +194,9 @@ export const getSearchOptimizationSuggestions = (
   }
 
   if (averageResultCount > 50) {
-    suggestions.push('Sonuç sayısını sınırlayın - Çok fazla sonuç performansı etkiler');
+    suggestions.push(
+      'Sonuç sayısını sınırlayın - Çok fazla sonuç performansı etkiler',
+    );
   }
 
   if (averageSearchTime > 50) {
@@ -205,23 +223,23 @@ export const runPerformanceTest = () => {
     'Kapadokya',
     'cami',
     'antik',
-    'şelale'
+    'şelale',
   ];
 
   console.log('🔄 Arama performans testi başlıyor...');
-  
+
   testQueries.forEach(query => {
     // Burada gerçek searchPlaces fonksiyonunu çağırabilirsiniz
     const startTime = performance.now();
     // const results = searchPlaces(query);
     const endTime = performance.now();
-    
+
     console.log(`✅ "${query}" - ${(endTime - startTime).toFixed(2)}ms`);
   });
 
   const stats = monitor.getPerformanceStats();
   console.log('📊 Performans İstatistikleri:', stats);
-  
+
   return stats;
 };
 

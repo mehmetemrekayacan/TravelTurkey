@@ -23,7 +23,7 @@ const SearchExampleScreen: React.FC = () => {
   const [selectedPlace, setSelectedPlace] = useState<TouristPlace | null>(null);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [popularPlaces] = useState<TouristPlace[]>(
-    touristPlaces.slice(0, 5) // İlk 5 popüler yer
+    touristPlaces.slice(0, 5), // İlk 5 popüler yer
   );
 
   // Yer seçimi
@@ -32,13 +32,13 @@ const SearchExampleScreen: React.FC = () => {
     Alert.alert(
       'Yer Seçildi',
       `${place.name} seçildi!\n${place.address.city}, ${place.address.district}`,
-      [{ text: 'Tamam' }]
+      [{ text: 'Tamam' }],
     );
   };
 
   // Popüler yer kartı
   const renderPopularPlace = ({ item }: { item: TouristPlace }) => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={styles.popularCard}
       onPress={() => handlePlaceSelect(item)}
     >
@@ -59,24 +59,26 @@ const SearchExampleScreen: React.FC = () => {
 
   // Kategori kartı
   const renderCategory = ({ item }: { item: any }) => (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={[
         styles.categoryCard,
-        selectedCategories.includes(item.id) && styles.selectedCategoryCard
+        selectedCategories.includes(item.id) && styles.selectedCategoryCard,
       ]}
       onPress={() => {
-        setSelectedCategories(prev => 
-          prev.includes(item.id) 
+        setSelectedCategories(prev =>
+          prev.includes(item.id)
             ? prev.filter(id => id !== item.id)
-            : [...prev, item.id]
+            : [...prev, item.id],
         );
       }}
     >
       <Text style={styles.categoryIcon}>{item.icon}</Text>
-      <Text style={[
-        styles.categoryName,
-        selectedCategories.includes(item.id) && styles.selectedCategoryName
-      ]}>
+      <Text
+        style={[
+          styles.categoryName,
+          selectedCategories.includes(item.id) && styles.selectedCategoryName,
+        ]}
+      >
         {item.name}
       </Text>
       <Text style={styles.categoryCount}>{item.placesCount} yer</Text>
@@ -86,11 +88,12 @@ const SearchExampleScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>Arama</Text>
-          <Text style={styles.subtitle}>Türkiye'de gezilecek yerleri keşfedin</Text>
+          <Text style={styles.subtitle}>
+            Türkiye'de gezilecek yerleri keşfedin
+          </Text>
         </View>
 
         {/* Search Component */}
@@ -109,12 +112,15 @@ const SearchExampleScreen: React.FC = () => {
             <View style={styles.selectedPlaceCard}>
               <Text style={styles.selectedPlaceIcon}>{selectedPlace.icon}</Text>
               <View style={styles.selectedPlaceInfo}>
-                <Text style={styles.selectedPlaceName}>{selectedPlace.name}</Text>
+                <Text style={styles.selectedPlaceName}>
+                  {selectedPlace.name}
+                </Text>
                 <Text style={styles.selectedPlaceDescription}>
                   {selectedPlace.shortDescription}
                 </Text>
                 <Text style={styles.selectedPlaceLocation}>
-                  📍 {selectedPlace.address.city}, {selectedPlace.address.district}
+                  📍 {selectedPlace.address.city},{' '}
+                  {selectedPlace.address.district}
                 </Text>
               </View>
             </View>
@@ -127,7 +133,7 @@ const SearchExampleScreen: React.FC = () => {
           <FlatList
             data={categories}
             renderItem={renderCategory}
-            keyExtractor={(item) => item.id}
+            keyExtractor={item => item.id}
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.horizontalList}
@@ -140,7 +146,7 @@ const SearchExampleScreen: React.FC = () => {
           <FlatList
             data={popularPlaces}
             renderItem={renderPopularPlace}
-            keyExtractor={(item) => item.id}
+            keyExtractor={item => item.id}
             scrollEnabled={false}
           />
         </View>
@@ -149,13 +155,18 @@ const SearchExampleScreen: React.FC = () => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Arama İpuçları</Text>
           <View style={styles.tipsContainer}>
-            <Text style={styles.tip}>💡 Şehir adı ile arama yapın (ör: "İstanbul")</Text>
-            <Text style={styles.tip}>🏛️ Kategori adı ile arama yapın (ör: "Müze")</Text>
+            <Text style={styles.tip}>
+              💡 Şehir adı ile arama yapın (ör: "İstanbul")
+            </Text>
+            <Text style={styles.tip}>
+              🏛️ Kategori adı ile arama yapın (ör: "Müze")
+            </Text>
             <Text style={styles.tip}>🔍 Kelime kombinasyonları deneyin</Text>
-            <Text style={styles.tip}>📱 Son aramalarınız otomatik kaydedilir</Text>
+            <Text style={styles.tip}>
+              📱 Son aramalarınız otomatik kaydedilir
+            </Text>
           </View>
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );

@@ -14,13 +14,13 @@ import {
   Alert,
 } from 'react-native';
 import { AppColors } from '../constants/Colors';
-import { 
-  searchPlaces, 
-  fuzzySearchPlaces, 
+import {
+  searchPlaces,
+  fuzzySearchPlaces,
   getSearchSuggestions,
   getPopularSearchTerms,
   searchPlacesWithFilters,
-  SearchFilters
+  SearchFilters,
 } from '../data/touristPlaces';
 
 const SearchDemoScreen: React.FC = () => {
@@ -46,7 +46,7 @@ const SearchDemoScreen: React.FC = () => {
         const filters: SearchFilters = {
           categories: ['historical'],
           minRating: 4.5,
-          isFree: false
+          isFree: false,
         };
         results = searchPlacesWithFilters(query, filters);
         break;
@@ -58,7 +58,7 @@ const SearchDemoScreen: React.FC = () => {
     Alert.alert(
       `${demoType} Arama Sonuçları`,
       `"${query}" için ${results.length} sonuç bulundu`,
-      [{ text: 'Tamam' }]
+      [{ text: 'Tamam' }],
     );
   };
 
@@ -67,19 +67,23 @@ const SearchDemoScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>Arama Demo</Text>
-          <Text style={styles.subtitle}>Gelişmiş arama özelliklerini test edin</Text>
+          <Text style={styles.subtitle}>
+            Gelişmiş arama özelliklerini test edin
+          </Text>
         </View>
 
         {/* Demo Buttons */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Arama Türleri</Text>
-          
-          <TouchableOpacity 
-            style={[styles.demoButton, selectedDemo === 'normal' && styles.selectedButton]}
+
+          <TouchableOpacity
+            style={[
+              styles.demoButton,
+              selectedDemo === 'normal' && styles.selectedButton,
+            ]}
             onPress={() => runSearchDemo('normal', 'İstanbul')}
           >
             <Text style={styles.demoButtonIcon}>🔍</Text>
@@ -89,8 +93,11 @@ const SearchDemoScreen: React.FC = () => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity 
-            style={[styles.demoButton, selectedDemo === 'fuzzy' && styles.selectedButton]}
+          <TouchableOpacity
+            style={[
+              styles.demoButton,
+              selectedDemo === 'fuzzy' && styles.selectedButton,
+            ]}
             onPress={() => runSearchDemo('fuzzy', 'Ayasofya')}
           >
             <Text style={styles.demoButtonIcon}>🎯</Text>
@@ -100,8 +107,11 @@ const SearchDemoScreen: React.FC = () => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity 
-            style={[styles.demoButton, selectedDemo === 'suggestions' && styles.selectedButton]}
+          <TouchableOpacity
+            style={[
+              styles.demoButton,
+              selectedDemo === 'suggestions' && styles.selectedButton,
+            ]}
             onPress={() => runSearchDemo('suggestions', 'Istan')}
           >
             <Text style={styles.demoButtonIcon}>💡</Text>
@@ -111,8 +121,11 @@ const SearchDemoScreen: React.FC = () => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity 
-            style={[styles.demoButton, selectedDemo === 'filtered' && styles.selectedButton]}
+          <TouchableOpacity
+            style={[
+              styles.demoButton,
+              selectedDemo === 'filtered' && styles.selectedButton,
+            ]}
             onPress={() => runSearchDemo('filtered', 'müze')}
           >
             <Text style={styles.demoButtonIcon}>🎛️</Text>
@@ -128,7 +141,7 @@ const SearchDemoScreen: React.FC = () => {
           <Text style={styles.sectionTitle}>Popüler Arama Terimleri</Text>
           <View style={styles.tagsContainer}>
             {popularTerms.slice(0, 10).map((term, index) => (
-              <TouchableOpacity 
+              <TouchableOpacity
                 key={index}
                 style={styles.tagButton}
                 onPress={() => runSearchDemo('normal', term)}
@@ -146,31 +159,29 @@ const SearchDemoScreen: React.FC = () => {
               Sonuçlar ({searchResults.length})
             </Text>
             <View style={styles.resultsContainer}>
-              {selectedDemo === 'suggestions' ? (
-                // String sonuçları için
-                searchResults.map((result, index) => (
-                  <View key={index} style={styles.resultItem}>
-                    <Text style={styles.resultText}>💡 {result}</Text>
-                  </View>
-                ))
-              ) : (
-                // TouristPlace sonuçları için
-                searchResults.slice(0, 5).map((place, index) => (
-                  <View key={place.id || index} style={styles.resultItem}>
-                    <Text style={styles.resultIcon}>{place.icon}</Text>
-                    <View style={styles.resultInfo}>
-                      <Text style={styles.resultName}>{place.name}</Text>
-                      <Text style={styles.resultLocation}>
-                        {place.address?.city}, {place.address?.district}
-                      </Text>
-                      <Text style={styles.resultRating}>
-                        ⭐ {place.rating?.average.toFixed(1)} 
-                        ({place.rating?.count.toLocaleString()} değerlendirme)
-                      </Text>
+              {selectedDemo === 'suggestions'
+                ? // String sonuçları için
+                  searchResults.map((result, index) => (
+                    <View key={index} style={styles.resultItem}>
+                      <Text style={styles.resultText}>💡 {result}</Text>
                     </View>
-                  </View>
-                ))
-              )}
+                  ))
+                : // TouristPlace sonuçları için
+                  searchResults.slice(0, 5).map((place, index) => (
+                    <View key={place.id || index} style={styles.resultItem}>
+                      <Text style={styles.resultIcon}>{place.icon}</Text>
+                      <View style={styles.resultInfo}>
+                        <Text style={styles.resultName}>{place.name}</Text>
+                        <Text style={styles.resultLocation}>
+                          {place.address?.city}, {place.address?.district}
+                        </Text>
+                        <Text style={styles.resultRating}>
+                          ⭐ {place.rating?.average.toFixed(1)}(
+                          {place.rating?.count.toLocaleString()} değerlendirme)
+                        </Text>
+                      </View>
+                    </View>
+                  ))}
             </View>
           </View>
         )}
@@ -180,26 +191,31 @@ const SearchDemoScreen: React.FC = () => {
           <Text style={styles.sectionTitle}>Arama İpuçları</Text>
           <View style={styles.tipsContainer}>
             <Text style={styles.tip}>
-              🔍 <Text style={styles.tipBold}>Normal Arama:</Text> İsim, açıklama, şehir, etiketler
+              🔍 <Text style={styles.tipBold}>Normal Arama:</Text> İsim,
+              açıklama, şehir, etiketler
             </Text>
             <Text style={styles.tip}>
-              🎯 <Text style={styles.tipBold}>Fuzzy Search:</Text> Yazım hatalarını tolere eder
+              🎯 <Text style={styles.tipBold}>Fuzzy Search:</Text> Yazım
+              hatalarını tolere eder
             </Text>
             <Text style={styles.tip}>
-              💡 <Text style={styles.tipBold}>Öneriler:</Text> 2+ karakter ile aktif olur
+              💡 <Text style={styles.tipBold}>Öneriler:</Text> 2+ karakter ile
+              aktif olur
             </Text>
             <Text style={styles.tip}>
-              🎛️ <Text style={styles.tipBold}>Filtreli:</Text> Kategori, rating, fiyat filtresi
+              🎛️ <Text style={styles.tipBold}>Filtreli:</Text> Kategori, rating,
+              fiyat filtresi
             </Text>
             <Text style={styles.tip}>
-              📊 <Text style={styles.tipBold}>Sıralama:</Text> Relevans skoruna göre
+              📊 <Text style={styles.tipBold}>Sıralama:</Text> Relevans skoruna
+              göre
             </Text>
             <Text style={styles.tip}>
-              ⚡ <Text style={styles.tipBold}>Performans:</Text> Debounce ve optimizasyon
+              ⚡ <Text style={styles.tipBold}>Performans:</Text> Debounce ve
+              optimizasyon
             </Text>
           </View>
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );
