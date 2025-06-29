@@ -3,7 +3,7 @@ import { Colors, AppColors } from '../constants/Colors';
 
 /**
  * TravelTurkey App - Global Styles
- * Modern Türkiye temalı stil dosyası
+ * 3 Tab yapısı için optimize edilmiş: Keşfet, Planlarım, Profil
  */
 
 export const GlobalStyles = StyleSheet.create({
@@ -48,25 +48,11 @@ export const GlobalStyles = StyleSheet.create({
     marginVertical: 8,
     elevation: 2,
     shadowColor: Colors.ui.shadow,
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowRadius: 4,
   },
 
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: AppColors.TEXT_PRIMARY,
-    marginBottom: 8,
-  },
-
-  cardSubtitle: {
-    fontSize: 14,
-    color: AppColors.TEXT_SECONDARY,
-    marginBottom: 12,
-  },
-
-  // Card Enhancement Styles
   touchableCard: {
     backgroundColor: AppColors.BG_PRIMARY,
     borderRadius: 12,
@@ -78,8 +64,6 @@ export const GlobalStyles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    borderWidth: 1,
-    borderColor: 'transparent',
   },
 
   cardContent: {
@@ -113,184 +97,67 @@ export const GlobalStyles = StyleSheet.create({
     borderLeftColor: AppColors.ACCENT,
   },
 
-  // Button Styles
-  buttonPrimary: {
-    backgroundColor: AppColors.PRIMARY,
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  buttonSecondary: {
-    backgroundColor: AppColors.SECONDARY,
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  buttonAccent: {
-    backgroundColor: AppColors.ACCENT,
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  buttonOutline: {
-    borderWidth: 2,
-    borderColor: AppColors.PRIMARY,
-    backgroundColor: 'transparent',
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  // Button Text Styles
-  buttonTextPrimary: {
-    color: Colors.neutral.white,
-    fontSize: 16,
+  // Typography Styles
+  titleMedium: {
+    fontSize: 18,
     fontWeight: '600',
-  },
-
-  buttonTextOutline: {
-    color: AppColors.PRIMARY,
-    fontSize: 16,
-    fontWeight: '600',
-  },
-
-  // Text Styles
-  titleLarge: {
-    fontSize: 28,
-    fontWeight: '700',
     color: AppColors.TEXT_PRIMARY,
     marginBottom: 8,
   },
 
-  titleMedium: {
-    fontSize: 20,
+  titleSmall: {
+    fontSize: 16,
     fontWeight: '600',
     color: AppColors.TEXT_PRIMARY,
-    marginBottom: 6,
+    marginBottom: 4,
   },
 
-  bodyLarge: {
-    fontSize: 16,
-    color: AppColors.TEXT_PRIMARY,
-    lineHeight: 24,
+  titleLargeWhite: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#FFFFFF',
+    marginBottom: 8,
+  },
+
+  titleMediumWhite: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#FFFFFF',
+    marginBottom: 8,
   },
 
   bodyMedium: {
+    fontSize: 16,
+    color: AppColors.TEXT_SECONDARY,
+    lineHeight: 24,
+    marginBottom: 8,
+  },
+
+  bodySmall: {
     fontSize: 14,
     color: AppColors.TEXT_SECONDARY,
     lineHeight: 20,
-  },
-
-  caption: {
-    fontSize: 12,
-    color: AppColors.TEXT_LIGHT,
-    lineHeight: 16,
-  },
-
-  // White Text Styles (for colored backgrounds)
-  titleMediumWhite: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: Colors.neutral.white,
-    marginBottom: 6,
+    marginBottom: 4,
   },
 
   bodyMediumWhite: {
-    fontSize: 14,
-    color: Colors.neutral.white,
-    lineHeight: 20,
-    opacity: 0.9,
+    fontSize: 16,
+    color: '#FFFFFF',
+    lineHeight: 24,
+    marginBottom: 8,
   },
 
   bodyMediumWhiteCenter: {
-    fontSize: 14,
-    color: Colors.neutral.white,
-    lineHeight: 20,
+    fontSize: 16,
+    color: '#FFFFFF',
+    lineHeight: 24,
     textAlign: 'center',
   },
 
-  // Turkish Themed Styles
-  turkishFlag: {
-    backgroundColor: AppColors.TURKISH_FLAG,
-    borderRadius: 4,
-    padding: 8,
-  },
-
-  bosphorusTheme: {
-    backgroundColor: AppColors.BOSPHORUS,
-    borderRadius: 8,
-    padding: 16,
-  },
-
-  cappadociaTheme: {
-    backgroundColor: AppColors.CAPPADOCIA,
-    borderRadius: 8,
-    padding: 16,
-  },
-
-  goldenAccent: {
-    backgroundColor: AppColors.GOLDEN_HORN,
-    borderRadius: 6,
-    padding: 12,
-  },
-
-  // Layout Helpers
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
-  column: {
-    flexDirection: 'column',
-  },
-
-  spaceBetween: {
-    justifyContent: 'space-between',
-  },
-
-  spaceAround: {
-    justifyContent: 'space-around',
-  },
-
-  center: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  // Spacing
-  marginSmall: {
-    margin: 8,
-  },
-
-  marginMedium: {
-    margin: 16,
-  },
-
-  marginLarge: {
-    margin: 24,
-  },
-
-  paddingSmall: {
-    padding: 8,
-  },
-
-  paddingMedium: {
-    padding: 16,
-  },
-
-  paddingLarge: {
-    padding: 24,
+  captionSecondary: {
+    fontSize: 12,
+    color: AppColors.TEXT_SECONDARY,
+    fontStyle: 'italic',
   },
 
   // Icon Styles
@@ -304,33 +171,51 @@ export const GlobalStyles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  iconSmall: {
-    fontSize: 16,
-    textAlign: 'center',
+  // Button Styles
+  buttonPrimary: {
+    backgroundColor: AppColors.PRIMARY,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    elevation: 2,
+    shadowColor: Colors.ui.shadow,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
   },
 
-  // Typography Enhancement
-  titleSmall: {
+  buttonTextPrimary: {
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
-    color: AppColors.TEXT_PRIMARY,
-    marginBottom: 4,
   },
 
-  bodySmall: {
-    fontSize: 14,
-    color: AppColors.TEXT_SECONDARY,
-    lineHeight: 20,
-    marginBottom: 4,
+  // Theme Styles
+  bosphorusTheme: {
+    backgroundColor: AppColors.SECONDARY,
+    padding: 20,
+    borderRadius: 12,
   },
 
-  captionSecondary: {
-    fontSize: 12,
-    color: AppColors.TEXT_SECONDARY,
-    fontStyle: 'italic',
+  turkishFlag: {
+    backgroundColor: '#e74c3c',
+    padding: 20,
+    borderRadius: 12,
   },
 
-  // Hotel Screen Specific Styles
+  // Layout Helpers
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  center: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  // Category Grid
   categoryGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -343,20 +228,44 @@ export const GlobalStyles = StyleSheet.create({
     margin: 4,
   },
 
-  priceText: {
-    marginLeft: 8,
-    color: '#e74c3c',
+  // Progress Bar
+  progressBarContainer: {
+    width: 60,
+    height: 8,
+    backgroundColor: '#ecf0f1',
+    borderRadius: 4,
+    overflow: 'hidden',
+    position: 'relative',
+  },
+
+  progressBar: {
+    height: '100%',
+    backgroundColor: AppColors.PRIMARY,
+    borderRadius: 4,
+  },
+
+  progressText: {
+    position: 'absolute',
+    right: -25,
+    top: -8,
+    fontSize: 10,
+    color: AppColors.TEXT_SECONDARY,
+  },
+
+  // Screen Specific Styles
+  planStatus: {
+    justifyContent: 'space-between',
+    marginTop: 8,
+  },
+
+  reservationStatus: {
+    marginTop: 4,
   },
 
   searchButton: {
     marginTop: 12,
   },
 
-  hotelRating: {
-    marginTop: 4,
-  },
-
-  // Profile Screen Specific Styles
   profileAvatar: {
     fontSize: 48,
     marginBottom: 8,
@@ -365,5 +274,9 @@ export const GlobalStyles = StyleSheet.create({
   statValue: {
     fontSize: 24,
     fontWeight: 'bold',
+  },
+
+  hotelRating: {
+    marginTop: 4,
   },
 });

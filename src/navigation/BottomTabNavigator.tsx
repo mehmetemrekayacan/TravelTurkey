@@ -1,6 +1,6 @@
 /**
  * TravelTurkey Bottom Tab Navigator
- * Ana navigasyon sistemi
+ * 3 Tab'lı navigasyon sistemi: Keşfet, Planlarım, Profil
  */
 
 import React from 'react';
@@ -10,58 +10,38 @@ import { BottomTabParamList } from '../types/navigation';
 import { AppColors } from '../constants/Colors';
 
 // Screens
-import HomeScreen from '../screens/HomeScreen';
-import PlacesScreen from '../screens/PlacesScreen';
-import HotelsScreen from '../screens/HotelsScreen';
-import GuideScreen from '../screens/GuideScreen';
+import ExploreScreen from '../screens/ExploreScreen';
+import PlansScreen from '../screens/PlansScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
-// Tab Navigator
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
-// Icon component (ESLint hatası için dışarı alındı)
-const TabIcon = React.memo(({ name, size }: { name: string; size: number }) => {
+// Icon component
+const TabIcon = ({ name, size }: { name: string; size: number }) => {
   const getIcon = () => {
     switch (name) {
-      case 'home':
-        return '🏠';
-      case 'place':
-        return '📍';
-      case 'hotel':
-        return '🏨';
-      case 'support-agent':
-        return '👨‍💼';
-      case 'person':
+      case 'explore':
+        return '🧭';
+      case 'plans':
+        return '📋';
+      case 'profile':
         return '👤';
       default:
         return '❓';
     }
   };
-
   return <Text style={{ fontSize: size * 0.8 }}>{getIcon()}</Text>;
-});
+};
 
-TabIcon.displayName = 'TabIcon';
-
-// Tab icon render fonksiyonları
-const renderHomeIcon = ({ size }: { size: number }) => (
-  <TabIcon name="home" size={size} />
+// Icon render functions
+const renderExploreIcon = ({ size }: { size: number }) => (
+  <TabIcon name="explore" size={size} />
 );
-
-const renderPlaceIcon = ({ size }: { size: number }) => (
-  <TabIcon name="place" size={size} />
+const renderPlansIcon = ({ size }: { size: number }) => (
+  <TabIcon name="plans" size={size} />
 );
-
-const renderHotelIcon = ({ size }: { size: number }) => (
-  <TabIcon name="hotel" size={size} />
-);
-
-const renderGuideIcon = ({ size }: { size: number }) => (
-  <TabIcon name="support-agent" size={size} />
-);
-
 const renderProfileIcon = ({ size }: { size: number }) => (
-  <TabIcon name="person" size={size} />
+  <TabIcon name="profile" size={size} />
 );
 
 export default function BottomTabNavigator() {
@@ -86,38 +66,20 @@ export default function BottomTabNavigator() {
       }}
     >
       <Tab.Screen
-        name="HomeTab"
-        component={HomeScreen}
+        name="ExploreTab"
+        component={ExploreScreen}
         options={{
-          title: 'Ana Sayfa',
-          tabBarIcon: renderHomeIcon,
+          title: 'Keşfet',
+          tabBarIcon: renderExploreIcon,
         }}
       />
 
       <Tab.Screen
-        name="PlacesTab"
-        component={PlacesScreen}
+        name="PlansTab"
+        component={PlansScreen}
         options={{
-          title: 'Yerler',
-          tabBarIcon: renderPlaceIcon,
-        }}
-      />
-
-      <Tab.Screen
-        name="HotelsTab"
-        component={HotelsScreen}
-        options={{
-          title: 'Oteller',
-          tabBarIcon: renderHotelIcon,
-        }}
-      />
-
-      <Tab.Screen
-        name="GuideTab"
-        component={GuideScreen}
-        options={{
-          title: 'Rehber',
-          tabBarIcon: renderGuideIcon,
+          title: 'Planlarım',
+          tabBarIcon: renderPlansIcon,
         }}
       />
 

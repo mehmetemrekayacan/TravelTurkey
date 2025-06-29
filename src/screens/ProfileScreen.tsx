@@ -27,15 +27,15 @@ const profileMenuItems = [
 
 // Kullanıcı istatistikleri
 const userStats = [
-  { label: 'Ziyaret Edilen Yer', value: '12', icon: '📍' },
-  { label: 'Konaklama', value: '8', icon: '🏨' },
-  { label: 'Tur Sayısı', value: '5', icon: '🎯' },
-  { label: 'Toplam Gün', value: '23', icon: '📅' },
+  { label: 'Toplam Plan', value: '3', icon: '�' },
+  { label: 'Ziyaret Edilen', value: '8', icon: '📍' },
+  { label: 'Favori Yer', value: '12', icon: '❤️' },
+  { label: 'Kaydedilen', value: '25', icon: '�' },
 ];
 
 export default function ProfileScreen() {
-  const handleMenuPress = (action: string) => {
-    console.log(`${action} menüsü seçildi`);
+  const handleMenuPress = (_action: string) => {
+    // TODO: Handle menu action
   };
 
   return (
