@@ -1,5 +1,5 @@
 /**
- * TravelTurkey - Explore Screen
+ * TravelTurkey - Explore Screen Template
  * Keşfet sayfası - Yerler ve aktiviteleri keşfet
  */
 
@@ -31,58 +31,27 @@ interface Category {
   count: number;
 }
 
-// Keşfedilebilir yerler verisi
-const explorePlaces: Place[] = [
-  {
-    id: 1,
-    name: 'İstanbul Boğazı',
-    description: 'İki kıtayı birleştiren eşsiz güzellik',
-    category: 'Doğal Güzellik',
-    icon: '🌊',
-    rating: 4.9,
-  },
-  {
-    id: 2,
-    name: 'Kapadokya',
-    description: 'Peri bacaları ve sıcak hava balonu',
-    category: 'Macera',
-    icon: '🎈',
-    rating: 4.8,
-  },
-  {
-    id: 3,
-    name: 'Pamukkale',
-    description: 'Beyaz travertenler ve termal sular',
-    category: 'Doğal Güzellik',
-    icon: '♨️',
-    rating: 4.7,
-  },
-  {
-    id: 4,
-    name: 'Efes Antik Kenti',
-    description: 'Antik dönem kalıntıları',
-    category: 'Tarih',
-    icon: '🏛️',
-    rating: 4.6,
-  },
-  {
-    id: 5,
-    name: 'Antalya Sahilleri',
-    description: 'Turkuaz mavisi deniz ve altın kumlar',
-    category: 'Plaj',
-    icon: '🏖️',
-    rating: 4.5,
-  },
-];
-
-const categories: Category[] = [
-  { id: 1, name: 'Doğal Güzellik', icon: '🌿', count: 15 },
-  { id: 2, name: 'Tarih', icon: '🏛️', count: 22 },
-  { id: 3, name: 'Macera', icon: '🎯', count: 8 },
-  { id: 4, name: 'Plaj', icon: '🏖️', count: 12 },
-];
-
 export default function ExploreScreen() {
+  // Sample data
+  const places: Place[] = [
+    {
+      id: 1,
+      name: 'İstanbul Boğazı',
+      description: 'İki kıtayı birleştiren eşsiz güzellik',
+      category: 'Doğal Güzellik',
+      icon: '🌊',
+      rating: 4.9,
+    },
+    // Add more places here...
+  ];
+
+  const categories: Category[] = [
+    { id: 1, name: 'Doğal Güzellik', icon: '🌿', count: 15 },
+    { id: 2, name: 'Tarih', icon: '🏛️', count: 22 },
+    // Add more categories here...
+  ];
+
+  // Event handlers
   const handlePlacePress = (_place: Place) => {
     // TODO: Navigate to place detail
   };
@@ -95,17 +64,10 @@ export default function ExploreScreen() {
     // TODO: Open search screen
   };
 
-  const renderStars = (rating: number) => {
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
-    let stars = '⭐'.repeat(fullStars);
-    if (hasHalfStar) stars += '⭐';
-    return stars;
-  };
-
+  // Render functions
   const renderPlace = ({ item }: { item: Place }) => (
     <TouchableOpacity
-      style={[GlobalStyles.card, GlobalStyles.touchableCard]}
+      style={GlobalStyles.touchableCard}
       onPress={() => handlePlacePress(item)}
     >
       <View style={GlobalStyles.cardContent}>
@@ -116,11 +78,9 @@ export default function ExploreScreen() {
           <Text style={GlobalStyles.titleSmall}>{item.name}</Text>
           <Text style={GlobalStyles.bodySmall}>{item.description}</Text>
           <Text style={GlobalStyles.bodySmall}>🏷️ {item.category}</Text>
-          <View style={[GlobalStyles.row, GlobalStyles.hotelRating]}>
-            <Text style={GlobalStyles.captionSecondary}>
-              {renderStars(item.rating)} {item.rating}
-            </Text>
-          </View>
+          <Text style={GlobalStyles.captionSecondary}>
+            ⭐ {item.rating}
+          </Text>
         </View>
         <View style={GlobalStyles.cardArrow}>
           <Text style={GlobalStyles.iconMedium}>➡️</Text>
@@ -142,10 +102,11 @@ export default function ExploreScreen() {
 
   return (
     <SafeAreaView style={GlobalStyles.safeArea}>
+      {/* Header */}
       <View style={GlobalStyles.header}>
         <Text style={GlobalStyles.headerTitle}>🧭 Keşfet</Text>
       </View>
-      
+
       <ScrollView style={GlobalStyles.container}>
         {/* Welcome Section */}
         <View style={[GlobalStyles.card, GlobalStyles.bosphorusTheme]}>
@@ -186,20 +147,19 @@ export default function ExploreScreen() {
         </View>
 
         <FlatList
-          data={explorePlaces}
+          data={places}
           renderItem={renderPlace}
           keyExtractor={item => item.id.toString()}
           scrollEnabled={false}
         />
 
-        {/* Information Card */}
+        {/* Info Card */}
         <View style={[GlobalStyles.card, GlobalStyles.infoCard]}>
           <Text style={GlobalStyles.titleSmall}>💡 Keşfet İpuçları</Text>
           <Text style={GlobalStyles.bodySmall}>
             • En iyi fotoğraflar için gün doğumu saatlerini tercih edin{'\n'}
             • Yerel rehberlerden yardım almayı unutmayın{'\n'}
-            • Mevsimsel özellikler için en uygun zamanları araştırın{'\n'}
-            • Her yer için planlarınıza ekleyebilirsiniz!
+            • Mevsimsel özellikler için en uygun zamanları araştırın
           </Text>
         </View>
       </ScrollView>

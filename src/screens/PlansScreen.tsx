@@ -1,16 +1,6 @@
 /**
  * TravelTurkey - Plans Screen
- * Planlarım sayfası - Seyahat planlarım ve r  const handlePlanPress = (_plan: typeof myPlans[0]) => {
-    // TODO: Navigate to plan detail
-  };
-
-  const handleReservationPress = (_reservation: typeof reservations[0]) => {
-    // TODO: Navigate to reservation detail
-  };
-
-  const handleQuickAction = (_action: string) => {
-    // TODO: Handle quick action
-  };ar
+ * Planlarım sayfası - Seyahat planlarım ve rezervasyonlarım
  */
 
 import React from 'react';
@@ -23,8 +13,35 @@ import {
 } from 'react-native';
 import { GlobalStyles } from '../styles/GlobalStyles';
 
+// Types
+interface Plan {
+  id: number;
+  title: string;
+  dates: string;
+  status: string;
+  places: string[];
+  icon: string;
+  progress: number;
+}
+
+interface Reservation {
+  id: number;
+  type: string;
+  name: string;
+  date: string;
+  status: string;
+  icon: string;
+}
+
+interface QuickAction {
+  id: number;
+  title: string;
+  icon: string;
+  action: string;
+}
+
 // Mevcut planlar verisi
-const myPlans = [
+const myPlans: Plan[] = [
   {
     id: 1,
     title: 'İstanbul Hafta Sonu',
@@ -55,7 +72,7 @@ const myPlans = [
 ];
 
 // Rezervasyonlar verisi
-const reservations = [
+const reservations: Reservation[] = [
   {
     id: 1,
     type: 'Otel',
@@ -82,7 +99,7 @@ const reservations = [
   },
 ];
 
-const quickActions = [
+const quickActions: QuickAction[] = [
   { id: 1, title: 'Yeni Plan', icon: '➕', action: 'new_plan' },
   { id: 2, title: 'Otel Ara', icon: '🏨', action: 'find_hotel' },
   { id: 3, title: 'Rehber Bul', icon: '👨‍💼', action: 'find_guide' },
@@ -90,11 +107,11 @@ const quickActions = [
 ];
 
 export default function PlansScreen() {
-  const handlePlanPress = (plan: (typeof myPlans)[0]) => {
+  const handlePlanPress = (plan: Plan) => {
     console.log(`${plan.title} planı seçildi`);
   };
 
-  const handleReservationPress = (reservation: (typeof reservations)[0]) => {
+  const handleReservationPress = (reservation: Reservation) => {
     console.log(`${reservation.name} rezervasyonu seçildi`);
   };
 

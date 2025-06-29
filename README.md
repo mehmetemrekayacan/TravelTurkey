@@ -4,6 +4,7 @@ Modern ve sade Türkiye turizm uygulaması - React Native ile geliştirilmiş.
 
 ## ✨ Özellikler
 
+- **🏠 Ana Sayfa**: Hoş geldin ekranı ve hızlı navigasyon
 - **🧭 Keşfet**: Türkiye'deki popüler yerleri ve aktiviteleri keşfedin
 - **📋 Planlarım**: Seyahat planlarınızı oluşturup takip edin
 - **👤 Profil**: Kişisel bilgileriniz ve seyahat istatistikleriniz
@@ -12,7 +13,7 @@ Modern ve sade Türkiye turizm uygulaması - React Native ile geliştirilmiş.
 
 - **React Native**: 0.80.0
 - **TypeScript**: Modern tip güvenliği
-- **React Navigation**: 3 tab'lı navigasyon sistemi
+- **React Navigation**: 4 tab'lı navigasyon sistemi
 - **ESLint + Prettier**: Kod kalitesi ve formatı
 
 ## 🚀 Kurulum
@@ -57,25 +58,57 @@ npm run test:coverage
 
 ```
 src/
-├── screens/          # Ana ekranlar (3 tab)
-│   ├── ExploreScreen.tsx
-│   ├── PlansScreen.tsx
-│   └── ProfileScreen.tsx
+├── screens/          # Ana ekranlar (4 tab + templates)
+│   ├── HomeScreen.tsx          # 🏠 Ana sayfa (NEW!)
+│   ├── ExploreScreen.tsx       # 🧭 Keşfet ekranı (Enhanced!)
+│   ├── PlansScreen.tsx         # 📋 Planlarım ekranı  
+│   ├── ProfileScreen.tsx       # 👤 Profil ekranı
+│   ├── ExploreScreenTemplate.tsx   # Keşfet template
+│   ├── ProfileScreenTemplate.tsx   # Profil template
+│   └── BaseScreenTemplate.tsx      # Genel screen template
 ├── navigation/       # Navigasyon yapısı
-│   └── BottomTabNavigator.tsx
+│   └── BottomTabNavigator.tsx  # 4 tab navigator
 ├── styles/          # Global stil tanımları
 │   └── GlobalStyles.ts
 ├── constants/       # Sabitler (renkler vb.)
 │   └── Colors.ts
 └── types/          # TypeScript tip tanımları
-    └── navigation.ts
+    └── navigation.ts           # 4 tab types
 ```
+
+## 📱 Screen Template'leri
+
+### Temel Screen Component Yapısı:
+```tsx
+import React from 'react';
+import { SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { GlobalStyles } from '../styles/GlobalStyles';
+
+export default function MyScreen() {
+  return (
+    <SafeAreaView style={GlobalStyles.safeArea}>
+      <View style={GlobalStyles.header}>
+        <Text style={GlobalStyles.headerTitle}>Başlık</Text>
+      </View>
+      <ScrollView style={GlobalStyles.container}>
+        {/* İçerik */}
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+```
+
+### Mevcut Template'ler:
+- **BaseScreenTemplate.tsx**: Genel amaçlı screen şablonu
+- **HomeScreen.tsx**: Ana sayfa örneği
+- **ExploreScreenTemplate.tsx**: Keşfet sayfası şablonu  
+- **ProfileScreenTemplate.tsx**: Profil sayfası şablonu
 
 ## 🎨 Tasarım
 
 - Sade ve modern arayüz
 - Türkiye temalı renkler
-- 3 ana tab yapısı
+- 4 ana tab yapısı
 - Responsive tasarım
 - iOS ve Android uyumlu
 

@@ -10,6 +10,7 @@ import { BottomTabParamList } from '../types/navigation';
 import { AppColors } from '../constants/Colors';
 
 // Screens
+import HomeScreen from '../screens/HomeScreen';
 import ExploreScreen from '../screens/ExploreScreen';
 import PlansScreen from '../screens/PlansScreen';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -20,29 +21,21 @@ const Tab = createBottomTabNavigator<BottomTabParamList>();
 const TabIcon = ({ name, size }: { name: string; size: number }) => {
   const getIcon = () => {
     switch (name) {
-      case 'explore':
-        return '🧭';
-      case 'plans':
-        return '📋';
-      case 'profile':
-        return '👤';
-      default:
-        return '❓';
+      case 'home': return '🏠';
+      case 'explore': return '🧭';
+      case 'plans': return '📋';
+      case 'profile': return '👤';
+      default: return '❓';
     }
   };
   return <Text style={{ fontSize: size * 0.8 }}>{getIcon()}</Text>;
 };
 
 // Icon render functions
-const renderExploreIcon = ({ size }: { size: number }) => (
-  <TabIcon name="explore" size={size} />
-);
-const renderPlansIcon = ({ size }: { size: number }) => (
-  <TabIcon name="plans" size={size} />
-);
-const renderProfileIcon = ({ size }: { size: number }) => (
-  <TabIcon name="profile" size={size} />
-);
+const renderHomeIcon = ({ size }: { size: number }) => <TabIcon name="home" size={size} />;
+const renderExploreIcon = ({ size }: { size: number }) => <TabIcon name="explore" size={size} />;
+const renderPlansIcon = ({ size }: { size: number }) => <TabIcon name="plans" size={size} />;
+const renderProfileIcon = ({ size }: { size: number }) => <TabIcon name="profile" size={size} />;
 
 export default function BottomTabNavigator() {
   return (
@@ -65,6 +58,15 @@ export default function BottomTabNavigator() {
         },
       }}
     >
+      <Tab.Screen
+        name="HomeTab"
+        component={HomeScreen}
+        options={{
+          title: 'Ana Sayfa',
+          tabBarIcon: renderHomeIcon,
+        }}
+      />
+
       <Tab.Screen
         name="ExploreTab"
         component={ExploreScreen}

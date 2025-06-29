@@ -7,6 +7,7 @@ import type { BottomTabScreenProps as RNBottomTabScreenProps } from '@react-navi
 
 // Bottom Tab Navigator parametreleri
 export type BottomTabParamList = {
+  HomeTab: undefined;
   ExploreTab: undefined;
   PlansTab: undefined;
   ProfileTab: undefined;
