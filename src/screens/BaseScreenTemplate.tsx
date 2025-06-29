@@ -20,9 +20,9 @@ interface BaseScreenProps {
   showHeader?: boolean;
 }
 
-export default function BaseScreen({ 
-  title = 'Ekran Başlığı', 
-  showHeader = true 
+export default function BaseScreen({
+  title = 'Ekran Başlığı',
+  showHeader = true,
 }: BaseScreenProps) {
   // State management
   const [isLoading, setIsLoading] = React.useState(false);
@@ -82,7 +82,7 @@ export default function BaseScreen({
         <View style={[GlobalStyles.card, GlobalStyles.bosphorusTheme]}>
           <Text style={GlobalStyles.titleLargeWhite}>Hero Başlık</Text>
           <Text style={GlobalStyles.bodyMediumWhite}>
-            Bu alan hero section için kullanılabilir. Önemli bilgiler ve 
+            Bu alan hero section için kullanılabilir. Önemli bilgiler ve
             call-to-action butonları burada yer alabilir.
           </Text>
         </View>
@@ -90,7 +90,7 @@ export default function BaseScreen({
         {/* Action Card */}
         <View style={GlobalStyles.card}>
           <Text style={GlobalStyles.titleMedium}>Hızlı İşlemler</Text>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={GlobalStyles.buttonPrimary}
             onPress={handleButtonPress}
             disabled={isLoading}
@@ -117,8 +117,8 @@ export default function BaseScreen({
         <View style={[GlobalStyles.card, GlobalStyles.infoCard]}>
           <Text style={GlobalStyles.titleSmall}>💡 Bilgi</Text>
           <Text style={GlobalStyles.bodySmall}>
-            Bu template React Native screen component oluşturmak için 
-            temel bir şablon sunar. İhtiyacınıza göre özelleştirebilirsiniz.
+            Bu template React Native screen component oluşturmak için temel bir
+            şablon sunar. İhtiyacınıza göre özelleştirebilirsiniz.
           </Text>
         </View>
       </ScrollView>

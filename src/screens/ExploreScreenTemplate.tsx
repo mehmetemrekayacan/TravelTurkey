@@ -78,9 +78,7 @@ export default function ExploreScreen() {
           <Text style={GlobalStyles.titleSmall}>{item.name}</Text>
           <Text style={GlobalStyles.bodySmall}>{item.description}</Text>
           <Text style={GlobalStyles.bodySmall}>🏷️ {item.category}</Text>
-          <Text style={GlobalStyles.captionSecondary}>
-            ⭐ {item.rating}
-          </Text>
+          <Text style={GlobalStyles.captionSecondary}>⭐ {item.rating}</Text>
         </View>
         <View style={GlobalStyles.cardArrow}>
           <Text style={GlobalStyles.iconMedium}>➡️</Text>
@@ -112,14 +110,15 @@ export default function ExploreScreen() {
         <View style={[GlobalStyles.card, GlobalStyles.bosphorusTheme]}>
           <Text style={GlobalStyles.titleLargeWhite}>Türkiye'yi Keşfedin!</Text>
           <Text style={GlobalStyles.bodyMediumWhite}>
-            Binlerce yıllık tarihi, eşsiz doğal güzellikleri ve zengin kültürü keşfedin
+            Binlerce yıllık tarihi, eşsiz doğal güzellikleri ve zengin kültürü
+            keşfedin
           </Text>
         </View>
 
         {/* Search Section */}
         <View style={GlobalStyles.card}>
           <Text style={GlobalStyles.titleMedium}>Ne Arıyorsunuz?</Text>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={[GlobalStyles.buttonPrimary, GlobalStyles.searchButton]}
             onPress={handleSearchPress}
           >
@@ -157,9 +156,9 @@ export default function ExploreScreen() {
         <View style={[GlobalStyles.card, GlobalStyles.infoCard]}>
           <Text style={GlobalStyles.titleSmall}>💡 Keşfet İpuçları</Text>
           <Text style={GlobalStyles.bodySmall}>
-            • En iyi fotoğraflar için gün doğumu saatlerini tercih edin{'\n'}
-            • Yerel rehberlerden yardım almayı unutmayın{'\n'}
-            • Mevsimsel özellikler için en uygun zamanları araştırın
+            • En iyi fotoğraflar için gün doğumu saatlerini tercih edin{'\n'}•
+            Yerel rehberlerden yardım almayı unutmayın{'\n'}• Mevsimsel
+            özellikler için en uygun zamanları araştırın
           </Text>
         </View>
       </ScrollView>

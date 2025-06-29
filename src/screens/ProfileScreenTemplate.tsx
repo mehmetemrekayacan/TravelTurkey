@@ -101,12 +101,14 @@ export default function ProfileScreen() {
             </Text>
             <Text style={GlobalStyles.titleMediumWhite}>Hoş Geldiniz!</Text>
             <Text style={GlobalStyles.bodyMediumWhite}>Misafir Kullanıcı</Text>
-            
-            <TouchableOpacity 
+
+            <TouchableOpacity
               style={GlobalStyles.buttonPrimary}
               onPress={handleEditProfile}
             >
-              <Text style={GlobalStyles.buttonTextPrimary}>Profili Düzenle</Text>
+              <Text style={GlobalStyles.buttonTextPrimary}>
+                Profili Düzenle
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

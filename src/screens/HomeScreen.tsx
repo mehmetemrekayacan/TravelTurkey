@@ -55,8 +55,8 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         {/* Quick Actions */}
         <View style={GlobalStyles.card}>
           <Text style={GlobalStyles.titleMedium}>Hızlı Başlangıç</Text>
-          
-          <TouchableOpacity 
+
+          <TouchableOpacity
             style={GlobalStyles.touchableCard}
             onPress={handleExplorePress}
           >
@@ -76,7 +76,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity 
+          <TouchableOpacity
             style={GlobalStyles.touchableCard}
             onPress={handlePlansPress}
           >
@@ -96,7 +96,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity 
+          <TouchableOpacity
             style={GlobalStyles.touchableCard}
             onPress={handleProfilePress}
           >
@@ -121,8 +121,8 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         <View style={[GlobalStyles.card, GlobalStyles.infoCard]}>
           <Text style={GlobalStyles.titleSmall}>💡 İpucu</Text>
           <Text style={GlobalStyles.bodySmall}>
-            Bu uygulama ile Türkiye'deki en güzel yerleri keşfedebilir, 
-            seyahat planlarınızı oluşturabilir ve deneyimlerinizi takip edebilirsiniz.
+            Bu uygulama ile Türkiye'deki en güzel yerleri keşfedebilir, seyahat
+            planlarınızı oluşturabilir ve deneyimlerinizi takip edebilirsiniz.
           </Text>
         </View>
       </ScrollView>

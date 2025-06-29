@@ -61,7 +61,7 @@ src/
 ├── screens/          # Ana ekranlar (4 tab + templates)
 │   ├── HomeScreen.tsx          # 🏠 Ana sayfa (NEW!)
 │   ├── ExploreScreen.tsx       # 🧭 Keşfet ekranı (Enhanced!)
-│   ├── PlansScreen.tsx         # 📋 Planlarım ekranı  
+│   ├── PlansScreen.tsx         # 📋 Planlarım ekranı
 │   ├── ProfileScreen.tsx       # 👤 Profil ekranı
 │   ├── ExploreScreenTemplate.tsx   # Keşfet template
 │   ├── ProfileScreenTemplate.tsx   # Profil template
@@ -79,6 +79,7 @@ src/
 ## 📱 Screen Template'leri
 
 ### Temel Screen Component Yapısı:
+
 ```tsx
 import React from 'react';
 import { SafeAreaView, ScrollView, Text, View } from 'react-native';
@@ -90,18 +91,17 @@ export default function MyScreen() {
       <View style={GlobalStyles.header}>
         <Text style={GlobalStyles.headerTitle}>Başlık</Text>
       </View>
-      <ScrollView style={GlobalStyles.container}>
-        {/* İçerik */}
-      </ScrollView>
+      <ScrollView style={GlobalStyles.container}>{/* İçerik */}</ScrollView>
     </SafeAreaView>
   );
 }
 ```
 
 ### Mevcut Template'ler:
+
 - **BaseScreenTemplate.tsx**: Genel amaçlı screen şablonu
 - **HomeScreen.tsx**: Ana sayfa örneği
-- **ExploreScreenTemplate.tsx**: Keşfet sayfası şablonu  
+- **ExploreScreenTemplate.tsx**: Keşfet sayfası şablonu
 - **ProfileScreenTemplate.tsx**: Profil sayfası şablonu
 
 ## 🎨 Tasarım
