@@ -5,7 +5,7 @@ module.exports = {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(react-native|@react-native|react-clone-referenced-element|@react-native-community|react-navigation|@react-navigation/.*|@unimodules/.*|native-base|react-native-svg|react-native-iphone-x-helper|react-native-vector-icons)/)',
+    'node_modules/(?!(react-native|@react-native|react-clone-referenced-element|@react-native-community|react-navigation|@react-navigation/.*|@unimodules/.*|native-base|react-native-svg|react-native-iphone-x-helper|react-native-vector-icons|react-native-gesture-handler|react-native-screens|react-native-safe-area-context)/)',
   ],
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',

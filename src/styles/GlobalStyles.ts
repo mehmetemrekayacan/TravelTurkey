@@ -66,6 +66,53 @@ export const GlobalStyles = StyleSheet.create({
     marginBottom: 12,
   },
 
+  // Card Enhancement Styles
+  touchableCard: {
+    backgroundColor: AppColors.BG_PRIMARY,
+    borderRadius: 12,
+    padding: 16,
+    marginHorizontal: 16,
+    marginVertical: 8,
+    elevation: 2,
+    shadowColor: Colors.ui.shadow,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    borderWidth: 1,
+    borderColor: 'transparent',
+  },
+
+  cardContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  cardIcon: {
+    width: 48,
+    height: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+  },
+
+  cardText: {
+    flex: 1,
+    paddingRight: 8,
+  },
+
+  cardArrow: {
+    width: 24,
+    height: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  infoCard: {
+    backgroundColor: AppColors.BG_SECONDARY,
+    borderLeftWidth: 4,
+    borderLeftColor: AppColors.ACCENT,
+  },
+
   // Button Styles
   buttonPrimary: {
     backgroundColor: AppColors.PRIMARY,
@@ -244,5 +291,79 @@ export const GlobalStyles = StyleSheet.create({
 
   paddingLarge: {
     padding: 24,
+  },
+
+  // Icon Styles
+  iconLarge: {
+    fontSize: 32,
+    textAlign: 'center',
+  },
+
+  iconMedium: {
+    fontSize: 20,
+    textAlign: 'center',
+  },
+
+  iconSmall: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
+
+  // Typography Enhancement
+  titleSmall: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: AppColors.TEXT_PRIMARY,
+    marginBottom: 4,
+  },
+
+  bodySmall: {
+    fontSize: 14,
+    color: AppColors.TEXT_SECONDARY,
+    lineHeight: 20,
+    marginBottom: 4,
+  },
+
+  captionSecondary: {
+    fontSize: 12,
+    color: AppColors.TEXT_SECONDARY,
+    fontStyle: 'italic',
+  },
+
+  // Hotel Screen Specific Styles
+  categoryGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 12,
+  },
+
+  categoryItem: {
+    flex: 1,
+    minWidth: '45%',
+    margin: 4,
+  },
+
+  priceText: {
+    marginLeft: 8,
+    color: '#e74c3c',
+  },
+
+  searchButton: {
+    marginTop: 12,
+  },
+
+  hotelRating: {
+    marginTop: 4,
+  },
+
+  // Profile Screen Specific Styles
+  profileAvatar: {
+    fontSize: 48,
+    marginBottom: 8,
+  },
+
+  statValue: {
+    fontSize: 24,
+    fontWeight: 'bold',
   },
 });
