@@ -3,7 +3,7 @@
  * Keşfet sayfası - Yerler ve aktiviteleri keşfet
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,198 +11,303 @@ import {
   View,
   TouchableOpacity,
   FlatList,
+  TextInput,
 } from 'react-native';
 import { GlobalStyles } from '../styles/GlobalStyles';
+import { AppColors } from '../constants/Colors';
+import { 
+  touristPlaces, 
+  categories as dataCategories, 
+  searchPlaces, 
+  getPlacesByCategory, 
+  getFeaturedPlaces 
+} from '../data/touristPlaces';
+import { TouristPlace, Category as CategoryType } from '../types/touristPlaces';
 
-// Types
-interface Place {
-  id: number;
-  name: string;
-  description: string;
-  category: string;
-  icon: string;
-  rating: number;
-}
+const ExploreScreen: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [filteredPlaces, setFilteredPlaces] = useState<TouristPlace[]>(getFeaturedPlaces());
 
-interface Category {
-  id: number;
-  name: string;
-  icon: string;
-  count: number;
-}
-
-// Keşfedilebilir yerler verisi
-const explorePlaces: Place[] = [
-  {
-    id: 1,
-    name: 'İstanbul Boğazı',
-    description: 'İki kıtayı birleştiren eşsiz güzellik',
-    category: 'Doğal Güzellik',
-    icon: '🌊',
-    rating: 4.9,
-  },
-  {
-    id: 2,
-    name: 'Kapadokya',
-    description: 'Peri bacaları ve sıcak hava balonu',
-    category: 'Macera',
-    icon: '🎈',
-    rating: 4.8,
-  },
-  {
-    id: 3,
-    name: 'Pamukkale',
-    description: 'Beyaz travertenler ve termal sular',
-    category: 'Doğal Güzellik',
-    icon: '♨️',
-    rating: 4.7,
-  },
-  {
-    id: 4,
-    name: 'Efes Antik Kenti',
-    description: 'Antik dönem kalıntıları',
-    category: 'Tarih',
-    icon: '🏛️',
-    rating: 4.6,
-  },
-  {
-    id: 5,
-    name: 'Antalya Sahilleri',
-    description: 'Turkuaz mavisi deniz ve altın kumlar',
-    category: 'Plaj',
-    icon: '🏖️',
-    rating: 4.5,
-  },
-];
-
-const categories: Category[] = [
-  { id: 1, name: 'Doğal Güzellik', icon: '🌿', count: 15 },
-  { id: 2, name: 'Tarih', icon: '🏛️', count: 22 },
-  { id: 3, name: 'Macera', icon: '🎯', count: 8 },
-  { id: 4, name: 'Plaj', icon: '🏖️', count: 12 },
-];
-
-export default function ExploreScreen() {
-  const handlePlacePress = (_place: Place) => {
-    // TODO: Navigate to place detail
+  // Arama fonksiyonu
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    if (query.trim() === '') {
+      setFilteredPlaces(getFeaturedPlaces());
+    } else {
+      setFilteredPlaces(searchPlaces(query));
+    }
   };
 
-  const handleCategoryPress = (_category: Category) => {
-    // TODO: Filter places by category
+  // Kategori filtresi
+  const handleCategoryFilter = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+    if (categoryId === 'all') {
+      setFilteredPlaces(getFeaturedPlaces());
+    } else {
+      setFilteredPlaces(getPlacesByCategory(categoryId));
+    }
   };
 
-  const handleSearchPress = () => {
-    // TODO: Open search screen
-  };
-
-  const renderStars = (rating: number) => {
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
-    let stars = '⭐'.repeat(fullStars);
-    if (hasHalfStar) stars += '⭐';
-    return stars;
-  };
-
-  const renderPlace = ({ item }: { item: Place }) => (
-    <TouchableOpacity
-      style={[GlobalStyles.card, GlobalStyles.touchableCard]}
-      onPress={() => handlePlacePress(item)}
-    >
-      <View style={GlobalStyles.cardContent}>
-        <View style={GlobalStyles.cardIcon}>
-          <Text style={GlobalStyles.iconLarge}>{item.icon}</Text>
+  // Place item renderer
+  const renderPlaceItem = ({ item }: { item: TouristPlace }) => (
+    <TouchableOpacity style={styles.placeCard}>
+      <View style={styles.placeHeader}>
+        <Text style={styles.placeIcon}>{item.icon}</Text>
+        <View style={styles.placeInfo}>
+          <Text style={styles.placeName}>{item.name}</Text>
+          <Text style={styles.placeLocation}>{item.address.city}, {item.address.district}</Text>
         </View>
-        <View style={GlobalStyles.cardText}>
-          <Text style={GlobalStyles.titleSmall}>{item.name}</Text>
-          <Text style={GlobalStyles.bodySmall}>{item.description}</Text>
-          <Text style={GlobalStyles.bodySmall}>🏷️ {item.category}</Text>
-          <View style={[GlobalStyles.row, GlobalStyles.hotelRating]}>
-            <Text style={GlobalStyles.captionSecondary}>
-              {renderStars(item.rating)} {item.rating}
-            </Text>
-          </View>
+        <View style={styles.ratingContainer}>
+          <Text style={styles.rating}>⭐ {item.rating.average.toFixed(1)}</Text>
         </View>
-        <View style={GlobalStyles.cardArrow}>
-          <Text style={GlobalStyles.iconMedium}>➡️</Text>
-        </View>
+      </View>
+      <Text style={styles.placeDescription}>{item.shortDescription}</Text>
+      <View style={styles.placeFooter}>
+        <Text style={styles.category}>{item.category}</Text>
+        <Text style={styles.price}>
+          {item.priceInfo.isFree ? 'Ücretsiz' : `${item.priceInfo.adult} ${item.priceInfo.currency}`}
+        </Text>
       </View>
     </TouchableOpacity>
   );
 
-  const renderCategory = ({ item }: { item: Category }) => (
-    <TouchableOpacity
-      style={[GlobalStyles.touchableCard, GlobalStyles.categoryItem]}
-      onPress={() => handleCategoryPress(item)}
+  // Category item renderer
+  const renderCategoryItem = ({ item }: { item: CategoryType | { id: string; name: string; icon: string; placesCount: number } }) => (
+    <TouchableOpacity 
+      style={[
+        styles.categoryCard,
+        selectedCategory === item.id && styles.selectedCategoryCard
+      ]}
+      onPress={() => handleCategoryFilter(item.id)}
     >
-      <Text style={GlobalStyles.iconMedium}>{item.icon}</Text>
-      <Text style={GlobalStyles.titleSmall}>{item.name}</Text>
-      <Text style={GlobalStyles.captionSecondary}>{item.count} yer</Text>
+      <Text style={styles.categoryIcon}>{item.icon}</Text>
+      <Text style={[
+        styles.categoryName,
+        selectedCategory === item.id && styles.selectedCategoryName
+      ]}>
+        {item.name}
+      </Text>
+      <Text style={styles.categoryCount}>{item.placesCount} yer</Text>
     </TouchableOpacity>
   );
 
   return (
     <SafeAreaView style={GlobalStyles.safeArea}>
-      <View style={GlobalStyles.header}>
-        <Text style={GlobalStyles.headerTitle}>🧭 Keşfet</Text>
-      </View>
-      
-      <ScrollView style={GlobalStyles.container}>
-        {/* Welcome Section */}
-        <View style={[GlobalStyles.card, GlobalStyles.bosphorusTheme]}>
-          <Text style={GlobalStyles.titleLargeWhite}>Türkiye'yi Keşfedin!</Text>
-          <Text style={GlobalStyles.bodyMediumWhite}>
-            Binlerce yıllık tarihi, eşsiz doğal güzellikleri ve zengin kültürü keşfedin
-          </Text>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={styles.title}>Keşfet</Text>
+          <Text style={styles.subtitle}>Türkiye'nin güzelliklerini keşfedin</Text>
         </View>
 
-        {/* Search Section */}
-        <View style={GlobalStyles.card}>
-          <Text style={GlobalStyles.titleMedium}>Ne Arıyorsunuz?</Text>
-          <TouchableOpacity 
-            style={[GlobalStyles.buttonPrimary, GlobalStyles.searchButton]}
-            onPress={handleSearchPress}
-          >
-            <Text style={GlobalStyles.buttonTextPrimary}>🔍 Yer Ara</Text>
-          </TouchableOpacity>
+        {/* Search Bar */}
+        <View style={styles.searchContainer}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Yer, şehir veya aktivite arayın..."
+            value={searchQuery}
+            onChangeText={handleSearch}
+            placeholderTextColor={AppColors.TEXT_SECONDARY}
+          />
+          <Text style={styles.searchIcon}>🔍</Text>
         </View>
 
         {/* Categories */}
-        <View style={GlobalStyles.card}>
-          <Text style={GlobalStyles.titleMedium}>Kategoriler</Text>
-          <View style={GlobalStyles.categoryGrid}>
-            <FlatList
-              data={categories}
-              renderItem={renderCategory}
-              keyExtractor={item => item.id.toString()}
-              numColumns={2}
-              scrollEnabled={false}
-            />
-          </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Kategoriler</Text>
+          <FlatList
+            data={[
+              { id: 'all', name: 'Tümü', icon: '🗺️', placesCount: touristPlaces.length, description: '', color: '' },
+              ...dataCategories
+            ]}
+            renderItem={renderCategoryItem}
+            keyExtractor={(item) => item.id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.categoriesList}
+          />
         </View>
 
-        {/* Popular Places */}
-        <View style={GlobalStyles.card}>
-          <Text style={GlobalStyles.titleMedium}>Popüler Yerler</Text>
-        </View>
-
-        <FlatList
-          data={explorePlaces}
-          renderItem={renderPlace}
-          keyExtractor={item => item.id.toString()}
-          scrollEnabled={false}
-        />
-
-        {/* Information Card */}
-        <View style={[GlobalStyles.card, GlobalStyles.infoCard]}>
-          <Text style={GlobalStyles.titleSmall}>💡 Keşfet İpuçları</Text>
-          <Text style={GlobalStyles.bodySmall}>
-            • En iyi fotoğraflar için gün doğumu saatlerini tercih edin{'\n'}
-            • Yerel rehberlerden yardım almayı unutmayın{'\n'}
-            • Mevsimsel özellikler için en uygun zamanları araştırın{'\n'}
-            • Her yer için planlarınıza ekleyebilirsiniz!
+        {/* Featured Places */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>
+            {selectedCategory === 'all' ? 'Öne Çıkan Yerler' : 'Sonuçlar'}
           </Text>
+          <Text style={styles.resultsCount}>{filteredPlaces.length} yer bulundu</Text>
+          
+          <FlatList
+            data={filteredPlaces}
+            renderItem={renderPlaceItem}
+            keyExtractor={(item) => item.id}
+            scrollEnabled={false}
+            contentContainerStyle={styles.placesList}
+          />
         </View>
+
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
+
+const styles = {
+  header: {
+    padding: 20,
+    paddingBottom: 10,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold' as const,
+    color: AppColors.PRIMARY,
+    marginBottom: 5,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: AppColors.TEXT_SECONDARY,
+  },
+  searchContainer: {
+    flexDirection: 'row' as const,
+    alignItems: 'center' as const,
+    margin: 20,
+    marginTop: 10,
+    backgroundColor: AppColors.BG_LIGHT,
+    borderRadius: 15,
+    paddingHorizontal: 15,
+  },
+  searchInput: {
+    flex: 1,
+    paddingVertical: 12,
+    fontSize: 16,
+    color: AppColors.TEXT_PRIMARY,
+  },
+  searchIcon: {
+    fontSize: 20,
+    marginLeft: 10,
+  },
+  section: {
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold' as const,
+    color: AppColors.TEXT_PRIMARY,
+    marginHorizontal: 20,
+    marginBottom: 10,
+  },
+  resultsCount: {
+    fontSize: 14,
+    color: AppColors.TEXT_SECONDARY,
+    marginHorizontal: 20,
+    marginBottom: 15,
+  },
+  categoriesList: {
+    paddingHorizontal: 15,
+  },
+  categoryCard: {
+    backgroundColor: AppColors.BG_PRIMARY,
+    borderRadius: 15,
+    padding: 15,
+    marginHorizontal: 5,
+    minWidth: 100,
+    alignItems: 'center' as const,
+    borderWidth: 1,
+    borderColor: AppColors.TEXT_LIGHT,
+  },
+  selectedCategoryCard: {
+    backgroundColor: AppColors.PRIMARY,
+    borderColor: AppColors.PRIMARY,
+  },
+  categoryIcon: {
+    fontSize: 24,
+    marginBottom: 5,
+  },
+  categoryName: {
+    fontSize: 14,
+    fontWeight: '600' as const,
+    color: AppColors.TEXT_PRIMARY,
+    textAlign: 'center' as const,
+    marginBottom: 3,
+  },
+  selectedCategoryName: {
+    color: AppColors.BG_PRIMARY,
+  },
+  categoryCount: {
+    fontSize: 12,
+    color: AppColors.TEXT_SECONDARY,
+  },
+  placesList: {
+    paddingHorizontal: 20,
+  },
+  placeCard: {
+    backgroundColor: AppColors.BG_PRIMARY,
+    borderRadius: 15,
+    padding: 15,
+    marginBottom: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  placeHeader: {
+    flexDirection: 'row' as const,
+    alignItems: 'center' as const,
+    marginBottom: 10,
+  },
+  placeIcon: {
+    fontSize: 40,
+    marginRight: 15,
+  },
+  placeInfo: {
+    flex: 1,
+  },
+  placeName: {
+    fontSize: 18,
+    fontWeight: 'bold' as const,
+    color: AppColors.TEXT_PRIMARY,
+    marginBottom: 3,
+  },
+  placeLocation: {
+    fontSize: 14,
+    color: AppColors.TEXT_SECONDARY,
+  },
+  ratingContainer: {
+    backgroundColor: AppColors.BG_LIGHT,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+  },
+  rating: {
+    fontSize: 14,
+    fontWeight: '600' as const,
+    color: AppColors.TEXT_PRIMARY,
+  },
+  placeDescription: {
+    fontSize: 14,
+    color: AppColors.TEXT_SECONDARY,
+    lineHeight: 20,
+    marginBottom: 10,
+  },
+  placeFooter: {
+    flexDirection: 'row' as const,
+    justifyContent: 'space-between' as const,
+    alignItems: 'center' as const,
+  },
+  category: {
+    fontSize: 12,
+    fontWeight: '600' as const,
+    color: AppColors.PRIMARY,
+    backgroundColor: AppColors.BG_LIGHT,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+  },
+  price: {
+    fontSize: 14,
+    fontWeight: 'bold' as const,
+    color: AppColors.TEXT_PRIMARY,
+  },
+};
+
+export default ExploreScreen;
