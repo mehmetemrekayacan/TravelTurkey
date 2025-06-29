@@ -77,6 +77,9 @@ export const AppColors = {
   BG_SECONDARY: Colors.neutral.offWhite, // #F8FAFC
   BG_LIGHT: Colors.neutral.grayLightest, // #F9FAFB
 
+  // Border renkleri
+  BORDER_LIGHT: Colors.neutral.grayLight, // #D1D5DB
+
   // Türkiye özel renkleri
   TURKISH_FLAG: Colors.primary.red, // #DC2626
   BOSPHORUS: Colors.accent.bosphorusBlue, // #0EA5E9

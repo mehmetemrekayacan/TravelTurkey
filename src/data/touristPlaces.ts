@@ -1713,12 +1713,99 @@ export const touristPlaces: TouristPlace[] = [
 
 // Veri arama ve filtreleme fonksiyonları
 export const searchPlaces = (query: string): TouristPlace[] => {
-  const lowercaseQuery = query.toLowerCase();
-  return touristPlaces.filter(place => 
-    place.name.toLowerCase().includes(lowercaseQuery) ||
-    place.description.toLowerCase().includes(lowercaseQuery) ||
-    place.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery))
+  if (!query || query.trim().length === 0) {
+    return [];
+  }
+
+  const lowercaseQuery = query.toLowerCase().trim();
+  const queryWords = lowercaseQuery.split(' ').filter(word => word.length > 0);
+
+  return touristPlaces.filter(place => {
+    // 1. İsim araması - En yüksek öncelik
+    const nameMatch = place.name.toLowerCase().includes(lowercaseQuery);
+    
+    // 2. Kısa açıklama araması
+    const shortDescMatch = place.shortDescription.toLowerCase().includes(lowercaseQuery);
+    
+    // 3. Şehir ve ilçe araması
+    const cityMatch = place.address.city.toLowerCase().includes(lowercaseQuery);
+    const districtMatch = place.address.district.toLowerCase().includes(lowercaseQuery);
+    
+    // 4. Kategori araması (Türkçe kategori isimleri)
+    const categoryMatch = categories.some(cat => 
+      cat.id === place.category && cat.name.toLowerCase().includes(lowercaseQuery)
+    );
+    
+    // 5. Alt kategori araması
+    const subcategoryMatch = place.subcategory?.toLowerCase().includes(lowercaseQuery) || false;
+    
+    // 6. Etiket araması
+    const tagsMatch = place.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery));
+    
+    // 7. Uzun açıklama araması
+    const descriptionMatch = place.description.toLowerCase().includes(lowercaseQuery);
+    
+    // 8. Çoklu kelime araması - Tüm kelimeler bulunmalı
+    const multiWordMatch = queryWords.length > 1 ? 
+      queryWords.every(word => 
+        place.name.toLowerCase().includes(word) ||
+        place.description.toLowerCase().includes(word) ||
+        place.address.city.toLowerCase().includes(word) ||
+        place.tags.some(tag => tag.toLowerCase().includes(word))
+      ) : false;
+    
+    // 9. Bölge araması
+    const regionMatch = place.region.toLowerCase().includes(lowercaseQuery);
+    
+    // 10. İpuçları araması
+    const tipsMatch = place.tips?.some(tip => tip.toLowerCase().includes(lowercaseQuery)) || false;
+    
+    // Herhangi bir eşleşme varsa true döndür
+    return nameMatch || shortDescMatch || cityMatch || districtMatch || 
+           categoryMatch || subcategoryMatch || tagsMatch || descriptionMatch ||
+           multiWordMatch || regionMatch || tipsMatch;
+  }).sort((a, b) => {
+    // Sonuçları relevansa göre sırala
+    const aScore = calculateRelevanceScore(a, lowercaseQuery);
+    const bScore = calculateRelevanceScore(b, lowercaseQuery);
+    return bScore - aScore;
+  });
+};
+
+// Relevans skoru hesaplama fonksiyonu
+const calculateRelevanceScore = (place: TouristPlace, query: string): number => {
+  let score = 0;
+  
+  // İsim eşleşmesi en yüksek puan
+  if (place.name.toLowerCase().includes(query)) {
+    score += place.name.toLowerCase() === query ? 100 : 50;
+  }
+  
+  // Şehir eşleşmesi
+  if (place.address.city.toLowerCase().includes(query)) {
+    score += place.address.city.toLowerCase() === query ? 80 : 30;
+  }
+  
+  // Kategori eşleşmesi
+  const categoryMatch = categories.find(cat => 
+    cat.id === place.category && cat.name.toLowerCase().includes(query)
   );
+  if (categoryMatch) {
+    score += 40;
+  }
+  
+  // Popülerlik bonusu
+  score += place.popularityScore * 0.1;
+  
+  // Öne çıkan yerler bonusu
+  if (place.isFeatured) {
+    score += 10;
+  }
+  
+  // Rating bonusu
+  score += place.rating.average * 2;
+  
+  return score;
 };
 
 export const getPlacesByCategory = (category: string): TouristPlace[] => {
@@ -1758,4 +1845,200 @@ export const getStatistics = () => {
     averageRating: touristPlaces.reduce((sum, p) => sum + p.rating.average, 0) / touristPlaces.length,
     totalVisitorsPerYear: touristPlaces.reduce((sum, p) => sum + (p.visitorsPerYear || 0), 0)
   };
+};
+
+// Gelişmiş arama özelliklerini destekleyen yardımcı fonksiyonlar
+
+// Arama önerileri fonksiyonu
+export const getSearchSuggestions = (query: string): string[] => {
+  if (!query || query.trim().length < 2) {
+    return [];
+  }
+
+  const lowercaseQuery = query.toLowerCase();
+  const suggestions = new Set<string>();
+
+  // Şehir önerileri
+  touristPlaces.forEach(place => {
+    if (place.address.city.toLowerCase().includes(lowercaseQuery)) {
+      suggestions.add(place.address.city);
+    }
+    if (place.address.district.toLowerCase().includes(lowercaseQuery)) {
+      suggestions.add(place.address.district);
+    }
+  });
+
+  // Kategori önerileri
+  categories.forEach(category => {
+    if (category.name.toLowerCase().includes(lowercaseQuery)) {
+      suggestions.add(category.name);
+    }
+  });
+
+  // Popüler yer isimleri
+  touristPlaces
+    .filter(place => place.name.toLowerCase().includes(lowercaseQuery))
+    .slice(0, 5)
+    .forEach(place => suggestions.add(place.name));
+
+  return Array.from(suggestions).slice(0, 8);
+};
+
+// Fuzzy search - yakın eşleşmeler için
+export const fuzzySearchPlaces = (query: string, threshold: number = 0.6): TouristPlace[] => {
+  if (!query || query.trim().length === 0) {
+    return [];
+  }
+
+  const lowercaseQuery = query.toLowerCase();
+  
+  return touristPlaces.filter(place => {
+    const similarity = calculateSimilarity(place.name.toLowerCase(), lowercaseQuery);
+    return similarity >= threshold;
+  }).slice(0, 10);
+};
+
+// String similarity hesaplama (Levenshtein distance tabanlı)
+const calculateSimilarity = (str1: string, str2: string): number => {
+  const longer = str1.length > str2.length ? str1 : str2;
+  const shorter = str1.length > str2.length ? str2 : str1;
+  
+  if (longer.length === 0) {
+    return 1.0;
+  }
+  
+  const distance = levenshteinDistance(longer, shorter);
+  return (longer.length - distance) / longer.length;
+};
+
+// Levenshtein distance algoritması
+const levenshteinDistance = (str1: string, str2: string): number => {
+  const matrix = [];
+
+  for (let i = 0; i <= str2.length; i++) {
+    matrix[i] = [i];
+  }
+
+  for (let j = 0; j <= str1.length; j++) {
+    matrix[0][j] = j;
+  }
+
+  for (let i = 1; i <= str2.length; i++) {
+    for (let j = 1; j <= str1.length; j++) {
+      if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1,
+          matrix[i][j - 1] + 1,
+          matrix[i - 1][j] + 1
+        );
+      }
+    }
+  }
+
+  return matrix[str2.length][str1.length];
+};
+
+// Gelişmiş filtreleme seçenekleri
+export interface SearchFilters {
+  categories?: string[];
+  regions?: string[];
+  cities?: string[];
+  priceRange?: {
+    min: number;
+    max: number;
+  };
+  minRating?: number;
+  isFree?: boolean;
+  hasParking?: boolean;
+  wheelchairAccessible?: boolean;
+  hasGuidedTours?: boolean;
+}
+
+// Filtreleme ile arama
+export const searchPlacesWithFilters = (
+  query: string, 
+  filters: SearchFilters = {}
+): TouristPlace[] => {
+  let results = query ? searchPlaces(query) : touristPlaces;
+
+  // Kategori filtresi
+  if (filters.categories && filters.categories.length > 0) {
+    results = results.filter(place => filters.categories!.includes(place.category));
+  }
+
+  // Bölge filtresi
+  if (filters.regions && filters.regions.length > 0) {
+    results = results.filter(place => filters.regions!.includes(place.region));
+  }
+
+  // Şehir filtresi
+  if (filters.cities && filters.cities.length > 0) {
+    results = results.filter(place => 
+      filters.cities!.some(city => 
+        place.address.city.toLowerCase() === city.toLowerCase()
+      )
+    );
+  }
+
+  // Fiyat aralığı filtresi
+  if (filters.priceRange) {
+    results = results.filter(place => {
+      const price = place.priceInfo.adult;
+      return price >= filters.priceRange!.min && price <= filters.priceRange!.max;
+    });
+  }
+
+  // Minimum rating filtresi
+  if (filters.minRating) {
+    results = results.filter(place => place.rating.average >= filters.minRating!);
+  }
+
+  // Ücretsiz yerler filtresi
+  if (filters.isFree !== undefined) {
+    results = results.filter(place => place.priceInfo.isFree === filters.isFree);
+  }
+
+  // Park yeri filtresi
+  if (filters.hasParking !== undefined) {
+    results = results.filter(place => place.accessibility.parking === filters.hasParking);
+  }
+
+  // Tekerlekli sandalye erişimi filtresi
+  if (filters.wheelchairAccessible !== undefined) {
+    results = results.filter(place => 
+      place.accessibility.wheelchairAccessible === filters.wheelchairAccessible
+    );
+  }
+
+  // Rehberli tur filtresi
+  if (filters.hasGuidedTours !== undefined) {
+    results = results.filter(place => 
+      place.accessibility.guidedTours === filters.hasGuidedTours
+    );
+  }
+
+  return results;
+};
+
+// Popüler arama terimleri
+export const getPopularSearchTerms = (): string[] => {
+  return [
+    'İstanbul',
+    'Kapadokya',
+    'Antalya',
+    'Pamukkale',
+    'Efes',
+    'Ayasofya',
+    'Topkapı Sarayı',
+    'Galata Kulesi',
+    'Ölüdeniz',
+    'Sümela Manastırı',
+    'Nemrut Dağı',
+    'Aspendos',
+    'Safranbolu',
+    'Mevlâna Müzesi',
+    'Truva'
+  ];
 };
