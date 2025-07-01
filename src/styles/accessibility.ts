@@ -6,35 +6,40 @@
 import { Theme } from './theme';
 
 // Color contrast calculation (WCAG 2.1)
-export const calculateContrastRatio = (color1: string, color2: string): number => {
+export const calculateContrastRatio = (
+  color1: string,
+  color2: string,
+): number => {
   const getLuminance = (color: string): number => {
     // Remove # if present
     const hex = color.replace('#', '');
-    
+
     // Convert to RGB
     const r = parseInt(hex.substr(0, 2), 16) / 255;
     const g = parseInt(hex.substr(2, 2), 16) / 255;
     const b = parseInt(hex.substr(4, 2), 16) / 255;
-    
+
     // Apply gamma correction
     const gammaCorrect = (value: number) => {
-      return value <= 0.03928 ? value / 12.92 : Math.pow((value + 0.055) / 1.055, 2.4);
+      return value <= 0.03928
+        ? value / 12.92
+        : Math.pow((value + 0.055) / 1.055, 2.4);
     };
-    
+
     const rCorrect = gammaCorrect(r);
     const gCorrect = gammaCorrect(g);
     const bCorrect = gammaCorrect(b);
-    
+
     // Calculate relative luminance
     return 0.2126 * rCorrect + 0.7152 * gCorrect + 0.0722 * bCorrect;
   };
-  
+
   const lum1 = getLuminance(color1);
   const lum2 = getLuminance(color2);
-  
+
   const lighter = Math.max(lum1, lum2);
   const darker = Math.min(lum1, lum2);
-  
+
   return (lighter + 0.05) / (darker + 0.05);
 };
 
@@ -43,14 +48,14 @@ export const meetsContrastRequirement = (
   foreground: string,
   background: string,
   level: 'AA' | 'AAA' = 'AA',
-  size: 'normal' | 'large' = 'normal'
+  size: 'normal' | 'large' = 'normal',
 ): boolean => {
   const ratio = calculateContrastRatio(foreground, background);
-  
+
   if (level === 'AAA') {
     return size === 'large' ? ratio >= 4.5 : ratio >= 7;
   }
-  
+
   // AA level (default)
   return size === 'large' ? ratio >= 3 : ratio >= 4.5;
 };
@@ -58,24 +63,27 @@ export const meetsContrastRequirement = (
 // Get accessible text color for a background
 export const getAccessibleTextColor = (
   backgroundColor: string,
-  preferredColor?: string
+  preferredColor?: string,
 ): string => {
   const colors = Theme.colors;
-  
-  if (preferredColor && meetsContrastRequirement(preferredColor, backgroundColor)) {
+
+  if (
+    preferredColor &&
+    meetsContrastRequirement(preferredColor, backgroundColor)
+  ) {
     return preferredColor;
   }
-  
+
   // Try white first
   if (meetsContrastRequirement(colors.neutral[50], backgroundColor)) {
     return colors.neutral[50];
   }
-  
+
   // Try black
   if (meetsContrastRequirement(colors.neutral[900], backgroundColor)) {
     return colors.neutral[900];
   }
-  
+
   // Try neutral colors
   const neutralColors = [
     colors.neutral[100],
@@ -83,13 +91,13 @@ export const getAccessibleTextColor = (
     colors.neutral[700],
     colors.neutral[800],
   ];
-  
+
   for (const color of neutralColors) {
     if (meetsContrastRequirement(color, backgroundColor)) {
       return color;
     }
   }
-  
+
   // Fallback
   return colors.neutral[900];
 };
@@ -97,11 +105,7 @@ export const getAccessibleTextColor = (
 // Common accessibility props for different component types
 export const AccessibilityHelpers = {
   // Button accessibility
-  button: (
-    label: string,
-    hint?: string,
-    disabled: boolean = false
-  ) => ({
+  button: (label: string, hint?: string, disabled: boolean = false) => ({
     accessible: true,
     accessibilityRole: 'button' as const,
     accessibilityLabel: label,
@@ -136,7 +140,7 @@ export const AccessibilityHelpers = {
     label: string,
     value?: string,
     placeholder?: string,
-    _error?: string
+    _error?: string,
   ) => ({
     accessible: true,
     accessibilityRole: 'text' as const,
@@ -146,12 +150,7 @@ export const AccessibilityHelpers = {
   }),
 
   // Tab accessibility
-  tab: (
-    label: string,
-    selected: boolean,
-    index: number,
-    total: number
-  ) => ({
+  tab: (label: string, selected: boolean, index: number, total: number) => ({
     accessible: true,
     accessibilityRole: 'tab' as const,
     accessibilityLabel: `${label}, tab ${index + 1} of ${total}`,
@@ -162,11 +161,11 @@ export const AccessibilityHelpers = {
   listItem: (
     label: string,
     position?: { index: number; total: number },
-    hint?: string
+    hint?: string,
   ) => ({
     accessible: true,
     accessibilityRole: 'button' as const,
-    accessibilityLabel: position 
+    accessibilityLabel: position
       ? `${label}, item ${position.index + 1} of ${position.total}`
       : label,
     accessibilityHint: hint || 'Double tap to select',
@@ -176,7 +175,7 @@ export const AccessibilityHelpers = {
   search: (
     placeholder: string = 'Search',
     value?: string,
-    resultsCount?: number
+    resultsCount?: number,
   ) => ({
     accessible: true,
     accessibilityRole: 'search' as const,
@@ -209,10 +208,10 @@ export const AccessibilityHelpers = {
 export const TouchTargets = {
   // Minimum touch target size (44pt recommended)
   minSize: Theme.accessibility.minTouchTarget,
-  
+
   // Ensure minimum touch target
   ensureMinimumSize: (size: number) => Math.max(size, TouchTargets.minSize),
-  
+
   // Calculate touch target padding
   calculatePadding: (contentSize: number) => {
     const minSize = TouchTargets.minSize;
@@ -229,7 +228,7 @@ export const FontScaling = {
     // For now, return the base size
     return Math.min(baseSize * 1, baseSize * maxScale);
   },
-  
+
   // Check if large text is enabled
   isLargeTextEnabled: (): boolean => {
     // In a real app, check system accessibility settings
@@ -244,7 +243,7 @@ export const ScreenReader = {
     // Implementation would depend on platform-specific screen reader APIs
     console.log(`Screen reader announcement: ${message}`);
   },
-  
+
   // Check if screen reader is active
   isEnabled: (): boolean => {
     // In a real app, check if screen reader is active
@@ -260,7 +259,7 @@ export const FocusManagement = {
       ref.current.focus();
     }
   },
-  
+
   // Manage focus for modals
   trapFocus: (_containerRef: any): void => {
     // Implementation for focus trapping in modals
@@ -277,45 +276,62 @@ export const ColorAccessibility = {
       lightOnDark: {
         background: Theme.colors.neutral[900],
         text: Theme.colors.neutral[50],
-        contrast: calculateContrastRatio(Theme.colors.neutral[50], Theme.colors.neutral[900]),
+        contrast: calculateContrastRatio(
+          Theme.colors.neutral[50],
+          Theme.colors.neutral[900],
+        ),
       },
       darkOnLight: {
         background: Theme.colors.neutral[50],
         text: Theme.colors.neutral[900],
-        contrast: calculateContrastRatio(Theme.colors.neutral[900], Theme.colors.neutral[50]),
+        contrast: calculateContrastRatio(
+          Theme.colors.neutral[900],
+          Theme.colors.neutral[50],
+        ),
       },
     },
-    
+
     // Brand color combinations (pre-validated)
     brand: {
       primaryOnWhite: {
         background: Theme.colors.neutral[50],
         text: Theme.colors.primary[600],
-        contrast: calculateContrastRatio(Theme.colors.primary[600], Theme.colors.neutral[50]),
+        contrast: calculateContrastRatio(
+          Theme.colors.primary[600],
+          Theme.colors.neutral[50],
+        ),
       },
       whiteOnPrimary: {
         background: Theme.colors.primary[500],
         text: Theme.colors.neutral[50],
-        contrast: calculateContrastRatio(Theme.colors.neutral[50], Theme.colors.primary[500]),
+        contrast: calculateContrastRatio(
+          Theme.colors.neutral[50],
+          Theme.colors.primary[500],
+        ),
       },
     },
   },
-  
+
   // Get accessible color variant
   getAccessibleVariant: (
     baseColor: keyof typeof Theme.colors.primary,
-    background: string
+    background: string,
   ): string => {
     const colorShades = Theme.colors.primary;
-    const shadeKeys = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] as const;
-    
+    const shadeKeys = [
+      50, 100, 200, 300, 400, 500, 600, 700, 800, 900,
+    ] as const;
+
     for (const shade of shadeKeys) {
       const color = colorShades[shade];
-      if (typeof color === 'string' && meetsContrastRequirement(color, background)) {
+      if (
+        typeof color === 'string' &&
+        meetsContrastRequirement(color, background)
+      ) {
         return color;
       }
     }
-    
+
     return Theme.colors.neutral[900]; // Fallback
   },
 };

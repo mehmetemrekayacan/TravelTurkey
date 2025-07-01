@@ -9,12 +9,12 @@ export const GoogleFonts = {
   poppins: {
     weights: ['300', '400', '500', '600', '700', '800'],
     variants: [
-      'Poppins-Light',        // 300
-      'Poppins-Regular',      // 400
-      'Poppins-Medium',       // 500
-      'Poppins-SemiBold',     // 600
-      'Poppins-Bold',         // 700
-      'Poppins-ExtraBold',    // 800
+      'Poppins-Light', // 300
+      'Poppins-Regular', // 400
+      'Poppins-Medium', // 500
+      'Poppins-SemiBold', // 600
+      'Poppins-Bold', // 700
+      'Poppins-ExtraBold', // 800
     ],
     fallbacks: {
       ios: 'System',
@@ -27,11 +27,11 @@ export const GoogleFonts = {
   inter: {
     weights: ['300', '400', '500', '600', '700'],
     variants: [
-      'Inter-Light',          // 300
-      'Inter-Regular',        // 400
-      'Inter-Medium',         // 500
-      'Inter-SemiBold',       // 600
-      'Inter-Bold',           // 700
+      'Inter-Light', // 300
+      'Inter-Regular', // 400
+      'Inter-Medium', // 500
+      'Inter-SemiBold', // 600
+      'Inter-Bold', // 700
     ],
     fallbacks: {
       ios: 'System',
@@ -44,10 +44,10 @@ export const GoogleFonts = {
   playfairDisplay: {
     weights: ['400', '500', '600', '700'],
     variants: [
-      'PlayfairDisplay-Regular',    // 400
-      'PlayfairDisplay-Medium',     // 500
-      'PlayfairDisplay-SemiBold',   // 600
-      'PlayfairDisplay-Bold',       // 700
+      'PlayfairDisplay-Regular', // 400
+      'PlayfairDisplay-Medium', // 500
+      'PlayfairDisplay-SemiBold', // 600
+      'PlayfairDisplay-Bold', // 700
     ],
     fallbacks: {
       ios: 'Georgia',
@@ -60,10 +60,10 @@ export const GoogleFonts = {
   jetBrainsMono: {
     weights: ['400', '500', '600', '700'],
     variants: [
-      'JetBrainsMono-Regular',      // 400
-      'JetBrainsMono-Medium',       // 500
-      'JetBrainsMono-SemiBold',     // 600
-      'JetBrainsMono-Bold',         // 700
+      'JetBrainsMono-Regular', // 400
+      'JetBrainsMono-Medium', // 500
+      'JetBrainsMono-SemiBold', // 600
+      'JetBrainsMono-Bold', // 700
     ],
     fallbacks: {
       ios: 'Menlo',
@@ -87,7 +87,7 @@ module.exports = {
   assets: ['./assets/fonts/'],
 };
     `,
-    
+
     // Font files to add to assets/fonts/
     requiredFiles: [
       // Poppins
@@ -97,27 +97,27 @@ module.exports = {
       'Poppins-SemiBold.ttf',
       'Poppins-Bold.ttf',
       'Poppins-ExtraBold.ttf',
-      
+
       // Inter
       'Inter-Light.ttf',
       'Inter-Regular.ttf',
       'Inter-Medium.ttf',
       'Inter-SemiBold.ttf',
       'Inter-Bold.ttf',
-      
+
       // Playfair Display
       'PlayfairDisplay-Regular.ttf',
       'PlayfairDisplay-Medium.ttf',
       'PlayfairDisplay-SemiBold.ttf',
       'PlayfairDisplay-Bold.ttf',
-      
+
       // JetBrains Mono
       'JetBrainsMono-Regular.ttf',
       'JetBrainsMono-Medium.ttf',
       'JetBrainsMono-SemiBold.ttf',
       'JetBrainsMono-Bold.ttf',
     ],
-    
+
     // Installation commands
     installCommands: [
       'npx react-native link',
@@ -144,7 +144,7 @@ module.exports = {
   }
 }
     `,
-    
+
     installCommands: [
       'expo install expo-font',
       'expo install @expo-google-fonts/poppins',
@@ -158,7 +158,7 @@ module.exports = {
     googleFontsImport: `
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
     `,
-    
+
     nextjsConfig: `
 // next.config.js
 module.exports = {
@@ -173,32 +173,32 @@ export const FontUtils = {
   // Get font family with fallbacks
   getFontFamily: (
     primary: keyof typeof GoogleFonts,
-    platform: 'ios' | 'android' | 'web' = 'ios'
+    platform: 'ios' | 'android' | 'web' = 'ios',
   ): string => {
     const font = GoogleFonts[primary];
     if (!font) return 'System';
-    
+
     return font.fallbacks[platform];
   },
 
   // Get font weight for specific font
   getFontWeight: (weight: string): string => {
     const weightMap: { [key: string]: string } = {
-      'light': '300',
-      'normal': '400',
-      'medium': '500',
-      'semibold': '600',
-      'bold': '700',
-      'extrabold': '800',
+      light: '300',
+      normal: '400',
+      medium: '500',
+      semibold: '600',
+      bold: '700',
+      extrabold: '800',
     };
-    
+
     return weightMap[weight.toLowerCase()] || '400';
   },
 
   // Check if font is loaded (for web)
   isFontLoaded: (fontFamily: string): boolean => {
     if (typeof window === 'undefined' || !(window as any).document) return true;
-    
+
     try {
       return (window as any).document.fonts.check(`16px ${fontFamily}`);
     } catch {
@@ -207,9 +207,12 @@ export const FontUtils = {
   },
 
   // Load font dynamically (for web)
-  loadFont: async (fontFamily: string, weight: string = '400'): Promise<boolean> => {
+  loadFont: async (
+    fontFamily: string,
+    weight: string = '400',
+  ): Promise<boolean> => {
     if (typeof window === 'undefined' || !(window as any).document) return true;
-    
+
     try {
       await (window as any).document.fonts.load(`${weight} 16px ${fontFamily}`);
       return true;

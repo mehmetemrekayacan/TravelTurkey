@@ -27,16 +27,16 @@ export const DesignTokens = {
   // Colors
   colors: {
     // Primary brand colors
-    primary: '#EF4444',      // Turkish flag red
-    secondary: '#3B82F6',    // Bosphorus blue
-    accent: '#14B8A6',       // Aegean turquoise
-    
+    primary: '#EF4444', // Turkish flag red
+    secondary: '#3B82F6', // Bosphorus blue
+    accent: '#14B8A6', // Aegean turquoise
+
     // Semantic colors
     success: '#22C55E',
     warning: '#F59E0B',
     error: '#EF4444',
     info: '#3B82F6',
-    
+
     // Neutral colors
     background: '#F8FAFC',
     surface: '#FFFFFF',
@@ -44,7 +44,7 @@ export const DesignTokens = {
     textSecondary: '#64748B',
     border: '#E2E8F0',
   },
-  
+
   // Spacing (8pt grid system)
   spacing: {
     xs: 4,
@@ -54,7 +54,7 @@ export const DesignTokens = {
     xl: 32,
     xxl: 48,
   },
-  
+
   // Typography
   typography: {
     fontSizes: {
@@ -78,7 +78,7 @@ export const DesignTokens = {
       relaxed: 1.75,
     },
   },
-  
+
   // Border radius
   borderRadius: {
     sm: 4,
@@ -88,7 +88,7 @@ export const DesignTokens = {
     xl: 20,
     full: 9999,
   },
-  
+
   // Shadows
   shadows: {
     sm: {
@@ -129,13 +129,13 @@ export const QuickStyles = {
     flex: 1,
     backgroundColor: Colors.background,
   },
-  
+
   safeContainer: {
     flex: 1,
     backgroundColor: Colors.background,
     paddingHorizontal: Spacing.md,
   },
-  
+
   centeredContainer: {
     flex: 1,
     backgroundColor: Colors.background,
@@ -143,7 +143,7 @@ export const QuickStyles = {
     alignItems: 'center',
     paddingHorizontal: Spacing.md,
   },
-  
+
   // Card styles
   card: {
     backgroundColor: Colors.surface,
@@ -151,7 +151,7 @@ export const QuickStyles = {
     padding: Spacing.md,
     ...Shadows.base,
   },
-  
+
   // Button styles
   primaryButton: {
     backgroundColor: Colors.primary,
@@ -162,7 +162,7 @@ export const QuickStyles = {
     justifyContent: 'center',
     ...Shadows.sm,
   },
-  
+
   secondaryButton: {
     backgroundColor: 'transparent',
     borderWidth: 1,
@@ -173,7 +173,7 @@ export const QuickStyles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  
+
   // Text styles
   heading: {
     fontSize: Typography.fontSizes.xxl,
@@ -181,21 +181,21 @@ export const QuickStyles = {
     color: Colors.text,
     lineHeight: Typography.fontSizes.xxl * Typography.lineHeights.tight,
   },
-  
+
   body: {
     fontSize: Typography.fontSizes.base,
     fontWeight: Typography.fontWeights.normal,
     color: Colors.text,
     lineHeight: Typography.fontSizes.base * Typography.lineHeights.normal,
   },
-  
+
   caption: {
     fontSize: Typography.fontSizes.sm,
     fontWeight: Typography.fontWeights.normal,
     color: Colors.textSecondary,
     lineHeight: Typography.fontSizes.sm * Typography.lineHeights.normal,
   },
-  
+
   // Input styles
   input: {
     backgroundColor: Colors.surface,

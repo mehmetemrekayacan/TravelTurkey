@@ -15,16 +15,16 @@ export const Typography = {
 
   // Font Sizes (following 8-point grid system)
   fontSize: {
-    xs: 12,      // Captions, helper text
-    sm: 14,      // Small text, secondary info
-    base: 16,    // Body text, default
-    lg: 18,      // Large body text
-    xl: 20,      // Section headers
-    '2xl': 24,   // Page titles
-    '3xl': 28,   // Hero titles
-    '4xl': 32,   // Display titles
-    '5xl': 36,   // Large displays
-    '6xl': 48,   // Hero displays
+    xs: 12, // Captions, helper text
+    sm: 14, // Small text, secondary info
+    base: 16, // Body text, default
+    lg: 18, // Large body text
+    xl: 20, // Section headers
+    '2xl': 24, // Page titles
+    '3xl': 28, // Hero titles
+    '4xl': 32, // Display titles
+    '5xl': 36, // Large displays
+    '6xl': 48, // Hero displays
   },
 
   // Font Weights (React Native compatible)
@@ -58,30 +58,30 @@ export const Typography = {
 export const Colors = {
   // Primary Colors - Turkish Identity
   primary: {
-    50: '#FEF2F2',   // Very light red
-    100: '#FEE2E2',  // Light red
-    200: '#FECACA',  // Lighter red
-    300: '#FCA5A5',  // Light medium red
-    400: '#F87171',  // Medium red
-    500: '#EF4444',  // Turkish flag red (main)
-    600: '#DC2626',  // Darker red
-    700: '#B91C1C',  // Dark red
-    800: '#991B1B',  // Very dark red
-    900: '#7F1D1D',  // Darkest red
+    50: '#FEF2F2', // Very light red
+    100: '#FEE2E2', // Light red
+    200: '#FECACA', // Lighter red
+    300: '#FCA5A5', // Light medium red
+    400: '#F87171', // Medium red
+    500: '#EF4444', // Turkish flag red (main)
+    600: '#DC2626', // Darker red
+    700: '#B91C1C', // Dark red
+    800: '#991B1B', // Very dark red
+    900: '#7F1D1D', // Darkest red
   },
 
   // Secondary Colors - Bosphorus Blue
   secondary: {
-    50: '#EFF6FF',   // Very light blue
-    100: '#DBEAFE',  // Light blue
-    200: '#BFDBFE',  // Lighter blue
-    300: '#93C5FD',  // Light medium blue
-    400: '#60A5FA',  // Medium blue
-    500: '#3B82F6',  // Bosphorus blue (main)
-    600: '#2563EB',  // Darker blue
-    700: '#1D4ED8',  // Dark blue
-    800: '#1E40AF',  // Very dark blue
-    900: '#1E3A8A',  // Darkest blue
+    50: '#EFF6FF', // Very light blue
+    100: '#DBEAFE', // Light blue
+    200: '#BFDBFE', // Lighter blue
+    300: '#93C5FD', // Light medium blue
+    400: '#60A5FA', // Medium blue
+    500: '#3B82F6', // Bosphorus blue (main)
+    600: '#2563EB', // Darker blue
+    700: '#1D4ED8', // Dark blue
+    800: '#1E40AF', // Very dark blue
+    900: '#1E3A8A', // Darkest blue
   },
 
   // Accent Colors - Turkish Culture
@@ -99,7 +99,7 @@ export const Colors = {
       800: '#115E59',
       900: '#134E4A',
     },
-    
+
     // Cappadocia Orange
     orange: {
       50: '#FFF7ED',
@@ -131,16 +131,16 @@ export const Colors = {
 
   // Neutral Colors - Modern & Clean
   neutral: {
-    50: '#F8FAFC',   // Almost white
-    100: '#F1F5F9',  // Very light gray
-    200: '#E2E8F0',  // Light gray
-    300: '#CBD5E1',  // Medium light gray
-    400: '#94A3B8',  // Medium gray
-    500: '#64748B',  // Base gray
-    600: '#475569',  // Medium dark gray
-    700: '#334155',  // Dark gray
-    800: '#1E293B',  // Very dark gray
-    900: '#0F172A',  // Almost black
+    50: '#F8FAFC', // Almost white
+    100: '#F1F5F9', // Very light gray
+    200: '#E2E8F0', // Light gray
+    300: '#CBD5E1', // Medium light gray
+    400: '#94A3B8', // Medium gray
+    500: '#64748B', // Base gray
+    600: '#475569', // Medium dark gray
+    700: '#334155', // Dark gray
+    800: '#1E293B', // Very dark gray
+    900: '#0F172A', // Almost black
   },
 
   // Semantic Colors - System States
@@ -174,11 +174,11 @@ export const Colors = {
 
 // Spacing System - 8-point grid
 export const Spacing = {
-  xs: 4,     // 0.25rem
-  sm: 8,     // 0.5rem
-  md: 16,    // 1rem (base)
-  lg: 24,    // 1.5rem
-  xl: 32,    // 2rem
+  xs: 4, // 0.25rem
+  sm: 8, // 0.5rem
+  md: 16, // 1rem (base)
+  lg: 24, // 1.5rem
+  xl: 32, // 2rem
   '2xl': 48, // 3rem
   '3xl': 64, // 4rem
   '4xl': 80, // 5rem
@@ -266,7 +266,7 @@ export const Theme = {
         lg: Spacing.lg,
       },
     },
-    
+
     card: {
       padding: Spacing.md,
       borderRadius: BorderRadius.md,
@@ -290,12 +290,12 @@ export const Theme = {
   accessibility: {
     // Minimum touch target size (44px recommended by Apple/Google)
     minTouchTarget: 44,
-    
+
     // Color contrast ratios (WCAG 2.1 AA compliance)
     contrast: {
-      normal: 4.5,   // Normal text
-      large: 3.0,    // Large text (18pt+ or 14pt+ bold)
-      nonText: 3.0,  // UI components
+      normal: 4.5, // Normal text
+      large: 3.0, // Large text (18pt+ or 14pt+ bold)
+      nonText: 3.0, // UI components
     },
   },
 };
@@ -304,12 +304,12 @@ export const Theme = {
 export const getColor = (colorPath: string) => {
   const paths = colorPath.split('.');
   let result: any = Colors;
-  
+
   for (const path of paths) {
     result = result[path];
     if (!result) return Colors.neutral[500]; // Fallback
   }
-  
+
   return result;
 };
 

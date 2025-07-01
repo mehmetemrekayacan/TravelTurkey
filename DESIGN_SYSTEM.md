@@ -7,17 +7,21 @@ A comprehensive, Turkey-themed design system built for modern mobile application
 Our color palette draws inspiration from Turkey's rich cultural heritage and natural beauty:
 
 ### Primary Colors
+
 - **Turkish Red** (`#EF4444`) - Inspired by the Turkish flag
 - **Bosphorus Blue** (`#3B82F6`) - The deep blue of Istanbul's straits
 - **Aegean Turquoise** (`#14B8A6`) - Crystal waters of the Turkish coast
 
 ### Cultural Accent Colors
+
 - **Cappadocia Orange** (`#F97316`) - Sunset hues over fairy chimneys
 - **Golden Horn Gold** (`#F59E0B`) - Historic Istanbul's golden light
 - **Anatolian Green** (`#22C55E`) - Fertile plains and olive groves
 
 ### Neutral Palette
+
 Modern, accessible grays with excellent contrast ratios:
+
 - Background: `#F8FAFC` (Stone 50)
 - Surface: `#FFFFFF` (Pure White)
 - Text: `#0F172A` (Slate 900)
@@ -26,12 +30,14 @@ Modern, accessible grays with excellent contrast ratios:
 ## 📝 Typography
 
 ### Font Stack
+
 1. **Primary**: Poppins - Modern, highly readable sans-serif
 2. **Secondary**: Inter - Clean, optimized for UI components
 3. **Accent**: Playfair Display - Elegant serif for special occasions
 4. **Monospace**: JetBrains Mono - Technical content and code
 
 ### Type Scale (8-point grid system)
+
 ```
 xs:   12px (Captions, helper text)
 sm:   14px (Small text, secondary info)
@@ -46,6 +52,7 @@ xl:   20px (Section headers)
 ```
 
 ### Font Weights
+
 - Light: 300
 - Normal: 400
 - Medium: 500
@@ -56,10 +63,11 @@ xl:   20px (Section headers)
 ## 🏗️ Design Tokens
 
 ### Spacing (8-point grid)
+
 ```typescript
 spacing: {
   xs: 4,    // 0.25rem
-  sm: 8,    // 0.5rem  
+  sm: 8,    // 0.5rem
   md: 16,   // 1rem (base)
   lg: 24,   // 1.5rem
   xl: 32,   // 2rem
@@ -69,6 +77,7 @@ spacing: {
 ```
 
 ### Border Radius
+
 ```typescript
 borderRadius: {
   none: 0,
@@ -83,7 +92,9 @@ borderRadius: {
 ```
 
 ### Shadows
+
 Elevation system for depth and hierarchy:
+
 - **sm**: Subtle cards, buttons
 - **base**: Default cards, modals
 - **lg**: Important overlays, major sections
@@ -92,13 +103,16 @@ Elevation system for depth and hierarchy:
 ## 🎯 Component System
 
 ### Pre-built Components
+
 All components follow our design principles and include:
+
 - Accessibility props (WCAG 2.1 AA compliant)
 - Dark mode support
 - Responsive behavior
 - Touch target optimization (44px minimum)
 
 #### Buttons
+
 ```typescript
 // Primary button
 <Button style={ComponentStyles.Button.primaryMedium}>
@@ -112,6 +126,7 @@ All components follow our design principles and include:
 ```
 
 #### Cards
+
 ```typescript
 // Default card
 <View style={ComponentStyles.Card.default}>
@@ -126,6 +141,7 @@ All components follow our design principles and include:
 ```
 
 #### Typography
+
 ```typescript
 // Heading
 <Text style={TextStyles.heading1}>Welcome to Turkey</Text>
@@ -140,20 +156,24 @@ All components follow our design principles and include:
 ## ♿ Accessibility
 
 ### Color Contrast
+
 All color combinations meet WCAG 2.1 AA standards:
+
 - Normal text: 4.5:1 minimum contrast ratio
 - Large text: 3.0:1 minimum contrast ratio
 - UI components: 3.0:1 minimum contrast ratio
 
 ### Touch Targets
+
 - Minimum 44px touch target size
 - Adequate spacing between interactive elements
 - Clear visual feedback for interactions
 
 ### Screen Reader Support
+
 ```typescript
 // Button with accessibility
-<Button 
+<Button
   {...AccessibilityHelpers.button(
     'Explore Cappadocia',
     'Opens detailed information about Cappadocia region'
@@ -163,7 +183,7 @@ All color combinations meet WCAG 2.1 AA standards:
 </Button>
 
 // Image with description
-<Image 
+<Image
   {...AccessibilityHelpers.image('Hot air balloons over Cappadocia at sunrise')}
   source={cappadociaImage}
 />
@@ -172,6 +192,7 @@ All color combinations meet WCAG 2.1 AA standards:
 ## 🚀 Quick Start
 
 ### 1. Install Dependencies
+
 ```bash
 # Google Fonts (if using Expo)
 expo install @expo-google-fonts/poppins @expo-google-fonts/inter
@@ -182,17 +203,19 @@ npx react-native link
 ```
 
 ### 2. Import Design System
+
 ```typescript
-import { 
-  Theme, 
-  TextStyles, 
+import {
+  Theme,
+  TextStyles,
   ComponentStyles,
   QuickStyles,
-  AccessibilityHelpers 
+  AccessibilityHelpers,
 } from '../styles';
 ```
 
 ### 3. Use Design Tokens
+
 ```typescript
 // Quick styles for rapid development
 const styles = StyleSheet.create({
@@ -216,17 +239,20 @@ const customStyles = StyleSheet.create({
 ## 📱 Platform Support
 
 ### React Native
+
 - iOS 11+
 - Android API 21+
 - Full accessibility support
 - Performance optimized
 
 ### Expo
+
 - SDK 45+
 - Font loading handled automatically
 - Easy deployment
 
 ### Web (React/Next.js)
+
 - Modern browsers
 - Progressive enhancement
 - Font loading optimization
@@ -247,11 +273,13 @@ const semanticBackground = Theme.colors.background; // Adapts to theme
 ## 🎨 Cultural Considerations
 
 ### Turkish Design Elements
+
 - Colors inspired by Turkish landscapes and culture
 - Typography optimized for Turkish language support
 - Cultural symbols and patterns (planned for future releases)
 
 ### Localization Ready
+
 - RTL support preparation
 - Multi-language typography considerations
 - Cultural color significance awareness
@@ -259,12 +287,14 @@ const semanticBackground = Theme.colors.background; // Adapts to theme
 ## 📊 Performance
 
 ### Optimizations
+
 - Tree-shakeable exports
 - Minimal bundle impact
 - Cached style objects
 - Optimized font loading
 
 ### Bundle Size
+
 - Core theme: ~2KB gzipped
 - Component styles: ~3KB gzipped
 - Typography: ~1KB gzipped
@@ -273,12 +303,14 @@ const semanticBackground = Theme.colors.background; // Adapts to theme
 ## 🛠️ Development
 
 ### Adding New Components
+
 1. Create component styles in `src/styles/components.ts`
 2. Add accessibility helpers
 3. Include in main exports
 4. Update documentation
 
 ### Customization
+
 ```typescript
 // Extend the theme
 const customTheme = {
@@ -293,6 +325,7 @@ const customTheme = {
 ```
 
 ### Testing
+
 - Accessibility testing with screen readers
 - Color contrast validation
 - Cross-platform testing
@@ -301,14 +334,15 @@ const customTheme = {
 ## 📚 Examples
 
 ### Complete Screen Example
+
 ```typescript
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { 
-  ComponentStyles, 
-  TextStyles, 
+import {
+  ComponentStyles,
+  TextStyles,
   QuickStyles,
-  AccessibilityHelpers 
+  AccessibilityHelpers,
 } from '../styles';
 
 export const ExploreScreen = () => {
@@ -316,20 +350,16 @@ export const ExploreScreen = () => {
     <ScrollView style={QuickStyles.container}>
       {/* Header */}
       <View style={ComponentStyles.Header.container}>
-        <Text style={ComponentStyles.Header.title}>
-          Explore Turkey
-        </Text>
+        <Text style={ComponentStyles.Header.title}>Explore Turkey</Text>
       </View>
 
       {/* Content */}
       <View style={{ padding: 16 }}>
-        <Text style={TextStyles.heading1}>
-          Discover Amazing Places
-        </Text>
-        
+        <Text style={TextStyles.heading1}>Discover Amazing Places</Text>
+
         <Text style={TextStyles.bodyMedium}>
-          From the fairy chimneys of Cappadocia to the blue waters 
-          of the Mediterranean, Turkey offers unforgettable experiences.
+          From the fairy chimneys of Cappadocia to the blue waters of the
+          Mediterranean, Turkey offers unforgettable experiences.
         </Text>
 
         {/* Destination Card */}
@@ -338,17 +368,15 @@ export const ExploreScreen = () => {
           <Text style={TextStyles.bodySmall}>
             Famous for hot air balloons and unique rock formations
           </Text>
-          
-          <TouchableOpacity 
+
+          <TouchableOpacity
             style={ComponentStyles.Button.primaryMedium}
             {...AccessibilityHelpers.button(
               'Explore Cappadocia',
-              'View detailed information about Cappadocia region'
+              'View detailed information about Cappadocia region',
             )}
           >
-            <Text style={ComponentStyles.ButtonText.primaryText}>
-              Explore
-            </Text>
+            <Text style={ComponentStyles.ButtonText.primaryText}>Explore</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -370,4 +398,4 @@ MIT License - Feel free to use in your projects!
 
 ---
 
-*Built with ❤️ for Turkish tourism and cultural appreciation*
+_Built with ❤️ for Turkish tourism and cultural appreciation_

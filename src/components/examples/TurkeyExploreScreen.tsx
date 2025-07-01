@@ -24,7 +24,8 @@ import {
 const sampleDestination = {
   id: '1',
   name: 'Cappadocia',
-  description: 'Experience the magical landscape of fairy chimneys and hot air balloons',
+  description:
+    'Experience the magical landscape of fairy chimneys and hot air balloons',
   rating: 4.9,
   reviewCount: 2453,
   price: '₺150',
@@ -44,7 +45,7 @@ export const DestinationCard: React.FC = () => {
           marginBottom: Theme.spacing.md,
         }}
         {...AccessibilityHelpers.image(
-          `Beautiful view of ${sampleDestination.name} with fairy chimneys and hot air balloons`
+          `Beautiful view of ${sampleDestination.name} with fairy chimneys and hot air balloons`,
         )}
       />
 
@@ -63,8 +64,13 @@ export const DestinationCard: React.FC = () => {
             {sampleDestination.name}
           </Text>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={TextStyles.labelMedium}>⭐ {sampleDestination.rating}</Text>
-            <Text style={TextStyles.caption}> ({sampleDestination.reviewCount})</Text>
+            <Text style={TextStyles.labelMedium}>
+              ⭐ {sampleDestination.rating}
+            </Text>
+            <Text style={TextStyles.caption}>
+              {' '}
+              ({sampleDestination.reviewCount})
+            </Text>
           </View>
         </View>
 
@@ -86,7 +92,12 @@ export const DestinationCard: React.FC = () => {
         >
           <View>
             <Text style={TextStyles.caption}>Starting from</Text>
-            <Text style={[TextStyles.heading3, { color: Theme.colors.primary[600] }]}>
+            <Text
+              style={[
+                TextStyles.heading3,
+                { color: Theme.colors.primary[600] },
+              ]}
+            >
               {sampleDestination.price}
             </Text>
           </View>
@@ -95,12 +106,10 @@ export const DestinationCard: React.FC = () => {
             style={ComponentStyles.Button.primaryMedium}
             {...AccessibilityHelpers.button(
               `Explore ${sampleDestination.name}`,
-              `View detailed information and book tours for ${sampleDestination.name}`
+              `View detailed information and book tours for ${sampleDestination.name}`,
             )}
           >
-            <Text style={ComponentStyles.ButtonText.primaryText}>
-              Explore
-            </Text>
+            <Text style={ComponentStyles.ButtonText.primaryText}>Explore</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -112,17 +121,15 @@ export const TurkeyExploreScreen: React.FC = () => {
   return (
     <>
       <StatusBar
-        barStyle="light-content"
+        barStyle='light-content'
         backgroundColor={Theme.colors.primary[600]}
       />
-      
+
       <ScrollView style={QuickStyles.container}>
         {/* Header */}
         <View style={ComponentStyles.Header.container}>
           <View>
-            <Text style={ComponentStyles.Header.title}>
-              Discover Turkey
-            </Text>
+            <Text style={ComponentStyles.Header.title}>Discover Turkey</Text>
             <Text style={ComponentStyles.Header.subtitle}>
               Unforgettable experiences await
             </Text>
@@ -131,33 +138,48 @@ export const TurkeyExploreScreen: React.FC = () => {
 
         {/* Welcome Section */}
         <View style={{ padding: Theme.spacing.md }}>
-          <Text style={[TextStyles.displaySmall, { textAlign: 'center', marginBottom: Theme.spacing.lg }]}>
+          <Text
+            style={[
+              TextStyles.displaySmall,
+              { textAlign: 'center', marginBottom: Theme.spacing.lg },
+            ]}
+          >
             Welcome to Turkey 🇹🇷
           </Text>
-          
-          <Text style={[TextStyles.bodyLarge, { textAlign: 'center', marginBottom: Theme.spacing.xl }]}>
-            From ancient wonders to natural beauty, discover a land where East meets West
+
+          <Text
+            style={[
+              TextStyles.bodyLarge,
+              { textAlign: 'center', marginBottom: Theme.spacing.xl },
+            ]}
+          >
+            From ancient wonders to natural beauty, discover a land where East
+            meets West
           </Text>
 
           {/* Featured Destination */}
-          <Text style={[TextStyles.heading2, { marginBottom: Theme.spacing.md }]}>
+          <Text
+            style={[TextStyles.heading2, { marginBottom: Theme.spacing.md }]}
+          >
             Featured Destination
           </Text>
-          
+
           <DestinationCard />
 
           {/* Quick Actions */}
           <View style={{ marginTop: Theme.spacing.xl }}>
-            <Text style={[TextStyles.heading3, { marginBottom: Theme.spacing.md }]}>
+            <Text
+              style={[TextStyles.heading3, { marginBottom: Theme.spacing.md }]}
+            >
               Plan Your Journey
             </Text>
-            
+
             <View style={{ gap: Theme.spacing.sm }}>
               <TouchableOpacity
                 style={ComponentStyles.Button.secondaryLarge}
                 {...AccessibilityHelpers.button(
                   'Browse all destinations',
-                  'View complete list of tourist destinations in Turkey'
+                  'View complete list of tourist destinations in Turkey',
                 )}
               >
                 <Text style={ComponentStyles.ButtonText.secondaryText}>
@@ -169,7 +191,7 @@ export const TurkeyExploreScreen: React.FC = () => {
                 style={ComponentStyles.Button.secondaryLarge}
                 {...AccessibilityHelpers.button(
                   'Create travel plan',
-                  'Start planning your custom Turkey itinerary'
+                  'Start planning your custom Turkey itinerary',
                 )}
               >
                 <Text style={ComponentStyles.ButtonText.secondaryText}>
@@ -181,7 +203,7 @@ export const TurkeyExploreScreen: React.FC = () => {
                 style={ComponentStyles.Button.secondaryLarge}
                 {...AccessibilityHelpers.button(
                   'Local guides',
-                  'Connect with experienced local guides'
+                  'Connect with experienced local guides',
                 )}
               >
                 <Text style={ComponentStyles.ButtonText.secondaryText}>
@@ -203,9 +225,15 @@ export const TurkeyExploreScreen: React.FC = () => {
             }}
           >
             <Text style={[TextStyles.accent, { textAlign: 'center' }]}>
-              "Turkey is not just a destination, it's a journey through time and culture"
+              "Turkey is not just a destination, it's a journey through time and
+              culture"
             </Text>
-            <Text style={[TextStyles.caption, { textAlign: 'center', marginTop: Theme.spacing.sm }]}>
+            <Text
+              style={[
+                TextStyles.caption,
+                { textAlign: 'center', marginTop: Theme.spacing.sm },
+              ]}
+            >
               — Turkish Tourism Board
             </Text>
           </View>
@@ -229,7 +257,7 @@ export const TurkeyStatsCard: React.FC = () => {
       <Text style={[TextStyles.heading3, { marginBottom: Theme.spacing.md }]}>
         Turkey by Numbers
       </Text>
-      
+
       <View
         style={{
           flexDirection: 'row',
@@ -252,7 +280,12 @@ export const TurkeyStatsCard: React.FC = () => {
             <Text style={{ fontSize: 24, marginBottom: Theme.spacing.xs }}>
               {stat.icon}
             </Text>
-            <Text style={[TextStyles.heading3, { color: Theme.colors.primary[600] }]}>
+            <Text
+              style={[
+                TextStyles.heading3,
+                { color: Theme.colors.primary[600] },
+              ]}
+            >
               {stat.value}
             </Text>
             <Text style={TextStyles.caption}>{stat.label}</Text>

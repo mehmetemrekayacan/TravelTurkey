@@ -13,7 +13,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.primary,
     fontSize: Theme.typography.fontSize['6xl'],
     fontWeight: Theme.typography.fontWeight.bold,
-    lineHeight: Theme.typography.fontSize['6xl'] * Theme.typography.lineHeight.tight,
+    lineHeight:
+      Theme.typography.fontSize['6xl'] * Theme.typography.lineHeight.tight,
     letterSpacing: Theme.typography.letterSpacing.tight,
     color: Theme.colors.neutral[900],
   },
@@ -22,7 +23,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.primary,
     fontSize: Theme.typography.fontSize['4xl'],
     fontWeight: Theme.typography.fontWeight.bold,
-    lineHeight: Theme.typography.fontSize['4xl'] * Theme.typography.lineHeight.tight,
+    lineHeight:
+      Theme.typography.fontSize['4xl'] * Theme.typography.lineHeight.tight,
     letterSpacing: Theme.typography.letterSpacing.tight,
     color: Theme.colors.neutral[900],
   },
@@ -31,7 +33,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.primary,
     fontSize: Theme.typography.fontSize['3xl'],
     fontWeight: Theme.typography.fontWeight.semiBold,
-    lineHeight: Theme.typography.fontSize['3xl'] * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize['3xl'] * Theme.typography.lineHeight.normal,
     color: Theme.colors.neutral[900],
   },
 
@@ -40,7 +43,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.primary,
     fontSize: Theme.typography.fontSize['2xl'],
     fontWeight: Theme.typography.fontWeight.bold,
-    lineHeight: Theme.typography.fontSize['2xl'] * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize['2xl'] * Theme.typography.lineHeight.normal,
     color: Theme.colors.neutral[900],
   },
 
@@ -48,7 +52,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.primary,
     fontSize: Theme.typography.fontSize.xl,
     fontWeight: Theme.typography.fontWeight.semiBold,
-    lineHeight: Theme.typography.fontSize.xl * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize.xl * Theme.typography.lineHeight.normal,
     color: Theme.colors.neutral[800],
   },
 
@@ -56,7 +61,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.primary,
     fontSize: Theme.typography.fontSize.lg,
     fontWeight: Theme.typography.fontWeight.semiBold,
-    lineHeight: Theme.typography.fontSize.lg * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize.lg * Theme.typography.lineHeight.normal,
     color: Theme.colors.neutral[800],
   },
 
@@ -65,7 +71,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.secondary,
     fontSize: Theme.typography.fontSize.lg,
     fontWeight: Theme.typography.fontWeight.normal,
-    lineHeight: Theme.typography.fontSize.lg * Theme.typography.lineHeight.relaxed,
+    lineHeight:
+      Theme.typography.fontSize.lg * Theme.typography.lineHeight.relaxed,
     color: Theme.colors.neutral[700],
   },
 
@@ -73,7 +80,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.secondary,
     fontSize: Theme.typography.fontSize.base,
     fontWeight: Theme.typography.fontWeight.normal,
-    lineHeight: Theme.typography.fontSize.base * Theme.typography.lineHeight.relaxed,
+    lineHeight:
+      Theme.typography.fontSize.base * Theme.typography.lineHeight.relaxed,
     color: Theme.colors.neutral[700],
   },
 
@@ -81,7 +89,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.secondary,
     fontSize: Theme.typography.fontSize.sm,
     fontWeight: Theme.typography.fontWeight.normal,
-    lineHeight: Theme.typography.fontSize.sm * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize.sm * Theme.typography.lineHeight.normal,
     color: Theme.colors.neutral[600],
   },
 
@@ -90,7 +99,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.secondary,
     fontSize: Theme.typography.fontSize.base,
     fontWeight: Theme.typography.fontWeight.medium,
-    lineHeight: Theme.typography.fontSize.base * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize.base * Theme.typography.lineHeight.normal,
     color: Theme.colors.neutral[800],
   },
 
@@ -98,7 +108,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.secondary,
     fontSize: Theme.typography.fontSize.sm,
     fontWeight: Theme.typography.fontWeight.medium,
-    lineHeight: Theme.typography.fontSize.sm * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize.sm * Theme.typography.lineHeight.normal,
     color: Theme.colors.neutral[700],
   },
 
@@ -106,7 +117,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.secondary,
     fontSize: Theme.typography.fontSize.xs,
     fontWeight: Theme.typography.fontWeight.medium,
-    lineHeight: Theme.typography.fontSize.xs * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize.xs * Theme.typography.lineHeight.normal,
     color: Theme.colors.neutral[600],
   },
 
@@ -115,7 +127,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.secondary,
     fontSize: Theme.typography.fontSize.base,
     fontWeight: Theme.typography.fontWeight.semiBold,
-    lineHeight: Theme.typography.fontSize.base * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize.base * Theme.typography.lineHeight.normal,
     letterSpacing: Theme.typography.letterSpacing.wide,
     textAlign: 'center' as const,
   },
@@ -124,7 +137,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.secondary,
     fontSize: Theme.typography.fontSize.sm,
     fontWeight: Theme.typography.fontWeight.semiBold,
-    lineHeight: Theme.typography.fontSize.sm * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize.sm * Theme.typography.lineHeight.normal,
     letterSpacing: Theme.typography.letterSpacing.wide,
     textAlign: 'center' as const,
   },
@@ -133,7 +147,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.secondary,
     fontSize: Theme.typography.fontSize.xs,
     fontWeight: Theme.typography.fontWeight.medium,
-    lineHeight: Theme.typography.fontSize.xs * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize.xs * Theme.typography.lineHeight.normal,
     letterSpacing: Theme.typography.letterSpacing.normal,
     textAlign: 'center' as const,
   },
@@ -143,7 +158,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.secondary,
     fontSize: Theme.typography.fontSize.xs,
     fontWeight: Theme.typography.fontWeight.normal,
-    lineHeight: Theme.typography.fontSize.xs * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize.xs * Theme.typography.lineHeight.normal,
     color: Theme.colors.neutral[500],
   },
 
@@ -152,7 +168,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.accent,
     fontSize: Theme.typography.fontSize.lg,
     fontWeight: Theme.typography.fontWeight.normal,
-    lineHeight: Theme.typography.fontSize.lg * Theme.typography.lineHeight.relaxed,
+    lineHeight:
+      Theme.typography.fontSize.lg * Theme.typography.lineHeight.relaxed,
     fontStyle: 'italic' as const,
     color: Theme.colors.primary[600],
   },
@@ -162,7 +179,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.secondary,
     fontSize: Theme.typography.fontSize.sm,
     fontWeight: Theme.typography.fontWeight.medium,
-    lineHeight: Theme.typography.fontSize.sm * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize.sm * Theme.typography.lineHeight.normal,
     color: Theme.colors.semantic.error[500],
   },
 
@@ -171,7 +189,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.secondary,
     fontSize: Theme.typography.fontSize.sm,
     fontWeight: Theme.typography.fontWeight.medium,
-    lineHeight: Theme.typography.fontSize.sm * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize.sm * Theme.typography.lineHeight.normal,
     color: Theme.colors.semantic.success[500],
   },
 
@@ -180,7 +199,8 @@ export const TextStyles: { [key: string]: TextStyle } = {
     fontFamily: Theme.typography.fonts.secondary,
     fontSize: Theme.typography.fontSize.base,
     fontWeight: Theme.typography.fontWeight.medium,
-    lineHeight: Theme.typography.fontSize.base * Theme.typography.lineHeight.normal,
+    lineHeight:
+      Theme.typography.fontSize.base * Theme.typography.lineHeight.normal,
     color: Theme.colors.secondary[600],
     textDecorationLine: 'underline' as const,
   },
@@ -189,7 +209,7 @@ export const TextStyles: { [key: string]: TextStyle } = {
 // Typography utility functions
 export const createTextStyle = (
   baseStyle: keyof typeof TextStyles,
-  overrides?: Partial<TextStyle>
+  overrides?: Partial<TextStyle>,
 ): TextStyle => {
   return {
     ...TextStyles[baseStyle],
@@ -200,14 +220,21 @@ export const createTextStyle = (
 // Responsive text scaling utility
 export const getResponsiveText = (
   baseSize: number,
-  scaleFactor: number = 1
+  scaleFactor: number = 1,
 ): number => {
   return Math.round(baseSize * scaleFactor);
 };
 
 // Text color utilities
 export const getTextColor = (
-  variant: 'primary' | 'secondary' | 'disabled' | 'error' | 'success' | 'warning' | 'info'
+  variant:
+    | 'primary'
+    | 'secondary'
+    | 'disabled'
+    | 'error'
+    | 'success'
+    | 'warning'
+    | 'info',
 ) => {
   switch (variant) {
     case 'primary':
