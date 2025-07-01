@@ -9,7 +9,16 @@ echo.
 cd /d "c:\Users\emrem\Desktop\TravelTurkey"
 
 echo Checking dependencies...
-call npm install
+call npm install --ignore-scripts
+echo.
+
+echo Installing iOS dependencies (if needed)...
+if exist "ios\" (
+    echo Note: CocoaPods not available on Windows. iOS build will require macOS.
+    echo Skipping iOS pod installation...
+) else (
+    echo No iOS directory found.
+)
 echo.
 
 echo Checking Android device...
