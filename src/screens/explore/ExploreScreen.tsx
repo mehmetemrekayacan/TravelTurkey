@@ -13,16 +13,19 @@ import {
   FlatList,
   TextInput,
 } from 'react-native';
-import { GlobalStyles } from '../styles/GlobalStyles';
-import { AppColors } from '../constants/Colors';
+import { GlobalStyles } from '../../styles/GlobalStyles';
+import { AppColors } from '../../constants/Colors';
 import {
   touristPlaces,
   categories as dataCategories,
   searchPlaces,
   getPlacesByCategory,
   getFeaturedPlaces,
-} from '../data/touristPlaces';
-import { TouristPlace, Category as CategoryType } from '../types/touristPlaces';
+} from '../../data/touristPlaces';
+import {
+  TouristPlace,
+  Category as CategoryType,
+} from '../../types/touristPlaces';
 
 const ExploreScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');

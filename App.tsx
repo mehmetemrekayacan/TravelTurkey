@@ -12,6 +12,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppColors } from './src/constants/Colors';
 import BottomTabNavigator from './src/navigation/BottomTabNavigator';
+import PerformanceMonitor from './src/components/debug/PerformanceMonitor';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +30,7 @@ function App(): React.JSX.Element {
             backgroundColor={AppColors.SECONDARY}
           />
           <BottomTabNavigator />
+          <PerformanceMonitor />
         </NavigationContainer>
       </SafeAreaProvider>
     </GestureHandlerRootView>

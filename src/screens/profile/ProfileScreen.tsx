@@ -11,7 +11,7 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import { GlobalStyles } from '../styles/GlobalStyles';
+import { GlobalStyles } from '../../styles/GlobalStyles';
 
 // Profil menü öğeleri
 const profileMenuItems = [

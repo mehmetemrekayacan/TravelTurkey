@@ -4,51 +4,25 @@
  */
 
 import React from 'react';
-import { Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabParamList } from '../types/navigation';
 import { AppColors } from '../constants/Colors';
 
 // Screens
-import HomeScreen from '../screens/HomeScreen';
-import ExploreScreen from '../screens/ExploreScreen';
-import PlansScreen from '../screens/PlansScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import HomeScreen from '../screens/home';
+import ExploreScreen from '../screens/explore';
+import PlansScreen from '../screens/plans';
+import ProfileScreen from '../screens/profile';
+
+// Icon components
+import {
+  HomeTabIcon,
+  ExploreTabIcon,
+  PlansTabIcon,
+  ProfileTabIcon,
+} from '../components/navigation';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
-
-// Icon component
-const TabIcon = ({ name, size }: { name: string; size: number }) => {
-  const getIcon = () => {
-    switch (name) {
-      case 'home':
-        return '🏠';
-      case 'explore':
-        return '🧭';
-      case 'plans':
-        return '📋';
-      case 'profile':
-        return '👤';
-      default:
-        return '❓';
-    }
-  };
-  return <Text style={{ fontSize: size * 0.8 }}>{getIcon()}</Text>;
-};
-
-// Icon render functions
-const renderHomeIcon = ({ size }: { size: number }) => (
-  <TabIcon name='home' size={size} />
-);
-const renderExploreIcon = ({ size }: { size: number }) => (
-  <TabIcon name='explore' size={size} />
-);
-const renderPlansIcon = ({ size }: { size: number }) => (
-  <TabIcon name='plans' size={size} />
-);
-const renderProfileIcon = ({ size }: { size: number }) => (
-  <TabIcon name='profile' size={size} />
-);
 
 export default function BottomTabNavigator() {
   return (
@@ -76,7 +50,7 @@ export default function BottomTabNavigator() {
         component={HomeScreen}
         options={{
           title: 'Ana Sayfa',
-          tabBarIcon: renderHomeIcon,
+          tabBarIcon: HomeTabIcon,
         }}
       />
 
@@ -85,7 +59,7 @@ export default function BottomTabNavigator() {
         component={ExploreScreen}
         options={{
           title: 'Keşfet',
-          tabBarIcon: renderExploreIcon,
+          tabBarIcon: ExploreTabIcon,
         }}
       />
 
@@ -94,7 +68,7 @@ export default function BottomTabNavigator() {
         component={PlansScreen}
         options={{
           title: 'Planlarım',
-          tabBarIcon: renderPlansIcon,
+          tabBarIcon: PlansTabIcon,
         }}
       />
 
@@ -103,7 +77,7 @@ export default function BottomTabNavigator() {
         component={ProfileScreen}
         options={{
           title: 'Profil',
-          tabBarIcon: renderProfileIcon,
+          tabBarIcon: ProfileTabIcon,
         }}
       />
     </Tab.Navigator>

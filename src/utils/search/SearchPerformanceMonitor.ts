@@ -3,8 +3,8 @@
  * Arama performansını ölçmek ve optimize etmek için utility
  */
 
-import { TouristPlace } from '../types/touristPlaces';
-import { touristPlaces, categories } from '../data/touristPlaces';
+import { TouristPlace } from '../../types/touristPlaces';
+import { touristPlaces, categories } from '../../data/touristPlaces';
 
 // Performans metrikleri interface'i
 export interface SearchPerformanceMetrics {
