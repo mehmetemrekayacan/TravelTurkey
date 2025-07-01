@@ -38,16 +38,16 @@ const TabIcon = ({ name, size }: { name: string; size: number }) => {
 
 // Icon render functions
 const renderHomeIcon = ({ size }: { size: number }) => (
-  <TabIcon name="home" size={size} />
+  <TabIcon name='home' size={size} />
 );
 const renderExploreIcon = ({ size }: { size: number }) => (
-  <TabIcon name="explore" size={size} />
+  <TabIcon name='explore' size={size} />
 );
 const renderPlansIcon = ({ size }: { size: number }) => (
-  <TabIcon name="plans" size={size} />
+  <TabIcon name='plans' size={size} />
 );
 const renderProfileIcon = ({ size }: { size: number }) => (
-  <TabIcon name="profile" size={size} />
+  <TabIcon name='profile' size={size} />
 );
 
 export default function BottomTabNavigator() {
@@ -72,7 +72,7 @@ export default function BottomTabNavigator() {
       }}
     >
       <Tab.Screen
-        name="HomeTab"
+        name='HomeTab'
         component={HomeScreen}
         options={{
           title: 'Ana Sayfa',
@@ -81,7 +81,7 @@ export default function BottomTabNavigator() {
       />
 
       <Tab.Screen
-        name="ExploreTab"
+        name='ExploreTab'
         component={ExploreScreen}
         options={{
           title: 'Keşfet',
@@ -90,7 +90,7 @@ export default function BottomTabNavigator() {
       />
 
       <Tab.Screen
-        name="PlansTab"
+        name='PlansTab'
         component={PlansScreen}
         options={{
           title: 'Planlarım',
@@ -99,7 +99,7 @@ export default function BottomTabNavigator() {
       />
 
       <Tab.Screen
-        name="ProfileTab"
+        name='ProfileTab'
         component={ProfileScreen}
         options={{
           title: 'Profil',

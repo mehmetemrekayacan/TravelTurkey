@@ -105,12 +105,12 @@ const BasicSearchExample: React.FC = () => {
           <Text style={styles.searchIcon}>🔍</Text>
           <TextInput
             style={styles.searchInput}
-            placeholder="Yer, şehir veya açıklama arayın..."
+            placeholder='Yer, şehir veya açıklama arayın...'
             value={searchText}
             onChangeText={setSearchText}
             placeholderTextColor={AppColors.TEXT_SECONDARY}
             autoCorrect={false}
-            clearButtonMode="while-editing"
+            clearButtonMode='while-editing'
           />
           {searchText.length > 0 && (
             <TouchableOpacity

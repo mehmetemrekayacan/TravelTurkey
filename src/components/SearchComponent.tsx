@@ -207,11 +207,11 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
           onBlur={() => setTimeout(() => setIsSearchFocused(false), 150)}
           placeholderTextColor={AppColors.TEXT_SECONDARY}
           autoCorrect={false}
-          clearButtonMode="while-editing"
+          clearButtonMode='while-editing'
         />
         {isLoading && (
           <ActivityIndicator
-            size="small"
+            size='small'
             color={AppColors.PRIMARY}
             style={styles.loadingIndicator}
           />
@@ -290,14 +290,14 @@ const styles = StyleSheet.create({
   searchInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: AppColors.WHITE,
     borderRadius: 12,
     borderWidth: 2,
     paddingHorizontal: 15,
     paddingVertical: 12,
     marginHorizontal: 20,
     marginVertical: 10,
-    shadowColor: '#000',
+    shadowColor: AppColors.SHADOW_COLOR,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -322,10 +322,10 @@ const styles = StyleSheet.create({
     top: '100%',
     left: 20,
     right: 20,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: AppColors.WHITE,
     borderRadius: 12,
     maxHeight: 300,
-    shadowColor: '#000',
+    shadowColor: AppColors.SHADOW_COLOR,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 8,

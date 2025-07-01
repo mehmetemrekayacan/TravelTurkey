@@ -25,7 +25,7 @@ function App(): React.JSX.Element {
       <SafeAreaProvider>
         <NavigationContainer>
           <StatusBar
-            barStyle="light-content"
+            barStyle='light-content'
             backgroundColor={AppColors.SECONDARY}
           />
           <BottomTabNavigator />

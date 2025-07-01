@@ -15,19 +15,21 @@ import {
 } from 'react-native';
 import { GlobalStyles } from '../styles/GlobalStyles';
 import { AppColors } from '../constants/Colors';
-import { 
-  touristPlaces, 
-  categories as dataCategories, 
-  searchPlaces, 
-  getPlacesByCategory, 
-  getFeaturedPlaces 
+import {
+  touristPlaces,
+  categories as dataCategories,
+  searchPlaces,
+  getPlacesByCategory,
+  getFeaturedPlaces,
 } from '../data/touristPlaces';
 import { TouristPlace, Category as CategoryType } from '../types/touristPlaces';
 
 const ExploreScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [filteredPlaces, setFilteredPlaces] = useState<TouristPlace[]>(getFeaturedPlaces());
+  const [filteredPlaces, setFilteredPlaces] = useState<TouristPlace[]>(
+    getFeaturedPlaces(),
+  );
 
   // Arama fonksiyonu
   const handleSearch = (query: string) => {
@@ -56,7 +58,9 @@ const ExploreScreen: React.FC = () => {
         <Text style={styles.placeIcon}>{item.icon}</Text>
         <View style={styles.placeInfo}>
           <Text style={styles.placeName}>{item.name}</Text>
-          <Text style={styles.placeLocation}>{item.address.city}, {item.address.district}</Text>
+          <Text style={styles.placeLocation}>
+            {item.address.city}, {item.address.district}
+          </Text>
         </View>
         <View style={styles.ratingContainer}>
           <Text style={styles.rating}>⭐ {item.rating.average.toFixed(1)}</Text>
@@ -66,26 +70,36 @@ const ExploreScreen: React.FC = () => {
       <View style={styles.placeFooter}>
         <Text style={styles.category}>{item.category}</Text>
         <Text style={styles.price}>
-          {item.priceInfo.isFree ? 'Ücretsiz' : `${item.priceInfo.adult} ${item.priceInfo.currency}`}
+          {item.priceInfo.isFree
+            ? 'Ücretsiz'
+            : `${item.priceInfo.adult} ${item.priceInfo.currency}`}
         </Text>
       </View>
     </TouchableOpacity>
   );
 
   // Category item renderer
-  const renderCategoryItem = ({ item }: { item: CategoryType | { id: string; name: string; icon: string; placesCount: number } }) => (
-    <TouchableOpacity 
+  const renderCategoryItem = ({
+    item,
+  }: {
+    item:
+      | CategoryType
+      | { id: string; name: string; icon: string; placesCount: number };
+  }) => (
+    <TouchableOpacity
       style={[
         styles.categoryCard,
-        selectedCategory === item.id && styles.selectedCategoryCard
+        selectedCategory === item.id && styles.selectedCategoryCard,
       ]}
       onPress={() => handleCategoryFilter(item.id)}
     >
       <Text style={styles.categoryIcon}>{item.icon}</Text>
-      <Text style={[
-        styles.categoryName,
-        selectedCategory === item.id && styles.selectedCategoryName
-      ]}>
+      <Text
+        style={[
+          styles.categoryName,
+          selectedCategory === item.id && styles.selectedCategoryName,
+        ]}
+      >
         {item.name}
       </Text>
       <Text style={styles.categoryCount}>{item.placesCount} yer</Text>
@@ -95,18 +109,19 @@ const ExploreScreen: React.FC = () => {
   return (
     <SafeAreaView style={GlobalStyles.safeArea}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>Keşfet</Text>
-          <Text style={styles.subtitle}>Türkiye'nin güzelliklerini keşfedin</Text>
+          <Text style={styles.subtitle}>
+            Türkiye'nin güzelliklerini keşfedin
+          </Text>
         </View>
 
         {/* Search Bar */}
         <View style={styles.searchContainer}>
           <TextInput
             style={styles.searchInput}
-            placeholder="Yer, şehir veya aktivite arayın..."
+            placeholder='Yer, şehir veya aktivite arayın...'
             value={searchQuery}
             onChangeText={handleSearch}
             placeholderTextColor={AppColors.TEXT_SECONDARY}
@@ -119,11 +134,18 @@ const ExploreScreen: React.FC = () => {
           <Text style={styles.sectionTitle}>Kategoriler</Text>
           <FlatList
             data={[
-              { id: 'all', name: 'Tümü', icon: '🗺️', placesCount: touristPlaces.length, description: '', color: '' },
-              ...dataCategories
+              {
+                id: 'all',
+                name: 'Tümü',
+                icon: '🗺️',
+                placesCount: touristPlaces.length,
+                description: '',
+                color: '',
+              },
+              ...dataCategories,
             ]}
             renderItem={renderCategoryItem}
-            keyExtractor={(item) => item.id}
+            keyExtractor={item => item.id}
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.categoriesList}
@@ -135,17 +157,18 @@ const ExploreScreen: React.FC = () => {
           <Text style={styles.sectionTitle}>
             {selectedCategory === 'all' ? 'Öne Çıkan Yerler' : 'Sonuçlar'}
           </Text>
-          <Text style={styles.resultsCount}>{filteredPlaces.length} yer bulundu</Text>
-          
+          <Text style={styles.resultsCount}>
+            {filteredPlaces.length} yer bulundu
+          </Text>
+
           <FlatList
             data={filteredPlaces}
             renderItem={renderPlaceItem}
-            keyExtractor={(item) => item.id}
+            keyExtractor={item => item.id}
             scrollEnabled={false}
             contentContainerStyle={styles.placesList}
           />
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );

@@ -99,7 +99,7 @@ const SearchExampleScreen: React.FC = () => {
         {/* Search Component */}
         <SearchComponent
           onPlaceSelect={handlePlaceSelect}
-          placeholder="Nereyi ziyaret etmek istiyorsunuz?"
+          placeholder='Nereyi ziyaret etmek istiyorsunuz?'
           maxResults={8}
           categories={selectedCategories}
           showRecentSearches={true}

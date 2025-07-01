@@ -115,14 +115,14 @@ export const GlobalStyles = StyleSheet.create({
   titleLargeWhite: {
     fontSize: 24,
     fontWeight: '700',
-    color: '#FFFFFF',
+    color: AppColors.WHITE,
     marginBottom: 8,
   },
 
   titleMediumWhite: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#FFFFFF',
+    color: AppColors.WHITE,
     marginBottom: 8,
   },
 
@@ -142,14 +142,14 @@ export const GlobalStyles = StyleSheet.create({
 
   bodyMediumWhite: {
     fontSize: 16,
-    color: '#FFFFFF',
+    color: AppColors.WHITE,
     lineHeight: 24,
     marginBottom: 8,
   },
 
   bodyMediumWhiteCenter: {
     fontSize: 16,
-    color: '#FFFFFF',
+    color: AppColors.WHITE,
     lineHeight: 24,
     textAlign: 'center',
   },
@@ -186,7 +186,7 @@ export const GlobalStyles = StyleSheet.create({
   },
 
   buttonTextPrimary: {
-    color: '#FFFFFF',
+    color: AppColors.WHITE,
     fontSize: 16,
     fontWeight: '600',
   },
@@ -199,7 +199,7 @@ export const GlobalStyles = StyleSheet.create({
   },
 
   turkishFlag: {
-    backgroundColor: '#e74c3c',
+    backgroundColor: AppColors.ERROR,
     padding: 20,
     borderRadius: 12,
   },
@@ -232,7 +232,7 @@ export const GlobalStyles = StyleSheet.create({
   progressBarContainer: {
     width: 60,
     height: 8,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: AppColors.BG_LIGHT,
     borderRadius: 4,
     overflow: 'hidden',
     position: 'relative',

@@ -83,33 +83,48 @@ export interface TouristPlace {
   slug: string;
   description: string;
   shortDescription: string;
-  
+
   // Kategori ve etiketler
-  category: 'historical' | 'natural' | 'cultural' | 'religious' | 'entertainment' | 'beach' | 'adventure' | 'shopping';
+  category:
+    | 'historical'
+    | 'natural'
+    | 'cultural'
+    | 'religious'
+    | 'entertainment'
+    | 'beach'
+    | 'adventure'
+    | 'shopping';
   subcategory: string;
   tags: string[];
-  
+
   // Konum bilgileri
   coordinates: Coordinates;
   address: Address;
-  region: 'marmara' | 'ege' | 'akdeniz' | 'ic_anadolu' | 'karadeniz' | 'dogu_anadolu' | 'guneydogu_anadolu';
-  
+  region:
+    | 'marmara'
+    | 'ege'
+    | 'akdeniz'
+    | 'ic_anadolu'
+    | 'karadeniz'
+    | 'dogu_anadolu'
+    | 'guneydogu_anadolu';
+
   // Görsel içerik
   icon: string; // Emoji
   photos: Photo[];
   virtualTourUrl?: string;
-  
+
   // Değerlendirme ve popülerlik
   rating: Rating;
   popularityScore: number; // 1-100 arası
   visitorsPerYear?: number;
-  
+
   // Ziyaret bilgileri
   priceInfo: PriceInfo;
   workingHours: WorkingHours;
   bestTimeToVisit: string[];
   estimatedDuration: string; // "2-3 hours", "half day", "full day"
-  
+
   // Erişibilirlik
   accessibility: {
     wheelchairAccessible: boolean;
@@ -119,17 +134,17 @@ export interface TouristPlace {
     audioGuide: boolean;
     languages: string[];
   };
-  
+
   // Yakındaki yerler
   nearbyPlaces: string[]; // Other place IDs
   nearbyRestaurants?: string[];
   nearbyHotels?: string[];
-  
+
   // İletişim ve pratik bilgiler
   contactInfo: ContactInfo;
   tips: string[];
   warnings?: string[];
-  
+
   // Meta bilgiler
   createdAt: string;
   updatedAt: string;

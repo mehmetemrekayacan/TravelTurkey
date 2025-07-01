@@ -1,0 +1,28 @@
+# Prettier ignore patterns
+
+# Dependencies
+node_modules/
+
+# Build outputs
+android/
+ios/
+build/
+dist/
+
+# Coverage reports
+coverage/
+
+# Generated files
+*.generated.*
+*.g.dart
+
+# Package managers
+package-lock.json
+yarn.lock
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

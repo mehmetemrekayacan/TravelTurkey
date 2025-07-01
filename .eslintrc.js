@@ -3,6 +3,15 @@ module.exports = {
   extends: ['@react-native'],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
+  ignorePatterns: [
+    'node_modules/',
+    'coverage/',
+    'android/',
+    'ios/',
+    'metro.config.js',
+    'babel.config.js',
+    '*.log',
+  ],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
@@ -10,6 +19,13 @@ module.exports = {
         '@typescript-eslint/no-shadow': ['error'],
         'no-shadow': 'off',
         'no-undef': 'off',
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          { argsIgnorePattern: '^_' },
+        ],
+        'react-hooks/exhaustive-deps': 'warn',
+        'react-native/no-inline-styles': 'warn',
+        'react-native/no-color-literals': 'off', // Disabled for now, will use manual review
       },
     },
     {

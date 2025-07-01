@@ -57,6 +57,16 @@ export const Colors = {
     cardBg: '#FFFFFF',
     mainBg: '#F9FAFB',
     shadow: 'rgba(0, 0, 0, 0.1)',
+    shadowDark: '#000000',
+    transparent: 'transparent',
+  },
+
+  // Shadow & Overlay renkleri
+  shadows: {
+    light: 'rgba(0, 0, 0, 0.05)',
+    medium: 'rgba(0, 0, 0, 0.1)',
+    dark: 'rgba(0, 0, 0, 0.15)',
+    black: '#000000',
   },
 };
 
@@ -80,9 +90,25 @@ export const AppColors = {
   // Border renkleri
   BORDER_LIGHT: Colors.neutral.grayLight, // #D1D5DB
 
+  // Shadow renkleri
+  SHADOW_COLOR: Colors.shadows.black, // #000000
+  SHADOW_LIGHT: Colors.shadows.light, // rgba(0, 0, 0, 0.05)
+  SHADOW_MEDIUM: Colors.shadows.medium, // rgba(0, 0, 0, 0.1)
+  SHADOW_DARK: Colors.shadows.dark, // rgba(0, 0, 0, 0.15)
+
+  // Özel renkler
+  WHITE: Colors.neutral.white, // #FFFFFF
+  TRANSPARENT: Colors.ui.transparent, // transparent
+
   // Türkiye özel renkleri
   TURKISH_FLAG: Colors.primary.red, // #DC2626
   BOSPHORUS: Colors.accent.bosphorusBlue, // #0EA5E9
   CAPPADOCIA: Colors.accent.cappadociaOrange, // #EA580C
   GOLDEN_HORN: Colors.secondary.golden, // #F59E0B
+
+  // Sistem renkleri
+  SUCCESS: Colors.system.success, // #059669
+  ERROR: Colors.system.error, // #DC2626
+  WARNING: Colors.system.warning, // #F59E0B
+  INFO: Colors.system.info, // #0EA5E9
 };
