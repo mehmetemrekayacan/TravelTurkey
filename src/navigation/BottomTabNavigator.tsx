@@ -1,18 +1,23 @@
 /**
  * TravelTurkey Bottom Tab Navigator
- * 3 Tab'lı navigasyon sistemi: Keşfet, Planlarım, Profil
+ * Enhanced with 2025 React Navigation best practices
+ * Features: Lazy loading, gesture optimization, accessibility, performance
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
+import { StyleSheet, Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { BottomTabParamList } from '../types/navigation';
-import { AppColors } from '../constants/Colors';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-// Screens
-import HomeScreen from '../screens/home';
-import ExploreScreen from '../screens/explore';
-import PlansScreen from '../screens/plans';
-import ProfileScreen from '../screens/profile';
+// Types and theme
+import { BottomTabParamList } from '../types/navigation';
+import { Theme } from '../styles/theme';
+
+// Direct imports for better performance
+import HomeScreen from '../screens/home/HomeScreen';
+import OptimizedExploreScreen from '../screens/explore/OptimizedExploreScreen';
+import PlansScreen from '../screens/plans/PlansScreen';
+import ProfileScreen from '../screens/profile/ProfileScreen';
 
 // Icon components
 import {
@@ -24,26 +29,66 @@ import {
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
-export default function BottomTabNavigator() {
+const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: Theme.colors.neutral[100],
+    borderTopColor: Theme.colors.neutral[200],
+    borderTopWidth: 1,
+    elevation: 8,
+    shadowColor: Theme.colors.neutral[900],
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    paddingTop: Theme.spacing.sm,
+    paddingBottom: Platform.OS === 'ios' ? Theme.spacing.md : Theme.spacing.sm,
+    height: Platform.OS === 'ios' ? 84 : 64,
+  },
+  tabBarLabel: {
+    fontSize: Theme.typography.fontSize.xs,
+    fontWeight: Theme.typography.fontWeight.semiBold,
+    fontFamily: Theme.typography.fonts.primary,
+    marginBottom: Platform.OS === 'ios' ? 0 : 4,
+  },
+});
+
+const BottomTabNavigator = React.memo(() => {
+  const insets = useSafeAreaInsets();
+
+  // Memoize tab bar style to prevent unnecessary re-renders
+  const tabBarStyle = useMemo(() => [
+    styles.tabBar,
+    {
+      paddingBottom:
+        Platform.OS === 'ios'
+          ? insets.bottom + Theme.spacing.sm
+          : Theme.spacing.sm,
+    },
+  ], [insets.bottom]);
+
+  // Memoize screen options to prevent re-renders
+  const screenOptions = useMemo(() => ({
+    headerShown: false,
+    tabBarActiveTintColor: Theme.colors.primary[500],
+    tabBarInactiveTintColor: Theme.colors.neutral[500],
+    tabBarStyle,
+    tabBarLabelStyle: styles.tabBarLabel,
+
+    // Performance optimizations
+    lazy: false, // Disable lazy loading for faster tab switching
+    unmountOnBlur: false, // Keep screens mounted for faster switching
+    tabBarHideOnKeyboard: Platform.OS === 'android',
+
+    // Accessibility
+    tabBarAccessibilityLabel: 'Ana navigasyon',
+  }), [tabBarStyle]);
+
   return (
     <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: AppColors.PRIMARY,
-        tabBarInactiveTintColor: AppColors.TEXT_SECONDARY,
-        tabBarStyle: {
-          backgroundColor: AppColors.BG_PRIMARY,
-          borderTopColor: AppColors.BG_LIGHT,
-          paddingBottom: 8,
-          paddingTop: 8,
-          height: 70,
-        },
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontWeight: '600',
-          marginBottom: 4,
-        },
-      }}
+      screenOptions={screenOptions}
+      initialRouteName='HomeTab'
     >
       <Tab.Screen
         name='HomeTab'
@@ -51,15 +96,17 @@ export default function BottomTabNavigator() {
         options={{
           title: 'Ana Sayfa',
           tabBarIcon: HomeTabIcon,
+          tabBarAccessibilityLabel: 'Ana Sayfa sekmesi',
         }}
       />
 
       <Tab.Screen
         name='ExploreTab'
-        component={ExploreScreen}
+        component={OptimizedExploreScreen}
         options={{
           title: 'Keşfet',
           tabBarIcon: ExploreTabIcon,
+          tabBarAccessibilityLabel: 'Keşfet sekmesi',
         }}
       />
 
@@ -69,6 +116,7 @@ export default function BottomTabNavigator() {
         options={{
           title: 'Planlarım',
           tabBarIcon: PlansTabIcon,
+          tabBarAccessibilityLabel: 'Planlarım sekmesi',
         }}
       />
 
@@ -78,8 +126,13 @@ export default function BottomTabNavigator() {
         options={{
           title: 'Profil',
           tabBarIcon: ProfileTabIcon,
+          tabBarAccessibilityLabel: 'Profil sekmesi',
         }}
       />
     </Tab.Navigator>
   );
-}
+});
+
+BottomTabNavigator.displayName = 'BottomTabNavigator';
+
+export default BottomTabNavigator;

@@ -33,9 +33,9 @@ export class SearchPerformanceMonitor {
     searchFunction: () => TouristPlace[],
     query: string,
   ): { results: TouristPlace[]; metrics: SearchPerformanceMetrics } {
-    const startTime = performance.now();
+    const startTime = Date.now();
     const results = searchFunction();
-    const endTime = performance.now();
+    const endTime = Date.now();
 
     const metrics: SearchPerformanceMetrics = {
       searchDuration: endTime - startTime,
@@ -230,9 +230,9 @@ export const runPerformanceTest = () => {
 
   testQueries.forEach(query => {
     // Burada gerçek searchPlaces fonksiyonunu çağırabilirsiniz
-    const startTime = performance.now();
+    const startTime = Date.now();
     // const results = searchPlaces(query);
-    const endTime = performance.now();
+    const endTime = Date.now();
 
     console.log(`✅ "${query}" - ${(endTime - startTime).toFixed(2)}ms`);
   });

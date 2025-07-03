@@ -5,8 +5,7 @@
 
 import React from 'react';
 import { SafeAreaView, ScrollView, Text } from 'react-native';
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { BottomTabParamList } from '../../types/navigation';
+import { BottomTabScreenProps } from '../../types/navigation';
 import { GlobalStyles } from '../../styles/GlobalStyles';
 import ScreenHeader from '../../components/common/ScreenHeader';
 import {
@@ -15,16 +14,16 @@ import {
   InfoCard,
 } from '../../components/common/Cards';
 
-type HomeScreenProps = BottomTabScreenProps<BottomTabParamList, 'HomeTab'>;
+type HomeScreenProps = BottomTabScreenProps<'HomeTab'>;
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
   // Event handlers
   const handleExplorePress = () => {
-    navigation.navigate('ExploreTab');
+    navigation.navigate({ name: 'ExploreTab', params: {} });
   };
 
   const handlePlansPress = () => {
-    navigation.navigate('PlansTab');
+    navigation.navigate({ name: 'PlansTab', params: undefined });
   };
 
   const handleProfilePress = () => {

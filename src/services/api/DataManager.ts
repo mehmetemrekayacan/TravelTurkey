@@ -35,11 +35,11 @@ class DataManager {
     if (this.initialized) return;
 
     console.log('🚀 Initializing DataManager...');
-    const startTime = performance.now();
+    const startTime = Date.now();
 
     this.buildIndexes();
 
-    const endTime = performance.now();
+    const endTime = Date.now();
     console.log(
       `✅ DataManager initialized in ${(endTime - startTime).toFixed(2)}ms`,
     );

@@ -195,30 +195,19 @@ export const FontUtils = {
     return weightMap[weight.toLowerCase()] || '400';
   },
 
-  // Check if font is loaded (for web)
-  isFontLoaded: (fontFamily: string): boolean => {
-    if (typeof window === 'undefined' || !(window as any).document) return true;
-
-    try {
-      return (window as any).document.fonts.check(`16px ${fontFamily}`);
-    } catch {
-      return false;
-    }
+  // Check if font is loaded (React Native always returns true - fonts are bundled)
+  isFontLoaded: (_fontFamily: string): boolean => {
+    // In React Native, fonts are bundled with the app, so they're always "loaded"
+    return true;
   },
 
-  // Load font dynamically (for web)
+  // Load font dynamically (React Native always returns true - fonts are pre-bundled)
   loadFont: async (
-    fontFamily: string,
-    weight: string = '400',
+    _fontFamily: string,
+    _weight: string = '400',
   ): Promise<boolean> => {
-    if (typeof window === 'undefined' || !(window as any).document) return true;
-
-    try {
-      await (window as any).document.fonts.load(`${weight} 16px ${fontFamily}`);
-      return true;
-    } catch {
-      return false;
-    }
+    // In React Native, fonts are bundled with the app, no dynamic loading needed
+    return Promise.resolve(true);
   },
 };
 

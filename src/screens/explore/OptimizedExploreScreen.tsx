@@ -50,7 +50,11 @@ const OptimizedExploreScreen: React.FC = () => {
 
   // Toggle search visibility
   const toggleSearch = useCallback(() => {
-    setShowSearch(prev => !prev);
+    console.log('🔍 Arama butonu tıklandı!');
+    setShowSearch(prev => {
+      console.log('showSearch değeri:', !prev);
+      return !prev;
+    });
   }, []);
 
   // Render category item
@@ -123,7 +127,7 @@ const OptimizedExploreScreen: React.FC = () => {
   return (
     <SafeAreaView style={GlobalStyles.safeArea}>
       <ScreenHeader
-        title='Keşfet'
+        title={`Keşfet ${showSearch ? '(Arama Modu)' : ''}`}
         icon='🧭'
         rightIcon='🔍'
         onRightPress={toggleSearch}

@@ -39,9 +39,16 @@ export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
 
       <View style={styles.spacer} />
 
-      {rightIcon && (
-        <TouchableOpacity onPress={onRightPress}>
-          <Text style={GlobalStyles.iconMedium}>{rightIcon}</Text>
+      {rightIcon && onRightPress && (
+        <TouchableOpacity 
+          onPress={() => {
+            console.log('ScreenHeader: Sağ buton tıklandı!');
+            onRightPress?.();
+          }}
+          style={styles.rightButton}
+          activeOpacity={0.7}
+        >
+          <Text style={[GlobalStyles.iconMedium, styles.rightIcon]}>{rightIcon}</Text>
         </TouchableOpacity>
       )}
     </View>
@@ -54,6 +61,15 @@ const styles = StyleSheet.create({
   },
   spacer: {
     flex: 1,
+  },
+  rightButton: {
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  rightIcon: {
+    fontSize: 24,
+    color: '#333',
   },
 });
 

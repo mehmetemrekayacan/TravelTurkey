@@ -48,7 +48,7 @@ export const useOptimizedSearch = (
 
   // Performance tracking
   const searchTimesRef = useRef<number[]>([]);
-  const debounceTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   // Performance stats
   const performanceStats = useMemo(() => {
@@ -74,7 +74,7 @@ export const useOptimizedSearch = (
       setIsError(false);
 
       try {
-        const startTime = performance.now();
+        const startTime = Date.now();
 
         // Perform search using optimized data manager
         let searchResults = dataManager.searchPlaces(searchQuery);
@@ -95,7 +95,7 @@ export const useOptimizedSearch = (
           6,
         );
 
-        const endTime = performance.now();
+        const endTime = Date.now();
         const searchDuration = endTime - startTime;
 
         // Track performance

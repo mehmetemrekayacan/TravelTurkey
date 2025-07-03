@@ -15,7 +15,7 @@ class MainActivity : ReactActivity() {
   override fun getMainComponentName(): String = "TravelTurkey"
 
   /**
-   * React Navigation için gerekli
+   * React Navigation için gerekli - gesture handler ve screens optimizasyonu
    */
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(null)
