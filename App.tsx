@@ -74,30 +74,36 @@ function App(): React.JSX.Element {
   const [appStateVisible, setAppStateVisible] = useState(AppState.currentState);
 
   // Memoize navigation theme to prevent unnecessary re-renders
-  const navigationTheme = useMemo(() => ({
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-      primary: Theme.colors.primary[500],
-      background: Theme.colors.neutral[50],
-      card: Theme.colors.neutral[100],
-      text: Theme.colors.neutral[900],
-      border: Theme.colors.neutral[200],
-      notification: Theme.colors.accent.turquoise[500],
-    },
-  }), []);
+  const navigationTheme = useMemo(
+    () => ({
+      ...DefaultTheme,
+      colors: {
+        ...DefaultTheme.colors,
+        primary: Theme.colors.primary[500],
+        background: Theme.colors.neutral[50],
+        card: Theme.colors.neutral[100],
+        text: Theme.colors.neutral[900],
+        border: Theme.colors.neutral[200],
+        notification: Theme.colors.accent.turquoise[500],
+      },
+    }),
+    [],
+  );
 
   // Memoize stack screen options
-  const stackScreenOptions = useMemo(() => ({
-    headerShown: false,
-    // Enable gesture navigation
-    gestureEnabled: true,
-    gestureDirection: 'horizontal' as const,
-    // Performance optimization
-    presentation: 'card' as const,
-    // Optimize animations
-    animationEnabled: true,
-  }), []);
+  const stackScreenOptions = useMemo(
+    () => ({
+      headerShown: false,
+      // Enable gesture navigation
+      gestureEnabled: true,
+      gestureDirection: 'horizontal' as const,
+      // Performance optimization
+      presentation: 'card' as const,
+      // Optimize animations
+      animationEnabled: true,
+    }),
+    [],
+  );
 
   // Handle app state changes for navigation persistence
   const handleAppStateChange = useCallback(
@@ -191,9 +197,7 @@ function App(): React.JSX.Element {
             translucent={false}
           />
 
-          <RootStack.Navigator
-            screenOptions={stackScreenOptions}
-          >
+          <RootStack.Navigator screenOptions={stackScreenOptions}>
             {/* Main App */}
             <RootStack.Screen
               name='Main'

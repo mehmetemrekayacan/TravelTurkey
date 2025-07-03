@@ -58,38 +58,41 @@ const BottomTabNavigator = React.memo(() => {
   const insets = useSafeAreaInsets();
 
   // Memoize tab bar style to prevent unnecessary re-renders
-  const tabBarStyle = useMemo(() => [
-    styles.tabBar,
-    {
-      paddingBottom:
-        Platform.OS === 'ios'
-          ? insets.bottom + Theme.spacing.sm
-          : Theme.spacing.sm,
-    },
-  ], [insets.bottom]);
+  const tabBarStyle = useMemo(
+    () => [
+      styles.tabBar,
+      {
+        paddingBottom:
+          Platform.OS === 'ios'
+            ? insets.bottom + Theme.spacing.sm
+            : Theme.spacing.sm,
+      },
+    ],
+    [insets.bottom],
+  );
 
   // Memoize screen options to prevent re-renders
-  const screenOptions = useMemo(() => ({
-    headerShown: false,
-    tabBarActiveTintColor: Theme.colors.primary[500],
-    tabBarInactiveTintColor: Theme.colors.neutral[500],
-    tabBarStyle,
-    tabBarLabelStyle: styles.tabBarLabel,
+  const screenOptions = useMemo(
+    () => ({
+      headerShown: false,
+      tabBarActiveTintColor: Theme.colors.primary[500],
+      tabBarInactiveTintColor: Theme.colors.neutral[500],
+      tabBarStyle,
+      tabBarLabelStyle: styles.tabBarLabel,
 
-    // Performance optimizations
-    lazy: false, // Disable lazy loading for faster tab switching
-    unmountOnBlur: false, // Keep screens mounted for faster switching
-    tabBarHideOnKeyboard: Platform.OS === 'android',
+      // Performance optimizations
+      lazy: false, // Disable lazy loading for faster tab switching
+      unmountOnBlur: false, // Keep screens mounted for faster switching
+      tabBarHideOnKeyboard: Platform.OS === 'android',
 
-    // Accessibility
-    tabBarAccessibilityLabel: 'Ana navigasyon',
-  }), [tabBarStyle]);
+      // Accessibility
+      tabBarAccessibilityLabel: 'Ana navigasyon',
+    }),
+    [tabBarStyle],
+  );
 
   return (
-    <Tab.Navigator
-      screenOptions={screenOptions}
-      initialRouteName='HomeTab'
-    >
+    <Tab.Navigator screenOptions={screenOptions} initialRouteName='HomeTab'>
       <Tab.Screen
         name='HomeTab'
         component={HomeScreen}

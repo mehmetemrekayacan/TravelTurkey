@@ -48,7 +48,9 @@ export const useOptimizedSearch = (
 
   // Performance tracking
   const searchTimesRef = useRef<number[]>([]);
-  const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined,
+  );
 
   // Performance stats
   const performanceStats = useMemo(() => {
