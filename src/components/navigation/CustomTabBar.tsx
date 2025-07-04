@@ -19,14 +19,18 @@ interface CustomTabBarProps extends BottomTabBarProps {
   // Add any custom props here
 }
 
-const CustomTabBar: React.FC<CustomTabBarProps> = ({ state, descriptors, navigation }) => {
+const CustomTabBar: React.FC<CustomTabBarProps> = ({
+  state,
+  descriptors,
+  navigation,
+}) => {
   const insets = useSafeAreaInsets();
 
   return (
     <View style={[styles.tabBarContainer, { paddingBottom: insets.bottom }]}>
       {/* Top border gradient effect */}
       <View style={styles.topBorder} />
-      
+
       {/* Tab buttons container */}
       <View style={styles.tabContainer}>
         {state.routes.map((route, index) => {
@@ -62,7 +66,7 @@ const CustomTabBar: React.FC<CustomTabBarProps> = ({ state, descriptors, navigat
           return (
             <TouchableOpacity
               key={route.key}
-              accessibilityRole="button"
+              accessibilityRole='button'
               accessibilityState={isFocused ? { selected: true } : {}}
               accessibilityLabel={options.tabBarAccessibilityLabel}
               onPress={onPress}
@@ -73,7 +77,9 @@ const CustomTabBar: React.FC<CustomTabBarProps> = ({ state, descriptors, navigat
               <View style={styles.iconContainer}>
                 {options.tabBarIcon?.({
                   focused: isFocused,
-                  color: isFocused ? AppColors.PRIMARY : AppColors.TEXT_SECONDARY,
+                  color: isFocused
+                    ? AppColors.PRIMARY
+                    : AppColors.TEXT_SECONDARY,
                   size: 24,
                 })}
               </View>

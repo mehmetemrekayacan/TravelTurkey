@@ -193,116 +193,118 @@ function App(): React.JSX.Element {
             }}
             fallback={null} // Custom loading component
           >
-          <StatusBar
-            barStyle={Platform.OS === 'ios' ? 'dark-content' : 'light-content'}
-            backgroundColor={Theme.colors.primary[500]}
-            translucent={false}
-          />
-
-          <RootStack.Navigator screenOptions={stackScreenOptions}>
-            {/* Main App */}
-            <RootStack.Screen
-              name='Main'
-              component={BottomTabNavigator}
-              options={{
-                headerShown: false,
-              }}
+            <StatusBar
+              barStyle={
+                Platform.OS === 'ios' ? 'dark-content' : 'light-content'
+              }
+              backgroundColor={Theme.colors.primary[500]}
+              translucent={false}
             />
 
-            {/* Modal Screens */}
-            <RootStack.Group
-              screenOptions={{
-                presentation: 'modal',
-                gestureEnabled: true,
-                gestureDirection: 'vertical',
-              }}
-            >
+            <RootStack.Navigator screenOptions={stackScreenOptions}>
+              {/* Main App */}
               <RootStack.Screen
-                name='Search'
-                component={BottomTabNavigator} // TODO: Create SearchScreen
+                name='Main'
+                component={BottomTabNavigator}
                 options={{
-                  title: 'Arama',
-                  headerShown: true,
-                }}
-              />
-              <RootStack.Screen
-                name='ImageViewer'
-                component={BottomTabNavigator} // TODO: Create ImageViewerScreen
-                options={{
-                  title: 'Galeri',
                   headerShown: false,
                 }}
               />
+
+              {/* Modal Screens */}
+              <RootStack.Group
+                screenOptions={{
+                  presentation: 'modal',
+                  gestureEnabled: true,
+                  gestureDirection: 'vertical',
+                }}
+              >
+                <RootStack.Screen
+                  name='Search'
+                  component={BottomTabNavigator} // TODO: Create SearchScreen
+                  options={{
+                    title: 'Arama',
+                    headerShown: true,
+                  }}
+                />
+                <RootStack.Screen
+                  name='ImageViewer'
+                  component={BottomTabNavigator} // TODO: Create ImageViewerScreen
+                  options={{
+                    title: 'Galeri',
+                    headerShown: false,
+                  }}
+                />
+                <RootStack.Screen
+                  name='ShareModal'
+                  component={BottomTabNavigator} // TODO: Create ShareModalScreen
+                  options={{
+                    title: 'Paylaş',
+                    headerShown: true,
+                  }}
+                />
+              </RootStack.Group>
+
+              {/* Full Screen Modals */}
+              <RootStack.Group
+                screenOptions={{
+                  presentation: 'modal',
+                  gestureEnabled: true,
+                }}
+              >
+                <RootStack.Screen
+                  name='Settings'
+                  component={BottomTabNavigator} // TODO: Create SettingsScreen
+                  options={{
+                    title: 'Ayarlar',
+                    headerShown: true,
+                  }}
+                />
+                <RootStack.Screen
+                  name='About'
+                  component={BottomTabNavigator} // TODO: Create AboutScreen
+                  options={{
+                    title: 'Hakkında',
+                    headerShown: true,
+                  }}
+                />
+              </RootStack.Group>
+
+              {/* Auth Screens */}
+              <RootStack.Group
+                screenOptions={{
+                  headerShown: false,
+                  gestureEnabled: false, // Disable gestures for auth screens
+                }}
+              >
+                <RootStack.Screen
+                  name='Onboarding'
+                  component={BottomTabNavigator} // TODO: Create OnboardingScreen
+                />
+                <RootStack.Screen
+                  name='Login'
+                  component={BottomTabNavigator} // TODO: Create LoginScreen
+                />
+                <RootStack.Screen
+                  name='Register'
+                  component={BottomTabNavigator} // TODO: Create RegisterScreen
+                />
+              </RootStack.Group>
+
+              {/* Detail Screens */}
               <RootStack.Screen
-                name='ShareModal'
-                component={BottomTabNavigator} // TODO: Create ShareModalScreen
+                name='PlaceDetail'
+                component={BottomTabNavigator} // TODO: Create PlaceDetailScreen
                 options={{
-                  title: 'Paylaş',
-                  headerShown: true,
+                  headerShown: false,
+                  gestureEnabled: true,
                 }}
               />
-            </RootStack.Group>
+            </RootStack.Navigator>
 
-            {/* Full Screen Modals */}
-            <RootStack.Group
-              screenOptions={{
-                presentation: 'modal',
-                gestureEnabled: true,
-              }}
-            >
-              <RootStack.Screen
-                name='Settings'
-                component={BottomTabNavigator} // TODO: Create SettingsScreen
-                options={{
-                  title: 'Ayarlar',
-                  headerShown: true,
-                }}
-              />
-              <RootStack.Screen
-                name='About'
-                component={BottomTabNavigator} // TODO: Create AboutScreen
-                options={{
-                  title: 'Hakkında',
-                  headerShown: true,
-                }}
-              />
-            </RootStack.Group>
-
-            {/* Auth Screens */}
-            <RootStack.Group
-              screenOptions={{
-                headerShown: false,
-                gestureEnabled: false, // Disable gestures for auth screens
-              }}
-            >
-              <RootStack.Screen
-                name='Onboarding'
-                component={BottomTabNavigator} // TODO: Create OnboardingScreen
-              />
-              <RootStack.Screen
-                name='Login'
-                component={BottomTabNavigator} // TODO: Create LoginScreen
-              />
-              <RootStack.Screen
-                name='Register'
-                component={BottomTabNavigator} // TODO: Create RegisterScreen
-              />
-            </RootStack.Group>
-
-            {/* Detail Screens */}
-            <RootStack.Screen
-              name='PlaceDetail'
-              component={BottomTabNavigator} // TODO: Create PlaceDetailScreen
-              options={{
-                headerShown: false,
-                gestureEnabled: true,
-              }}
-            />
-          </RootStack.Navigator>
-
-          {/* Performance Monitor - only in development */}
-          {__DEV__ && <PerformanceMonitor />}
-        </NavigationContainer>
+            {/* Performance Monitor - only in development */}
+            {__DEV__ && <PerformanceMonitor />}
+          </NavigationContainer>
         </BadgeProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>

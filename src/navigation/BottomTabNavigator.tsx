@@ -63,7 +63,7 @@ const BottomTabNavigator = React.memo(() => {
   // Memoize custom tab bar to prevent re-renders
   const renderCustomTabBar = React.useCallback(
     (props: any) => <CustomTabBar {...props} />,
-    []
+    [],
   );
 
   // Memoize tab bar style to prevent unnecessary re-renders
@@ -103,8 +103,8 @@ const BottomTabNavigator = React.memo(() => {
   );
 
   return (
-    <Tab.Navigator 
-      screenOptions={screenOptions} 
+    <Tab.Navigator
+      screenOptions={screenOptions}
       initialRouteName='ExploreTab'
       tabBar={renderCustomTabBar}
     >

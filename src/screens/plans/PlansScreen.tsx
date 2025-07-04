@@ -157,7 +157,7 @@ export default function PlansScreen() {
       <ScrollView style={GlobalStyles.container}>
         {/* Badge Demo for testing */}
         <BadgeDemo />
-        
+
         {/* Quick Actions */}
         <View style={GlobalStyles.card}>
           <Text style={GlobalStyles.titleMedium}>Hızlı İşlemler</Text>

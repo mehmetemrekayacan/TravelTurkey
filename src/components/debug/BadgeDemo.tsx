@@ -16,47 +16,80 @@ const BadgeDemo: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Badge Demo</Text>
-      
+
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Keşfet Tab: {exploreCounter.count}</Text>
+        <Text style={styles.sectionTitle}>
+          Keşfet Tab: {exploreCounter.count}
+        </Text>
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={styles.button} onPress={exploreCounter.increment}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={exploreCounter.increment}
+          >
             <Text style={styles.buttonText}>+</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={exploreCounter.decrement}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={exploreCounter.decrement}
+          >
             <Text style={styles.buttonText}>-</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.clearButton} onPress={exploreCounter.clear}>
+          <TouchableOpacity
+            style={styles.clearButton}
+            onPress={exploreCounter.clear}
+          >
             <Text style={styles.buttonText}>Clear</Text>
           </TouchableOpacity>
         </View>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Planlarım Tab: {plansCounter.count}</Text>
+        <Text style={styles.sectionTitle}>
+          Planlarım Tab: {plansCounter.count}
+        </Text>
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={styles.button} onPress={plansCounter.increment}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={plansCounter.increment}
+          >
             <Text style={styles.buttonText}>+</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={plansCounter.decrement}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={plansCounter.decrement}
+          >
             <Text style={styles.buttonText}>-</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.clearButton} onPress={plansCounter.clear}>
+          <TouchableOpacity
+            style={styles.clearButton}
+            onPress={plansCounter.clear}
+          >
             <Text style={styles.buttonText}>Clear</Text>
           </TouchableOpacity>
         </View>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Profil Tab: {profileCounter.count}</Text>
+        <Text style={styles.sectionTitle}>
+          Profil Tab: {profileCounter.count}
+        </Text>
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={styles.button} onPress={profileCounter.increment}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={profileCounter.increment}
+          >
             <Text style={styles.buttonText}>+</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={profileCounter.decrement}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={profileCounter.decrement}
+          >
             <Text style={styles.buttonText}>-</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.clearButton} onPress={profileCounter.clear}>
+          <TouchableOpacity
+            style={styles.clearButton}
+            onPress={profileCounter.clear}
+          >
             <Text style={styles.buttonText}>Clear</Text>
           </TouchableOpacity>
         </View>

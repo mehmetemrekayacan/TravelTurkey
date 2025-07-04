@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { 
+import {
   ExploreTabIcon as BaseExploreIcon,
   PlansTabIcon as BasePlansIcon,
   ProfileTabIcon as BaseProfileIcon,

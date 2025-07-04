@@ -60,7 +60,7 @@ export const useBadge = (): BadgeContextType => {
 // Hook for easy badge management
 export const useBadgeCount = (tabName: string) => {
   const { getBadge, setBadge, clearBadge } = useBadge();
-  
+
   return {
     count: getBadge(tabName),
     setCount: (count: number) => setBadge(tabName, count),

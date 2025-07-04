@@ -16,10 +16,16 @@ interface TabIconProps {
   badge?: number; // Badge count for notifications
 }
 
-const AnimatedIcon = ({ focused, color, size, iconName, badge }: { 
-  focused: boolean; 
-  color: string; 
-  size: number; 
+const AnimatedIcon = ({
+  focused,
+  color,
+  size,
+  iconName,
+  badge,
+}: {
+  focused: boolean;
+  color: string;
+  size: number;
   iconName: string;
   badge?: number;
 }) => {
@@ -64,23 +70,20 @@ const AnimatedIcon = ({ focused, color, size, iconName, badge }: {
     <View style={styles.iconContainer}>
       {/* Background circle for focused state */}
       {focused && (
-        <Animated.View 
+        <Animated.View
           style={[
             styles.backgroundCircle,
             {
               transform: [{ scale: scaleAnim }],
-            }
-          ]} 
+            },
+          ]}
         />
       )}
-      
+
       {/* Animated icon */}
       <Animated.View
         style={{
-          transform: [
-            { scale: scaleAnim },
-            { translateY: translateYAnim },
-          ],
+          transform: [{ scale: scaleAnim }, { translateY: translateYAnim }],
           opacity: opacityAnim,
         }}
       >
@@ -103,12 +106,17 @@ const AnimatedIcon = ({ focused, color, size, iconName, badge }: {
   );
 };
 
-export const ExploreTabIcon = ({ focused, color, size, badge }: TabIconProps) => (
+export const ExploreTabIcon = ({
+  focused,
+  color,
+  size,
+  badge,
+}: TabIconProps) => (
   <AnimatedIcon
     focused={focused}
     color={color}
     size={size}
-    iconName="explore"
+    iconName='explore'
     badge={badge}
   />
 );
@@ -118,17 +126,22 @@ export const PlansTabIcon = ({ focused, color, size, badge }: TabIconProps) => (
     focused={focused}
     color={color}
     size={size}
-    iconName="assignment"
+    iconName='assignment'
     badge={badge}
   />
 );
 
-export const ProfileTabIcon = ({ focused, color, size, badge }: TabIconProps) => (
+export const ProfileTabIcon = ({
+  focused,
+  color,
+  size,
+  badge,
+}: TabIconProps) => (
   <AnimatedIcon
     focused={focused}
     color={color}
     size={size}
-    iconName="person"
+    iconName='person'
     badge={badge}
   />
 );
@@ -138,7 +151,7 @@ export const HomeTabIcon = ({ focused, color, size, badge }: TabIconProps) => (
     focused={focused}
     color={color}
     size={size}
-    iconName="home"
+    iconName='home'
     badge={badge}
   />
 );
