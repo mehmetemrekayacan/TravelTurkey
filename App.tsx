@@ -35,6 +35,7 @@ import type {
 // Import navigators and screens
 import BottomTabNavigator from './src/navigation/BottomTabNavigator';
 import PerformanceMonitor from './src/components/debug/PerformanceMonitor';
+import { BadgeProvider } from './src/context/BadgeContext';
 
 // Constants
 const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
@@ -180,17 +181,18 @@ function App(): React.JSX.Element {
   return (
     <GestureHandlerRootView style={styles.container}>
       <SafeAreaProvider>
-        <NavigationContainer
-          linking={linking}
-          theme={navigationTheme}
-          initialState={initialState}
-          onStateChange={onStateChange}
-          onReady={() => {
-            // Navigation is ready - good place for analytics, crashlytics, etc.
-            console.log('Navigation is ready');
-          }}
-          fallback={null} // Custom loading component
-        >
+        <BadgeProvider>
+          <NavigationContainer
+            linking={linking}
+            theme={navigationTheme}
+            initialState={initialState}
+            onStateChange={onStateChange}
+            onReady={() => {
+              // Navigation is ready - good place for analytics, crashlytics, etc.
+              console.log('Navigation is ready');
+            }}
+            fallback={null} // Custom loading component
+          >
           <StatusBar
             barStyle={Platform.OS === 'ios' ? 'dark-content' : 'light-content'}
             backgroundColor={Theme.colors.primary[500]}
@@ -301,6 +303,7 @@ function App(): React.JSX.Element {
           {/* Performance Monitor - only in development */}
           {__DEV__ && <PerformanceMonitor />}
         </NavigationContainer>
+        </BadgeProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

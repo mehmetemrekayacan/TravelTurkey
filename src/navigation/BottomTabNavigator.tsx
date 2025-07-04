@@ -1,7 +1,7 @@
 /**
  * TravelTurkey Bottom Tab Navigator
  * Enhanced with 2025 React Navigation best practices
- * Features: Lazy loading, gesture optimization, accessibility, performance
+ * Features: Modern vector icons, smooth animations, Turkey-themed design, accessibility
  */
 
 import React, { useMemo } from 'react';
@@ -11,61 +11,67 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Types and theme
 import { BottomTabParamList } from '../types/navigation';
-import { Theme } from '../styles/theme';
+import { AppColors } from '../constants/Colors';
 
 // Direct imports for better performance
-import HomeScreen from '../screens/home/HomeScreen';
 import OptimizedExploreScreen from '../screens/explore/OptimizedExploreScreen';
 import PlansScreen from '../screens/plans/PlansScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 
-// Icon components
+// Modern vector icons (Material Icons)
 import {
-  HomeTabIcon,
   ExploreTabIcon,
   PlansTabIcon,
   ProfileTabIcon,
-} from '../components/navigation';
+} from '../components/navigation/VectorTabIcons';
+
+// Custom tab bar component
+import CustomTabBar from '../components/navigation/CustomTabBar';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: Theme.colors.neutral[100],
-    borderTopColor: Theme.colors.neutral[200],
+    backgroundColor: AppColors.BG_PRIMARY,
+    borderTopColor: AppColors.BORDER_LIGHT,
     borderTopWidth: 1,
-    elevation: 8,
-    shadowColor: Theme.colors.neutral[900],
+    elevation: 12,
+    shadowColor: AppColors.SHADOW_COLOR,
     shadowOffset: {
       width: 0,
-      height: -2,
+      height: -3,
     },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    paddingTop: Theme.spacing.sm,
-    paddingBottom: Platform.OS === 'ios' ? Theme.spacing.md : Theme.spacing.sm,
-    height: Platform.OS === 'ios' ? 84 : 64,
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    paddingTop: 8,
+    paddingBottom: Platform.OS === 'ios' ? 12 : 8,
+    paddingHorizontal: 16,
+    height: Platform.OS === 'ios' ? 88 : 68,
   },
   tabBarLabel: {
-    fontSize: Theme.typography.fontSize.xs,
-    fontWeight: Theme.typography.fontWeight.semiBold,
-    fontFamily: Theme.typography.fonts.primary,
+    fontSize: 11,
+    fontWeight: '600',
+    fontFamily: Platform.OS === 'ios' ? 'System' : 'Roboto',
     marginBottom: Platform.OS === 'ios' ? 0 : 4,
+    marginTop: 2,
   },
 });
 
 const BottomTabNavigator = React.memo(() => {
   const insets = useSafeAreaInsets();
 
+  // Memoize custom tab bar to prevent re-renders
+  const renderCustomTabBar = React.useCallback(
+    (props: any) => <CustomTabBar {...props} />,
+    []
+  );
+
   // Memoize tab bar style to prevent unnecessary re-renders
   const tabBarStyle = useMemo(
     () => [
       styles.tabBar,
       {
-        paddingBottom:
-          Platform.OS === 'ios'
-            ? insets.bottom + Theme.spacing.sm
-            : Theme.spacing.sm,
+        paddingBottom: Platform.OS === 'ios' ? insets.bottom + 12 : 8,
       },
     ],
     [insets.bottom],
@@ -75,8 +81,8 @@ const BottomTabNavigator = React.memo(() => {
   const screenOptions = useMemo(
     () => ({
       headerShown: false,
-      tabBarActiveTintColor: Theme.colors.primary[500],
-      tabBarInactiveTintColor: Theme.colors.neutral[500],
+      tabBarActiveTintColor: AppColors.PRIMARY, // Turkish red
+      tabBarInactiveTintColor: AppColors.TEXT_SECONDARY,
       tabBarStyle,
       tabBarLabelStyle: styles.tabBarLabel,
 
@@ -85,31 +91,31 @@ const BottomTabNavigator = React.memo(() => {
       unmountOnBlur: false, // Keep screens mounted for faster switching
       tabBarHideOnKeyboard: Platform.OS === 'android',
 
+      // Enhanced visual effects - removed for now to avoid render issues
+
       // Accessibility
       tabBarAccessibilityLabel: 'Ana navigasyon',
+      tabBarItemStyle: {
+        paddingVertical: 4,
+      },
     }),
     [tabBarStyle],
   );
 
   return (
-    <Tab.Navigator screenOptions={screenOptions} initialRouteName='HomeTab'>
-      <Tab.Screen
-        name='HomeTab'
-        component={HomeScreen}
-        options={{
-          title: 'Ana Sayfa',
-          tabBarIcon: HomeTabIcon,
-          tabBarAccessibilityLabel: 'Ana Sayfa sekmesi',
-        }}
-      />
-
+    <Tab.Navigator 
+      screenOptions={screenOptions} 
+      initialRouteName='ExploreTab'
+      tabBar={renderCustomTabBar}
+    >
       <Tab.Screen
         name='ExploreTab'
         component={OptimizedExploreScreen}
         options={{
           title: 'Keşfet',
           tabBarIcon: ExploreTabIcon,
-          tabBarAccessibilityLabel: 'Keşfet sekmesi',
+          tabBarAccessibilityLabel:
+            "Keşfet sekmesi - Türkiye'deki güzel yerleri keşfedin",
         }}
       />
 
@@ -119,7 +125,8 @@ const BottomTabNavigator = React.memo(() => {
         options={{
           title: 'Planlarım',
           tabBarIcon: PlansTabIcon,
-          tabBarAccessibilityLabel: 'Planlarım sekmesi',
+          tabBarAccessibilityLabel:
+            'Planlarım sekmesi - Seyahat planlarınızı görüntüleyin',
         }}
       />
 
@@ -129,7 +136,8 @@ const BottomTabNavigator = React.memo(() => {
         options={{
           title: 'Profil',
           tabBarIcon: ProfileTabIcon,
-          tabBarAccessibilityLabel: 'Profil sekmesi',
+          tabBarAccessibilityLabel:
+            'Profil sekmesi - Hesap ayarları ve profil bilgileri',
         }}
       />
     </Tab.Navigator>

@@ -3,6 +3,7 @@
  * Barrel export for easier imports
  */
 
+// Tab icons (using emoji for now, can be upgraded to vector icons later)
 export {
   TabIcon,
   HomeTabIcon,

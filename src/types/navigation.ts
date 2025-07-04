@@ -48,7 +48,6 @@ export type RootStackParamList = {
 
 // Bottom Tab Navigator parametreleri
 export type BottomTabParamList = {
-  HomeTab: undefined;
   ExploreTab: {
     initialCategory?: string;
     refreshKey?: string;
@@ -125,7 +124,7 @@ export type ExploreStackScreenProps<
 export type HomeStackScreenProps<Screen extends keyof HomeStackParamList> =
   CompositeScreenProps<
     StackScreenProps<HomeStackParamList, Screen>,
-    BottomTabScreenProps<'HomeTab'>
+    BottomTabScreenProps<'ExploreTab'>
   >;
 
 export type PlansStackScreenProps<Screen extends keyof PlansStackParamList> =

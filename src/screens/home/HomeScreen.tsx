@@ -14,7 +14,7 @@ import {
   InfoCard,
 } from '../../components/common/Cards';
 
-type HomeScreenProps = BottomTabScreenProps<'HomeTab'>;
+type HomeScreenProps = BottomTabScreenProps<'ExploreTab'>;
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
   // Event handlers
