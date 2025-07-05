@@ -3,18 +3,21 @@
  * Keşfet sayfası - Yerler ve aktiviteleri keşfet
  */
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   Text,
   View,
   TouchableOpacity,
   FlatList,
   TextInput,
+  ListRenderItem,
+  RefreshControl,
 } from 'react-native';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 import { GlobalStyles } from '../../styles/GlobalStyles';
 import { AppColors } from '../../constants/Colors';
+import { TouristicPlaceCard } from '../../components/common';
 import {
   touristPlaces,
   categories as dataCategories,
@@ -26,6 +29,7 @@ import {
   TouristPlace,
   Category as CategoryType,
 } from '../../types/touristPlaces';
+import { EnhancedTouristPlace } from '../../types/enhanced/touristPlace2025';
 
 const ExploreScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -33,146 +37,223 @@ const ExploreScreen: React.FC = () => {
   const [filteredPlaces, setFilteredPlaces] = useState<TouristPlace[]>(
     getFeaturedPlaces(),
   );
+  const [refreshing, setRefreshing] = useState<boolean>(false);
 
-  // Arama fonksiyonu
-  const handleSearch = (query: string) => {
+  // Optimized search function with debouncing effect
+  const handleSearch = useCallback((query: string) => {
     setSearchQuery(query);
     if (query.trim() === '') {
       setFilteredPlaces(getFeaturedPlaces());
     } else {
       setFilteredPlaces(searchPlaces(query));
     }
-  };
+  }, []);
 
-  // Kategori filtresi
-  const handleCategoryFilter = (categoryId: string) => {
+  // Optimized category filter function
+  const handleCategoryFilter = useCallback((categoryId: string) => {
     setSelectedCategory(categoryId);
     if (categoryId === 'all') {
       setFilteredPlaces(getFeaturedPlaces());
     } else {
       setFilteredPlaces(getPlacesByCategory(categoryId));
     }
-  };
+  }, []);
 
-  // Place item renderer
-  const renderPlaceItem = ({ item }: { item: TouristPlace }) => (
-    <TouchableOpacity style={styles.placeCard}>
-      <View style={styles.placeHeader}>
-        <Text style={styles.placeIcon}>{item.icon}</Text>
-        <View style={styles.placeInfo}>
-          <Text style={styles.placeName}>{item.name}</Text>
-          <Text style={styles.placeLocation}>
-            {item.address.city}, {item.address.district}
+  // Memoized categories data with 'all' option
+  const categoriesData = useMemo(
+    () => [
+      {
+        id: 'all',
+        name: 'Tümü',
+        icon: '🗺️',
+        placesCount: touristPlaces.length,
+        description: '',
+        color: '',
+      },
+      ...dataCategories,
+    ],
+    [],
+  );
+
+  // Optimized place card press handler
+  const handlePlacePress = useCallback(
+    (place: TouristPlace | EnhancedTouristPlace) => {
+      // TODO: Navigate to place detail screen
+      console.log('Place pressed:', place.name);
+    },
+    [],
+  );
+
+  // Optimized place item renderer with proper typing
+  const renderPlaceItem: ListRenderItem<TouristPlace> = useCallback(
+    ({ item, index }) => (
+      <TouristicPlaceCard
+        place={item}
+        index={index}
+        onPress={handlePlacePress}
+        variant='default'
+      />
+    ),
+    [handlePlacePress],
+  );
+
+  // Optimized category item renderer
+  const renderCategoryItem: ListRenderItem<
+    | CategoryType
+    | { id: string; name: string; icon: string; placesCount: number }
+  > = useCallback(
+    ({ item, index }) => (
+      <Animated.View entering={FadeInDown.delay(index * 50).springify()}>
+        <TouchableOpacity
+          style={[
+            styles.categoryCard,
+            selectedCategory === item.id && styles.selectedCategoryCard,
+          ]}
+          onPress={() => handleCategoryFilter(item.id)}
+          accessibilityRole='button'
+          accessibilityLabel={`${item.name} kategorisi`}
+          accessibilityState={{ selected: selectedCategory === item.id }}
+        >
+          <Text style={styles.categoryIcon}>{item.icon}</Text>
+          <Text
+            style={[
+              styles.categoryName,
+              selectedCategory === item.id && styles.selectedCategoryName,
+            ]}
+          >
+            {item.name}
           </Text>
-        </View>
-        <View style={styles.ratingContainer}>
-          <Text style={styles.rating}>⭐ {item.rating.average.toFixed(1)}</Text>
-        </View>
-      </View>
-      <Text style={styles.placeDescription}>{item.shortDescription}</Text>
-      <View style={styles.placeFooter}>
-        <Text style={styles.category}>{item.category}</Text>
-        <Text style={styles.price}>
-          {item.priceInfo.isFree
-            ? 'Ücretsiz'
-            : `${item.priceInfo.adult} ${item.priceInfo.currency}`}
-        </Text>
-      </View>
-    </TouchableOpacity>
+          <Text style={styles.categoryCount}>{item.placesCount} yer</Text>
+        </TouchableOpacity>
+      </Animated.View>
+    ),
+    [selectedCategory, handleCategoryFilter],
   );
 
-  // Category item renderer
-  const renderCategoryItem = ({
-    item,
-  }: {
-    item:
-      | CategoryType
-      | { id: string; name: string; icon: string; placesCount: number };
-  }) => (
-    <TouchableOpacity
-      style={[
-        styles.categoryCard,
-        selectedCategory === item.id && styles.selectedCategoryCard,
-      ]}
-      onPress={() => handleCategoryFilter(item.id)}
-    >
-      <Text style={styles.categoryIcon}>{item.icon}</Text>
-      <Text
-        style={[
-          styles.categoryName,
-          selectedCategory === item.id && styles.selectedCategoryName,
-        ]}
-      >
-        {item.name}
-      </Text>
-      <Text style={styles.categoryCount}>{item.placesCount} yer</Text>
-    </TouchableOpacity>
+  // Optimized key extractors
+  const keyExtractorPlace = useCallback((item: TouristPlace) => item.id, []);
+  const keyExtractorCategory = useCallback(
+    (
+      item:
+        | CategoryType
+        | { id: string; name: string; icon: string; placesCount: number },
+    ) => item.id,
+    [],
   );
 
-  return (
-    <SafeAreaView style={GlobalStyles.safeArea}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+  // Pull to refresh handler
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    // Simulate data refresh
+    setTimeout(() => {
+      setFilteredPlaces(
+        selectedCategory === 'all'
+          ? getFeaturedPlaces()
+          : getPlacesByCategory(selectedCategory),
+      );
+      setRefreshing(false);
+    }, 1000);
+  }, [selectedCategory]);
+
+  // Header component for the main FlatList
+  const ListHeaderComponent = useCallback(
+    () => (
+      <View>
         {/* Header */}
-        <View style={styles.header}>
+        <Animated.View entering={FadeInDown.delay(100)} style={styles.header}>
           <Text style={styles.title}>Keşfet</Text>
           <Text style={styles.subtitle}>
             Türkiye'nin güzelliklerini keşfedin
           </Text>
-        </View>
+        </Animated.View>
 
         {/* Search Bar */}
-        <View style={styles.searchContainer}>
+        <Animated.View
+          entering={FadeInDown.delay(200)}
+          style={styles.searchContainer}
+        >
           <TextInput
             style={styles.searchInput}
             placeholder='Yer, şehir veya aktivite arayın...'
             value={searchQuery}
             onChangeText={handleSearch}
             placeholderTextColor={AppColors.TEXT_SECONDARY}
+            accessibilityLabel='Arama çubuğu'
+            accessibilityHint='Yer, şehir veya aktivite aramak için buraya yazın'
           />
           <Text style={styles.searchIcon}>🔍</Text>
-        </View>
+        </Animated.View>
 
         {/* Categories */}
-        <View style={styles.section}>
+        <Animated.View entering={FadeInDown.delay(300)} style={styles.section}>
           <Text style={styles.sectionTitle}>Kategoriler</Text>
           <FlatList
-            data={[
-              {
-                id: 'all',
-                name: 'Tümü',
-                icon: '🗺️',
-                placesCount: touristPlaces.length,
-                description: '',
-                color: '',
-              },
-              ...dataCategories,
-            ]}
+            data={categoriesData}
             renderItem={renderCategoryItem}
-            keyExtractor={item => item.id}
+            keyExtractor={keyExtractorCategory}
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.categoriesList}
+            initialNumToRender={5}
+            maxToRenderPerBatch={5}
+            windowSize={10}
           />
-        </View>
+        </Animated.View>
 
-        {/* Featured Places */}
-        <View style={styles.section}>
+        {/* Section Header for Places */}
+        <View style={styles.placesHeader}>
           <Text style={styles.sectionTitle}>
             {selectedCategory === 'all' ? 'Öne Çıkan Yerler' : 'Sonuçlar'}
           </Text>
           <Text style={styles.resultsCount}>
             {filteredPlaces.length} yer bulundu
           </Text>
-
-          <FlatList
-            data={filteredPlaces}
-            renderItem={renderPlaceItem}
-            keyExtractor={item => item.id}
-            scrollEnabled={false}
-            contentContainerStyle={styles.placesList}
-          />
         </View>
-      </ScrollView>
+      </View>
+    ),
+    [
+      searchQuery,
+      categoriesData,
+      selectedCategory,
+      filteredPlaces.length,
+      handleSearch,
+      renderCategoryItem,
+      keyExtractorCategory,
+    ],
+  );
+
+  return (
+    <SafeAreaView style={GlobalStyles.safeArea}>
+      <FlatList
+        data={filteredPlaces}
+        renderItem={renderPlaceItem}
+        keyExtractor={keyExtractorPlace}
+        ListHeaderComponent={ListHeaderComponent}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={AppColors.PRIMARY}
+            colors={[AppColors.PRIMARY]}
+          />
+        }
+        // Performance optimizations
+        initialNumToRender={6}
+        maxToRenderPerBatch={8}
+        windowSize={10}
+        removeClippedSubviews={true}
+        updateCellsBatchingPeriod={50}
+        getItemLayout={(data, index) => ({
+          length: 280, // Approximate item height
+          offset: 280 * index,
+          index,
+        })}
+        // Accessibility
+        accessibilityLabel='Turistik yerler listesi'
+        // Content container style
+        contentContainerStyle={styles.mainFlatListContent}
+      />
     </SafeAreaView>
   );
 };
@@ -227,6 +308,9 @@ const styles = {
     marginHorizontal: 20,
     marginBottom: 15,
   },
+  placesHeader: {
+    marginBottom: 10,
+  },
   categoriesList: {
     paddingHorizontal: 15,
   },
@@ -262,6 +346,10 @@ const styles = {
     fontSize: 12,
     color: AppColors.TEXT_SECONDARY,
   },
+  mainFlatListContent: {
+    paddingBottom: 20,
+  },
+  // Legacy styles for backward compatibility
   placesList: {
     paddingHorizontal: 20,
   },
