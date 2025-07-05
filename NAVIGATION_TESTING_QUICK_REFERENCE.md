@@ -170,7 +170,7 @@ export interface TouristPlace {
   uuid?: string; // for sync across devices
   name: string;
   slug: string;
-  
+
   // Multi-language content
   content: {
     description: string;
@@ -189,32 +189,32 @@ export interface TouristPlace {
   subcategory: string;
   tags: string[];
   themes?: string[]; // romantic, family, adventure, etc.
-  
+
   // Location and geography
   coordinates: Coordinates;
   address: Address;
   region: TurkeyRegion;
   climaticZone?: 'mediterranean' | 'continental' | 'black_sea' | 'eastern';
-  
+
   // Rich media
   media: Media[];
   virtualTourUrl?: string;
   liveWebcamUrl?: string;
-  
+
   // Social proof and analytics
   rating: Rating;
   popularityScore: number;
   visitorsPerYear?: number;
   peakMonths?: number[]; // 1-12 for months
   averageStayDuration?: number; // minutes
-  
+
   // Visitor information
   priceInfo: PriceInfo;
   workingHours: WorkingHours;
   bestTimeToVisit: string[];
   estimatedDuration: string;
   crowdingLevel?: 'low' | 'medium' | 'high';
-  
+
   // Accessibility and inclusivity
   accessibility: Accessibility;
   familyFriendly: {
@@ -222,18 +222,18 @@ export interface TouristPlace {
     ageRecommendation?: string;
     facilities?: string[];
   };
-  
+
   // Connections and recommendations
   nearbyPlaces: string[];
   suggestedCombinations?: string[][]; // suggested tour combinations
   similarPlaces?: string[];
-  
+
   // Contact and practical info
   contactInfo: ContactInfo;
   facilities?: string[];
   tips: string[];
   warnings?: string[];
-  
+
   // Sustainability and environment
   sustainability?: {
     ecoFriendly: boolean;
@@ -241,7 +241,7 @@ export interface TouristPlace {
     certifications?: string[];
     localImpact?: 'positive' | 'neutral' | 'negative';
   };
-  
+
   // Technical metadata
   metadata: {
     createdAt: string;
@@ -251,7 +251,7 @@ export interface TouristPlace {
     verified: boolean;
     lastVerified?: string;
   };
-  
+
   // Status and availability
   status: {
     isActive: boolean;
@@ -260,7 +260,7 @@ export interface TouristPlace {
     reopeningDate?: string;
     seasonalAvailability?: string[];
   };
-  
+
   // AI and personalization
   aiGenerated?: {
     description?: boolean;
@@ -271,27 +271,27 @@ export interface TouristPlace {
 }
 
 // Supporting types
-export type PlaceCategory = 
-  | 'historical' 
-  | 'natural' 
-  | 'cultural' 
-  | 'religious' 
-  | 'entertainment' 
-  | 'beach' 
-  | 'adventure' 
+export type PlaceCategory =
+  | 'historical'
+  | 'natural'
+  | 'cultural'
+  | 'religious'
+  | 'entertainment'
+  | 'beach'
+  | 'adventure'
   | 'shopping'
   | 'wellness'
   | 'culinary'
   | 'nightlife'
   | 'sports';
 
-export type TurkeyRegion = 
-  | 'marmara' 
-  | 'ege' 
-  | 'akdeniz' 
-  | 'ic_anadolu' 
-  | 'karadeniz' 
-  | 'dogu_anadolu' 
+export type TurkeyRegion =
+  | 'marmara'
+  | 'ege'
+  | 'akdeniz'
+  | 'ic_anadolu'
+  | 'karadeniz'
+  | 'dogu_anadolu'
   | 'guneydogu_anadolu';
 
 // Enhanced contact information
@@ -316,22 +316,26 @@ export interface ContactInfo {
 ### Historical Places
 
 1. **Hagia Sophia (Ayasofya)**
+
    - Location: Istanbul, Fatih
    - Category: Historical/Religious
    - Coordinates: 41.0086°N, 28.9802°E
    - UNESCO World Heritage Site
 
 2. **Topkapi Palace (Topkapı Sarayı)**
+
    - Location: Istanbul, Fatih
    - Category: Historical/Cultural
    - Coordinates: 41.0115°N, 28.9833°E
 
 3. **Ephesus Ancient City (Efes)**
+
    - Location: Izmir, Selçuk
    - Category: Historical
    - Coordinates: 37.9395°N, 27.3417°E
 
 4. **Troy (Truva)**
+
    - Location: Çanakkale, Tevfikiye
    - Category: Historical
    - Coordinates: 39.9576°N, 26.2393°E
@@ -344,16 +348,19 @@ export interface ContactInfo {
 ### Natural Wonders
 
 6. **Cappadocia (Kapadokya)**
+
    - Location: Nevşehir
    - Category: Natural
    - Coordinates: 38.6431°N, 34.8289°E
 
 7. **Pamukkale Thermal Pools**
+
    - Location: Denizli
    - Category: Natural/Wellness
    - Coordinates: 37.9242°N, 29.1203°E
 
 8. **Mount Ararat (Ağrı Dağı)**
+
    - Location: Ağrı
    - Category: Natural/Adventure
    - Coordinates: 39.7016°N, 44.2977°E
@@ -366,11 +373,13 @@ export interface ContactInfo {
 ### Cultural Sites
 
 10. **Blue Mosque (Sultan Ahmed Camii)**
+
     - Location: Istanbul, Fatih
     - Category: Religious/Cultural
     - Coordinates: 41.0054°N, 28.9768°E
 
 11. **Mevlana Museum (Mevlâna Müzesi)**
+
     - Location: Konya
     - Category: Religious/Cultural
     - Coordinates: 37.8714°N, 32.5044°E
@@ -383,11 +392,13 @@ export interface ContactInfo {
 ### Coastal Destinations
 
 13. **Ölüdeniz Blue Lagoon**
+
     - Location: Muğla, Fethiye
     - Category: Beach/Natural
     - Coordinates: 36.5497°N, 29.1169°E
 
 14. **Patara Beach**
+
     - Location: Antalya, Kaş
     - Category: Beach/Historical
     - Coordinates: 36.2647°N, 29.3133°E
@@ -400,21 +411,25 @@ export interface ContactInfo {
 ### Adventure & Entertainment
 
 16. **Uludağ National Park**
+
     - Location: Bursa
     - Category: Natural/Adventure
     - Coordinates: 40.0922°N, 29.2797°E
 
 17. **Safranbolu Historic Town**
+
     - Location: Karabük
     - Category: Historical/Cultural
     - Coordinates: 41.2500°N, 32.6944°E
 
 18. **Ani Archaeological Site**
+
     - Location: Kars
     - Category: Historical
     - Coordinates: 40.5069°N, 43.5744°E
 
 19. **Göreme Open Air Museum**
+
     - Location: Nevşehir, Göreme
     - Category: Historical/Religious
     - Coordinates: 38.6433°N, 34.8361°E
@@ -639,7 +654,7 @@ interface OfflineStrategy {
 class TouristPlaceService {
   private cache = new Map<string, TouristPlace>();
   private observers = new Set<(places: TouristPlace[]) => void>();
-  
+
   // GraphQL-style field selection
   async getPlaces(options: {
     fields?: (keyof TouristPlace)[];
@@ -650,19 +665,19 @@ class TouristPlaceService {
     // Implementation with intelligent caching,
     // field selection, and real-time updates
   }
-  
+
   // AI-powered recommendations
   async getRecommendations(
     userId: string,
-    context: RecommendationContext
+    context: RecommendationContext,
   ): Promise<TouristPlace[]> {
     // ML-based recommendation engine
   }
-  
+
   // Predictive preloading
   async preloadForUser(
     userProfile: UserProfile,
-    location?: Coordinates
+    location?: Coordinates,
   ): Promise<void> {
     // Smart preloading based on user behavior patterns
   }

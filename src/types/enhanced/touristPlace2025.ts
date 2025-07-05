@@ -371,7 +371,7 @@ export interface EnhancedTouristPlace {
   uuid: string; // for cross-platform sync
   name: string;
   slug: string;
-  
+
   // Multi-language content
   content: {
     description: string;
@@ -397,7 +397,7 @@ export interface EnhancedTouristPlace {
   tags: string[];
   themes: PlaceTheme[];
   difficulty: 'easy' | 'moderate' | 'challenging' | 'expert';
-  
+
   // Location and geography
   coordinates: EnhancedCoordinates;
   address: MultilingualAddress;
@@ -405,7 +405,7 @@ export interface EnhancedTouristPlace {
   climaticZone: 'mediterranean' | 'continental' | 'black_sea' | 'eastern';
   altitude?: number;
   area?: number; // square meters
-  
+
   // Rich media and virtual experiences
   media: RichMedia[];
   virtualExperiences?: {
@@ -414,7 +414,7 @@ export interface EnhancedTouristPlace {
     liveWebcam?: string;
     timelapse?: string;
   };
-  
+
   // Social proof and analytics
   rating: AdvancedRating;
   popularity: {
@@ -432,7 +432,7 @@ export interface EnhancedTouristPlace {
       yearly: number[];
     };
   };
-  
+
   // Visitor information
   priceInfo: DynamicPriceInfo;
   schedule: {
@@ -447,7 +447,7 @@ export interface EnhancedTouristPlace {
       [period: string]: 'low' | 'medium' | 'high';
     };
   };
-  
+
   // Visit planning
   experience: {
     estimatedDuration: {
@@ -467,7 +467,7 @@ export interface EnhancedTouristPlace {
       optimal: number;
     };
   };
-  
+
   // Accessibility and inclusivity
   accessibility: ComprehensiveAccessibility;
   inclusivity: {
@@ -478,7 +478,7 @@ export interface EnhancedTouristPlace {
     seniorFriendly: boolean;
     childFriendly: boolean;
   };
-  
+
   // Connections and recommendations
   connections: {
     nearbyPlaces: string[];
@@ -491,7 +491,7 @@ export interface EnhancedTouristPlace {
     similarPlaces: string[];
     alternativePlaces: string[]; // similar experience, different location
   };
-  
+
   // Practical information
   facilities: {
     available: string[];
@@ -508,7 +508,7 @@ export interface EnhancedTouristPlace {
     storage: boolean;
     wifi: boolean;
   };
-  
+
   // Contact and booking
   contactInfo: {
     phone?: string;
@@ -529,7 +529,7 @@ export interface EnhancedTouristPlace {
     };
     emergencyContact?: string;
   };
-  
+
   // Safety and guidelines
   safety: {
     level: 'very_safe' | 'safe' | 'moderate' | 'caution' | 'high_risk';
@@ -539,10 +539,10 @@ export interface EnhancedTouristPlace {
     insurance: boolean; // insurance recommended/required
     emergencyServices: boolean;
   };
-  
+
   // Sustainability and impact
   sustainability: SustainabilityInfo;
-  
+
   // Weather dependency
   weather: {
     dependent: boolean;
@@ -550,10 +550,10 @@ export interface EnhancedTouristPlace {
     optimalConditions: string[];
     seasonalAccess: { [season: string]: boolean };
   };
-  
+
   // AI and personalization
   ai: AIEnhancements;
-  
+
   // Technical metadata
   metadata: {
     createdAt: string;
@@ -570,7 +570,7 @@ export interface EnhancedTouristPlace {
     };
     contributors: string[];
   };
-  
+
   // Status and availability
   status: {
     operational: 'open' | 'closed' | 'limited' | 'seasonal' | 'maintenance';
@@ -587,7 +587,7 @@ export interface EnhancedTouristPlace {
     };
     lastStatusUpdate: string;
   };
-  
+
   // Performance tracking
   performance?: {
     views: number;
@@ -603,14 +603,14 @@ export interface EnhancedTouristPlace {
 }
 
 // Supporting types
-export type ExtendedPlaceCategory = 
-  | 'historical' 
-  | 'natural' 
-  | 'cultural' 
-  | 'religious' 
-  | 'entertainment' 
-  | 'beach' 
-  | 'adventure' 
+export type ExtendedPlaceCategory =
+  | 'historical'
+  | 'natural'
+  | 'cultural'
+  | 'religious'
+  | 'entertainment'
+  | 'beach'
+  | 'adventure'
   | 'shopping'
   | 'wellness'
   | 'culinary'
@@ -628,7 +628,7 @@ export type ExtendedPlaceCategory =
   | 'eco'
   | 'digital';
 
-export type PlaceTheme = 
+export type PlaceTheme =
   | 'romantic'
   | 'adventure'
   | 'family'
@@ -650,13 +650,13 @@ export type PlaceTheme =
   | 'photogenic'
   | 'unique';
 
-export type TurkeyRegion = 
-  | 'marmara' 
-  | 'ege' 
-  | 'akdeniz' 
-  | 'ic_anadolu' 
-  | 'karadeniz' 
-  | 'dogu_anadolu' 
+export type TurkeyRegion =
+  | 'marmara'
+  | 'ege'
+  | 'akdeniz'
+  | 'ic_anadolu'
+  | 'karadeniz'
+  | 'dogu_anadolu'
   | 'guneydogu_anadolu';
 
 // Pagination and query interfaces for 2025

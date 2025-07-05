@@ -12,50 +12,66 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
     uuid: 'hs-550e8400-e29b-41d4-a716-446655440001',
     name: 'Ayasofya Müzesi',
     slug: 'ayasofya-muzesi-istanbul',
-    
+
     content: {
-      description: 'Ayasofya, İstanbul\'da bulunan ve Bizans İmparatorluğu döneminde inşa edilmiş, daha sonra Osmanlı İmparatorluğu tarafından camiye çevrilmiş tarihi bir yapıdır. 1500 yıllık tarihi boyunca hem kilise hem cami olarak hizmet vermiş, bugün dünya mimarlık tarihinin en önemli yapıtlarından biri olarak kabul edilmektedir.',
-      shortDescription: 'Bizans ve Osmanlı mimarisinin muhteşem buluştuğu 1500 yıllık tarihi yapı',
+      description:
+        "Ayasofya, İstanbul'da bulunan ve Bizans İmparatorluğu döneminde inşa edilmiş, daha sonra Osmanlı İmparatorluğu tarafından camiye çevrilmiş tarihi bir yapıdır. 1500 yıllık tarihi boyunca hem kilise hem cami olarak hizmet vermiş, bugün dünya mimarlık tarihinin en önemli yapıtlarından biri olarak kabul edilmektedir.",
+      shortDescription:
+        'Bizans ve Osmanlı mimarisinin muhteşem buluştuğu 1500 yıllık tarihi yapı',
       highlights: [
-        'Dünya\'nın en büyük kubbelerinden biri',
+        "Dünya'nın en büyük kubbelerinden biri",
         'Bizans mozaikları ve İslami kaligrafi',
         'UNESCO Dünya Mirası Listesi',
-        'Mimarlık tarihinin çığır açan eseri'
+        'Mimarlık tarihinin çığır açan eseri',
       ],
-      history: 'MS 537 yılında İmparator Justinian tarafından inşa ettirilen Ayasofya, bin yıl boyunca dünyanın en büyük katedrali olma unvanını korumuştur.',
-      significance: 'Doğu ve Batı kültürlerinin, Hristiyanlık ve İslam\'ın mimari sentezi',
+      history:
+        'MS 537 yılında İmparator Justinian tarafından inşa ettirilen Ayasofya, bin yıl boyunca dünyanın en büyük katedrali olma unvanını korumuştur.',
+      significance:
+        "Doğu ve Batı kültürlerinin, Hristiyanlık ve İslam'ın mimari sentezi",
       translations: {
         en: {
           name: 'Hagia Sophia Museum',
-          description: 'Hagia Sophia is a historical architectural marvel in Istanbul, built during the Byzantine Empire and later converted to a mosque by the Ottoman Empire. For 1500 years, it has served as both church and mosque, and is today recognized as one of the most important works in world architectural history.',
-          shortDescription: 'A magnificent 1500-year-old structure where Byzantine and Ottoman architecture meet',
+          description:
+            'Hagia Sophia is a historical architectural marvel in Istanbul, built during the Byzantine Empire and later converted to a mosque by the Ottoman Empire. For 1500 years, it has served as both church and mosque, and is today recognized as one of the most important works in world architectural history.',
+          shortDescription:
+            'A magnificent 1500-year-old structure where Byzantine and Ottoman architecture meet',
           highlights: [
-            'One of the world\'s largest domes',
+            "One of the world's largest domes",
             'Byzantine mosaics and Islamic calligraphy',
             'UNESCO World Heritage Site',
-            'Groundbreaking work in architectural history'
+            'Groundbreaking work in architectural history',
           ],
-          history: 'Built by Emperor Justinian in 537 AD, Hagia Sophia held the title of the world\'s largest cathedral for a thousand years.',
-          significance: 'An architectural synthesis of Eastern and Western cultures, Christianity and Islam'
-        }
-      }
+          history:
+            "Built by Emperor Justinian in 537 AD, Hagia Sophia held the title of the world's largest cathedral for a thousand years.",
+          significance:
+            'An architectural synthesis of Eastern and Western cultures, Christianity and Islam',
+        },
+      },
     },
 
     category: 'historical',
     subcategory: 'Müze',
-    tags: ['İstanbul', 'Bizans', 'Osmanlı', 'Mimarlık', 'UNESCO', 'Külliye', 'Mozaik'],
+    tags: [
+      'İstanbul',
+      'Bizans',
+      'Osmanlı',
+      'Mimarlık',
+      'UNESCO',
+      'Külliye',
+      'Mozaik',
+    ],
     themes: ['spiritual', 'educational', 'photogenic', 'traditional', 'unique'],
     difficulty: 'easy',
-    
+
     coordinates: {
       latitude: 41.0086,
       longitude: 28.9802,
       elevation: 35,
       precision: 5,
       lastUpdated: '2025-01-01T00:00:00Z',
-      mapProvider: 'google'
+      mapProvider: 'google',
     },
-    
+
     address: {
       city: 'İstanbul',
       district: 'Fatih',
@@ -68,11 +84,12 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
           city: 'Istanbul',
           district: 'Fatih',
           neighborhood: 'Sultanahmet',
-          fullAddress: 'Sultan Ahmet, Hagia Sophia Square No:1, 34122 Fatih/Istanbul'
-        }
-      }
+          fullAddress:
+            'Sultan Ahmet, Hagia Sophia Square No:1, 34122 Fatih/Istanbul',
+        },
+      },
     },
-    
+
     region: 'marmara',
     climaticZone: 'mediterranean',
     altitude: 35,
@@ -83,9 +100,11 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         id: 'hs-main-2025',
         type: 'image',
         url: 'https://cdn.travelturkey.com/places/hagia-sophia/main-4k.webp',
-        thumbnail: 'https://cdn.travelturkey.com/places/hagia-sophia/thumb-400.webp',
-        caption: 'Ayasofya\'nın ihtişamlı iç mekanı',
-        altText: 'Ayasofya müzesinin kubbeli iç mekanı, mozaikler ve kaligrafi ile süslenmiş',
+        thumbnail:
+          'https://cdn.travelturkey.com/places/hagia-sophia/thumb-400.webp',
+        caption: "Ayasofya'nın ihtişamlı iç mekanı",
+        altText:
+          'Ayasofya müzesinin kubbeli iç mekanı, mozaikler ve kaligrafi ile süslenmiş',
         photographer: 'Mehmet Özkan',
         license: 'proprietary',
         isPrimary: true,
@@ -95,45 +114,46 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
           height: 2160,
           fileSize: 2400000,
           format: 'webp',
-          colorSpace: 'sRGB'
+          colorSpace: 'sRGB',
         },
         ai: {
           autoGenerated: false,
           objects: ['dome', 'columns', 'mosaics', 'calligraphy', 'tourists'],
           faces: 15,
           sentiment: 'positive',
-          quality: 0.95
+          quality: 0.95,
         },
         cdn: {
           regions: ['europe', 'asia', 'america'],
           optimized: true,
           webp: true,
-          avif: true
-        }
+          avif: true,
+        },
       },
       {
         id: 'hs-360-tour',
         type: '360',
         url: 'https://cdn.travelturkey.com/places/hagia-sophia/360-tour.html',
-        thumbnail: 'https://cdn.travelturkey.com/places/hagia-sophia/360-thumb.webp',
+        thumbnail:
+          'https://cdn.travelturkey.com/places/hagia-sophia/360-thumb.webp',
         caption: '360° sanal tur',
-        altText: 'Ayasofya\'nın 360 derece interaktif sanal turu',
+        altText: "Ayasofya'nın 360 derece interaktif sanal turu",
         isPrimary: false,
-        quality: 'high'
-      }
+        quality: 'high',
+      },
     ],
 
     virtualExperiences: {
       virtualTour: 'https://virtualturkey.com/hagia-sophia',
       arExperience: 'https://ar.travelturkey.com/hagia-sophia',
-      liveWebcam: 'https://live.travelturkey.com/hagia-sophia'
+      liveWebcam: 'https://live.travelturkey.com/hagia-sophia',
     },
 
     rating: {
       overall: {
         average: 4.8,
         count: 125430,
-        distribution: [245, 892, 3150, 18950, 102193]
+        distribution: [245, 892, 3150, 18950, 102193],
       },
       aspects: {
         location: 4.9,
@@ -143,29 +163,35 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         atmosphere: 4.9,
         accessibility: 4.2,
         safety: 4.9,
-        authenticity: 4.9
+        authenticity: 4.9,
       },
       demographics: {
         byAge: { '18-25': 4.7, '26-35': 4.8, '36-50': 4.9, '51+': 4.8 },
-        byGender: { 'male': 4.8, 'female': 4.8, 'other': 4.7 },
-        byNationality: { 'TR': 4.9, 'US': 4.8, 'DE': 4.7, 'UK': 4.8 },
-        byTravelType: { 'solo': 4.7, 'couple': 4.9, 'family': 4.8, 'group': 4.6 }
+        byGender: { male: 4.8, female: 4.8, other: 4.7 },
+        byNationality: { TR: 4.9, US: 4.8, DE: 4.7, UK: 4.8 },
+        byTravelType: { solo: 4.7, couple: 4.9, family: 4.8, group: 4.6 },
       },
       sentiment: {
         positive: 0.82,
         neutral: 0.15,
         negative: 0.03,
         keywords: {
-          positive: ['magnificent', 'breathtaking', 'historical', 'unique', 'spiritual'],
-          negative: ['crowded', 'expensive', 'queue']
-        }
+          positive: [
+            'magnificent',
+            'breathtaking',
+            'historical',
+            'unique',
+            'spiritual',
+          ],
+          negative: ['crowded', 'expensive', 'queue'],
+        },
       },
       trending: {
         direction: 'up',
         changeRate: 0.03,
-        period: '6months'
+        period: '6months',
       },
-      lastCalculated: '2025-07-05T10:00:00Z'
+      lastCalculated: '2025-07-05T10:00:00Z',
     },
 
     popularity: {
@@ -174,14 +200,14 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         global: 5,
         national: 1,
         regional: 1,
-        category: 1
+        category: 1,
       },
       trends: {
         daily: [85, 92, 88, 95, 98, 94, 91],
         weekly: [92, 89, 94, 96, 98, 95, 93],
         monthly: [94, 96, 98, 97, 95, 93, 96, 98, 97, 95, 94, 96],
-        yearly: [92, 94, 96, 98]
-      }
+        yearly: [92, 94, 96, 98],
+      },
     },
 
     priceInfo: {
@@ -191,27 +217,27 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         child: 0,
         student: 50,
         senior: 75,
-        group: 85
+        group: 85,
       },
       seasonalMultipliers: {
         high: 1.2,
         medium: 1.0,
-        low: 0.8
+        low: 0.8,
       },
       discounts: {
         group: 15,
         early: 10,
-        local: 50
+        local: 50,
       },
       dynamicPricing: {
         enabled: true,
         factors: ['demand', 'events', 'capacity'],
-        currentMultiplier: 1.1
+        currentMultiplier: 1.1,
       },
       isFree: false,
       paymentMethods: ['cash', 'card', 'mobile'],
       refundPolicy: 'Tam iade: 24 saat öncesine kadar',
-      lastUpdated: '2025-07-05T08:00:00Z'
+      lastUpdated: '2025-07-05T08:00:00Z',
     },
 
     schedule: {
@@ -223,15 +249,15 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
           thursday: '09:00-17:00',
           friday: '09:00-17:00',
           saturday: '09:00-17:00',
-          sunday: '09:00-17:00'
+          sunday: '09:00-17:00',
         },
         exceptions: [
           {
             date: '2025-01-01',
             hours: null,
             reason: 'Yılbaşı tatili',
-            type: 'holiday'
-          }
+            type: 'holiday',
+          },
         ],
         seasonalChanges: [
           {
@@ -245,50 +271,50 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
               thursday: '09:00-19:00',
               friday: '09:00-19:00',
               saturday: '09:00-19:00',
-              sunday: '09:00-19:00'
-            }
-          }
+              sunday: '09:00-19:00',
+            },
+          },
         ],
         realTimeStatus: {
           isOpen: true,
           nextChange: '2025-07-05T17:00:00Z',
           estimatedCapacity: 'high',
-          waitTime: 25
+          waitTime: 25,
         },
         timezone: 'Europe/Istanbul',
         bookingRequired: false,
-        lastUpdated: '2025-07-05T09:00:00Z'
+        lastUpdated: '2025-07-05T09:00:00Z',
       },
       bestTimeToVisit: {
         seasons: ['İlkbahar', 'Sonbahar'],
         months: [4, 5, 9, 10],
         days: ['Tuesday', 'Wednesday', 'Thursday'],
-        hours: ['09:00-11:00', '15:00-17:00']
+        hours: ['09:00-11:00', '15:00-17:00'],
       },
       crowdingPatterns: {
-        'early_morning': 'low',
-        'morning': 'medium',
-        'midday': 'high',
-        'afternoon': 'high',
-        'evening': 'medium'
-      }
+        early_morning: 'low',
+        morning: 'medium',
+        midday: 'high',
+        afternoon: 'high',
+        evening: 'medium',
+      },
     },
 
     experience: {
       estimatedDuration: {
         minimum: 45,
         recommended: 120,
-        maximum: 240
+        maximum: 240,
       },
       physicalDemand: 'low',
       ageRecommendation: {
         minimum: 6,
-        optimal: 'all ages'
+        optimal: 'all ages',
       },
       groupSize: {
         maximum: 25,
-        optimal: 8
-      }
+        optimal: 8,
+      },
     },
 
     accessibility: {
@@ -299,7 +325,7 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         elevatorAccess: true,
         accessibleParking: true,
         accessibleRestrooms: true,
-        wheelchairRental: true
+        wheelchairRental: true,
       },
       sensory: {
         visuallyImpairedSupport: true,
@@ -308,27 +334,27 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         brailleSignage: false,
         audioDescriptions: true,
         signLanguageServices: false,
-        inductionLoops: false
+        inductionLoops: false,
       },
       cognitive: {
         easyReadMaterials: true,
         quietSpaces: false,
         simplifiedNavigation: true,
-        pictorialSigns: true
+        pictorialSigns: true,
       },
       transportation: {
         publicTransport: {
           accessible: true,
           routes: ['T1 Tramvay', 'Eminönü-Kabataş'],
           nearestStation: 'Sultanahmet Tramvay Durağı',
-          distance: 200
+          distance: 200,
         },
         parking: {
           available: false,
           accessible: false,
           free: false,
-          spaces: 0
-        }
+          spaces: 0,
+        },
       },
       services: {
         guidedTours: {
@@ -336,23 +362,23 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
           languages: ['Turkish', 'English', 'German', 'French', 'Arabic'],
           signLanguage: false,
           audioGuide: true,
-          virtualTours: true
+          virtualTours: true,
         },
         assistance: {
           personalAssistance: true,
           companionFree: true,
-          serviceAnimals: true
-        }
+          serviceAnimals: true,
+        },
       },
       certifications: [
         {
           name: 'Türkiye Erişilebilirlik Sertifikası',
           level: 'Bronz',
           validUntil: '2026-12-31',
-          verifiedBy: 'T.C. Kültür ve Turizm Bakanlığı'
-        }
+          verifiedBy: 'T.C. Kültür ve Turizm Bakanlığı',
+        },
       ],
-      lastAudited: '2025-03-15T00:00:00Z'
+      lastAudited: '2025-03-15T00:00:00Z',
     },
 
     inclusivity: {
@@ -361,40 +387,55 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
       petFriendly: false,
       soloTravelerFriendly: true,
       seniorFriendly: true,
-      childFriendly: true
+      childFriendly: true,
     },
 
     connections: {
-      nearbyPlaces: ['blue-mosque-2025', 'topkapi-palace-2025', 'basilica-cistern-2025'],
+      nearbyPlaces: [
+        'blue-mosque-2025',
+        'topkapi-palace-2025',
+        'basilica-cistern-2025',
+      ],
       suggestedCombinations: [
         {
           name: 'Sultanahmet Meydanı Turu',
           places: ['hagia-sophia-2025', 'blue-mosque-2025', 'hippodrome-2025'],
           duration: '4 saat',
-          theme: 'historical'
+          theme: 'historical',
         },
         {
-          name: 'Bizans İstanbul\'u',
-          places: ['hagia-sophia-2025', 'basilica-cistern-2025', 'chora-museum-2025'],
+          name: "Bizans İstanbul'u",
+          places: [
+            'hagia-sophia-2025',
+            'basilica-cistern-2025',
+            'chora-museum-2025',
+          ],
           duration: '6 saat',
-          theme: 'cultural'
-        }
+          theme: 'cultural',
+        },
       ],
       similarPlaces: ['blue-mosque-2025', 'suleymaniye-mosque-2025'],
-      alternativePlaces: ['kariye-museum-2025', 'fethiye-mosque-2025']
+      alternativePlaces: ['kariye-museum-2025', 'fethiye-mosque-2025'],
     },
 
     facilities: {
-      available: ['restrooms', 'gift_shop', 'cafe', 'audio_guides', 'lockers', 'first_aid'],
+      available: [
+        'restrooms',
+        'gift_shop',
+        'cafe',
+        'audio_guides',
+        'lockers',
+        'first_aid',
+      ],
       planned: ['prayer_room', 'family_room'],
       accessibility: {
-        'restrooms': true,
-        'gift_shop': true,
-        'cafe': true,
-        'audio_guides': true,
-        'lockers': false,
-        'first_aid': true
-      }
+        restrooms: true,
+        gift_shop: true,
+        cafe: true,
+        audio_guides: true,
+        lockers: false,
+        first_aid: true,
+      },
     },
 
     services: {
@@ -405,7 +446,7 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
       dining: true,
       restrooms: true,
       storage: true,
-      wifi: true
+      wifi: true,
     },
 
     contactInfo: {
@@ -415,13 +456,13 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
       booking: {
         required: false,
         platforms: ['GetYourGuide', 'Viator', 'Official Website'],
-        advanceNotice: 'Online bilet önerilir'
+        advanceNotice: 'Online bilet önerilir',
       },
       socialMedia: {
         instagram: '@ayasofyamuzesi',
         facebook: 'AyasofyaMuzesi',
-        twitter: '@ayasofya_muzesi'
-      }
+        twitter: '@ayasofya_muzesi',
+      },
     },
 
     safety: {
@@ -429,16 +470,16 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
       guidelines: [
         'Uygun kıyafet giyinin (omuzlar ve dizler kapalı)',
         'Fotoğraf çekerken flaş kullanmayın',
-        'Sessizliği koruyun'
+        'Sessizliği koruyun',
       ],
       restrictions: [
         'Büyük çantalar yasak',
         'Yiyecek ve içecek yasak',
-        'Sigara içmek yasak'
+        'Sigara içmek yasak',
       ],
       equipment: [],
       insurance: false,
-      emergencyServices: true
+      emergencyServices: true,
     },
 
     sustainability: {
@@ -447,38 +488,38 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         energySource: ['renewable', 'grid'],
         wasteManagement: true,
         waterConservation: true,
-        biodiversityProtection: false
+        biodiversityProtection: false,
       },
       social: {
         localEmployment: 85,
         communityInvolvement: true,
         culturalPreservation: true,
-        accessiblePricing: true
+        accessiblePricing: true,
       },
       economic: {
         localSuppliers: 70,
         revenueToLocal: 60,
-        fairWages: true
+        fairWages: true,
       },
       certifications: [
         {
           name: 'UNESCO Dünya Mirası',
           validUntil: 'permanent',
-          verifiedBy: 'UNESCO'
-        }
+          verifiedBy: 'UNESCO',
+        },
       ],
       initiatives: [
         'LED aydınlatma sistemi',
         'Atık azaltma programı',
-        'Yerel rehber istihdamı'
+        'Yerel rehber istihdamı',
       ],
       impact: {
         positive: ['Kültürel mirasın korunması', 'Turizm geliri', 'İstihdam'],
         negative: ['Ziyaretçi yoğunluğu', 'Aşınma'],
-        mitigation: ['Ziyaretçi sayısı kontrolü', 'Koruma çalışmaları']
+        mitigation: ['Ziyaretçi sayısı kontrolü', 'Koruma çalışmaları'],
       },
       score: 78,
-      lastAssessed: '2025-01-15T00:00:00Z'
+      lastAssessed: '2025-01-15T00:00:00Z',
     },
 
     weather: {
@@ -489,8 +530,8 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         spring: true,
         summer: true,
         autumn: true,
-        winter: true
-      }
+        winter: true,
+      },
     },
 
     ai: {
@@ -501,19 +542,19 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
           spring: ['tulip-gardens-2025'],
           summer: ['bosphorus-cruise-2025'],
           autumn: ['princes-islands-2025'],
-          winter: ['turkish-bath-2025']
+          winter: ['turkish-bath-2025'],
         },
         timeOfDay: {
           morning: ['basilica-cistern-2025'],
           afternoon: ['topkapi-palace-2025'],
-          evening: ['bosphorus-cruise-2025']
-        }
+          evening: ['bosphorus-cruise-2025'],
+        },
       },
       personalization: {
         userTypes: ['cultural', 'historical', 'spiritual', 'educational'],
         interests: ['architecture', 'history', 'religion', 'art'],
         difficulty: 'easy',
-        duration: 'half_day'
+        duration: 'half_day',
       },
       predictions: {
         crowding: [
@@ -521,43 +562,55 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
             date: '2025-07-06',
             period: 'morning',
             level: 'medium',
-            confidence: 0.85
+            confidence: 0.85,
           },
           {
             date: '2025-07-06',
             period: 'afternoon',
             level: 'high',
-            confidence: 0.92
-          }
+            confidence: 0.92,
+          },
         ],
         weather: {
           impact: 'neutral',
-          recommendation: 'İç mekan olduğu için hava durumundan etkilenmez'
+          recommendation: 'İç mekan olduğu için hava durumundan etkilenmez',
         },
         pricing: {
           predicted: 110,
           trend: 'rising',
-          bestTime: 'Hafta içi sabah erken saatler'
-        }
+          bestTime: 'Hafta içi sabah erken saatler',
+        },
       },
       content: {
         autoGeneratedDescription: false,
         translatedContent: { en: true, de: true, fr: true },
-        summarizedReviews: 'Ziyaretçiler tarihi atmosfer ve mimari güzellikten çok etkileniyor',
-        extractedHighlights: ['Kubbenin ihtişamı', 'Mozaikların detayları', 'Tarihi atmosfer']
+        summarizedReviews:
+          'Ziyaretçiler tarihi atmosfer ve mimari güzellikten çok etkileniyor',
+        extractedHighlights: [
+          'Kubbenin ihtişamı',
+          'Mozaikların detayları',
+          'Tarihi atmosfer',
+        ],
       },
       analytics: {
         popularTimes: {
-          '9': 60, '10': 75, '11': 85, '12': 95, '13': 90,
-          '14': 95, '15': 85, '16': 70, '17': 45
+          '9': 60,
+          '10': 75,
+          '11': 85,
+          '12': 95,
+          '13': 90,
+          '14': 95,
+          '15': 85,
+          '16': 70,
+          '17': 45,
         },
         visitDuration: {
           average: 95,
-          distribution: [20, 45, 75, 120, 180]
+          distribution: [20, 45, 75, 120, 180],
         },
         returnVisitorRate: 15,
-        conversionRate: 78
-      }
+        conversionRate: 78,
+      },
     },
 
     metadata: {
@@ -571,9 +624,9 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         score: 95,
         completeness: 98,
         accuracy: 96,
-        freshness: 92
+        freshness: 92,
       },
-      contributors: ['admin', 'curator_mehmet', 'ai_assistant']
+      contributors: ['admin', 'curator_mehmet', 'ai_assistant'],
     },
 
     status: {
@@ -585,9 +638,9 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         spring: true,
         summer: true,
         autumn: true,
-        winter: true
+        winter: true,
       },
-      lastStatusUpdate: '2025-07-05T09:00:00Z'
+      lastStatusUpdate: '2025-07-05T09:00:00Z',
     },
 
     performance: {
@@ -599,8 +652,8 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
       saves: 187349,
       conversionRate: 78,
       bounceRate: 12,
-      avgTimeOnPage: 285
-    }
+      avgTimeOnPage: 285,
+    },
   },
 
   // 2. Cappadocia - Simplified structure for space
@@ -609,38 +662,45 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
     uuid: 'cp-550e8400-e29b-41d4-a716-446655440002',
     name: 'Kapadokya',
     slug: 'kapadokya-nevsehir',
-    
+
     content: {
-      description: 'Kapadokya, Nevşehir, Kayseri ve Aksaray illerini kapsayan, benzersiz coğrafi oluşumları, yeraltı şehirleri ve sıcak hava balonu turlarıyla dünya çapında ünlü bir bölgedir.',
+      description:
+        'Kapadokya, Nevşehir, Kayseri ve Aksaray illerini kapsayan, benzersiz coğrafi oluşumları, yeraltı şehirleri ve sıcak hava balonu turlarıyla dünya çapında ünlü bir bölgedir.',
       shortDescription: 'Peri bacaları ve sıcak hava balonlarının diyarı',
       highlights: [
         'Sıcak hava balonu turları',
         'Peri bacaları ve kayalık oluşumlar',
         'Yeraltı şehirleri',
-        'UNESCO Dünya Mirası'
-      ]
+        'UNESCO Dünya Mirası',
+      ],
     },
 
     category: 'natural',
     subcategory: 'Doğal Alan',
-    tags: ['Nevşehir', 'Peri Bacaları', 'Sıcak Hava Balonu', 'Yeraltı Şehri', 'UNESCO'],
+    tags: [
+      'Nevşehir',
+      'Peri Bacaları',
+      'Sıcak Hava Balonu',
+      'Yeraltı Şehri',
+      'UNESCO',
+    ],
     themes: ['adventure', 'romantic', 'photogenic', 'unique', 'experiential'],
     difficulty: 'moderate',
-    
+
     coordinates: {
       latitude: 38.6431,
       longitude: 34.8289,
       elevation: 1200,
-      precision: 10
+      precision: 10,
     },
-    
+
     address: {
       city: 'Nevşehir',
       district: 'Ürgüp',
       fullAddress: 'Kapadokya Bölgesi, Nevşehir',
-      countryCode: 'TR'
+      countryCode: 'TR',
     },
-    
+
     region: 'ic_anadolu',
     climaticZone: 'continental',
     altitude: 1200,
@@ -651,9 +711,11 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         id: 'cp-balloons',
         type: 'image',
         url: 'https://cdn.travelturkey.com/places/cappadocia/balloons-4k.webp',
-        thumbnail: 'https://cdn.travelturkey.com/places/cappadocia/balloons-thumb.webp',
+        thumbnail:
+          'https://cdn.travelturkey.com/places/cappadocia/balloons-thumb.webp',
         caption: 'Güneş doğumunda sıcak hava balonları',
-        altText: 'Kapadokya\'da peri bacaları üzerinde uçan renkli sıcak hava balonları',
+        altText:
+          "Kapadokya'da peri bacaları üzerinde uçan renkli sıcak hava balonları",
         isPrimary: true,
         quality: 'ultra',
         ai: {
@@ -661,16 +723,16 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
           objects: ['balloons', 'fairy_chimneys', 'sunrise', 'landscape'],
           faces: 0,
           sentiment: 'positive',
-          quality: 0.98
-        }
-      }
+          quality: 0.98,
+        },
+      },
     ],
 
     rating: {
       overall: {
         average: 4.9,
         count: 89754,
-        distribution: [156, 445, 1789, 12890, 74474]
+        distribution: [156, 445, 1789, 12890, 74474],
       },
       aspects: {
         location: 4.9,
@@ -678,7 +740,7 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         value: 4.7,
         cleanliness: 4.6,
         atmosphere: 5.0,
-        accessibility: 3.8
+        accessibility: 3.8,
       },
       sentiment: {
         positive: 0.91,
@@ -686,10 +748,10 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         negative: 0.02,
         keywords: {
           positive: ['magical', 'breathtaking', 'unforgettable', 'stunning'],
-          negative: ['expensive', 'weather dependent']
-        }
+          negative: ['expensive', 'weather dependent'],
+        },
       },
-      lastCalculated: '2025-07-05T10:00:00Z'
+      lastCalculated: '2025-07-05T10:00:00Z',
     },
 
     popularity: {
@@ -698,48 +760,53 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
         global: 8,
         national: 2,
         regional: 1,
-        category: 1
+        category: 1,
       },
       trends: {
         daily: [85, 88, 92, 89, 95, 98, 96], // Last 7 days
         weekly: [90, 93, 95, 92, 96], // Last 5 weeks
         monthly: [88, 91, 94, 96], // Last 4 months
-        yearly: [85, 88, 92, 96] // Last 4 years
-      }
+        yearly: [85, 88, 92, 96], // Last 4 years
+      },
     },
 
     priceInfo: {
       currency: 'TRY',
       basePrices: {
         adult: 0, // Free to visit, but activities cost extra
-        child: 0
+        child: 0,
       },
       isFree: true,
-      lastUpdated: '2025-07-05T08:00:00Z'
+      lastUpdated: '2025-07-05T08:00:00Z',
     },
 
     // Simplified other fields for space...
     schedule: {
       workingHours: {
         regular: {
-          monday: '24/7', tuesday: '24/7', wednesday: '24/7',
-          thursday: '24/7', friday: '24/7', saturday: '24/7', sunday: '24/7'
+          monday: '24/7',
+          tuesday: '24/7',
+          wednesday: '24/7',
+          thursday: '24/7',
+          friday: '24/7',
+          saturday: '24/7',
+          sunday: '24/7',
         },
         timezone: 'Europe/Istanbul',
-        lastUpdated: '2025-07-05T09:00:00Z'
+        lastUpdated: '2025-07-05T09:00:00Z',
       },
       bestTimeToVisit: {
         seasons: ['İlkbahar', 'Sonbahar'],
         months: [4, 5, 9, 10],
         days: ['All days'],
-        hours: ['05:00-07:00', '17:00-19:00']
+        hours: ['05:00-07:00', '17:00-19:00'],
       },
       crowdingPatterns: {
-        'morning': 'medium',
-        'afternoon': 'high',
-        'evening': 'low',
-        'night': 'low'
-      }
+        morning: 'medium',
+        afternoon: 'high',
+        evening: 'low',
+        night: 'low',
+      },
     },
 
     experience: {
@@ -749,58 +816,95 @@ export const enhancedTouristPlaces: EnhancedTouristPlace[] = [
       groupSize: {
         minimum: 1,
         maximum: 20,
-        optimal: 6
-      }
+        optimal: 6,
+      },
     },
 
     accessibility: {
       physical: { wheelchairAccessible: false, mobilityAidFriendly: false },
-      transportation: { publicTransport: { accessible: true, routes: ['Nevşehir Airport Transfer'] } }
+      transportation: {
+        publicTransport: {
+          accessible: true,
+          routes: ['Nevşehir Airport Transfer'],
+        },
+      },
     } as any,
 
     inclusivity: {
-      lgbtqFriendly: true, familyFriendly: true, petFriendly: false,
-      soloTravelerFriendly: true, seniorFriendly: false, childFriendly: true
+      lgbtqFriendly: true,
+      familyFriendly: true,
+      petFriendly: false,
+      soloTravelerFriendly: true,
+      seniorFriendly: false,
+      childFriendly: true,
     },
 
     connections: {
       nearbyPlaces: ['goreme-museum-2025', 'underground-city-2025'],
       suggestedCombinations: [],
       similarPlaces: [],
-      alternativePlaces: []
+      alternativePlaces: [],
     },
 
     facilities: { available: [], planned: [], accessibility: {} },
-    services: { guidedTours: true, audioGuides: false, rentals: [], shopping: false, dining: false, restrooms: false, storage: false, wifi: false },
+    services: {
+      guidedTours: true,
+      audioGuides: false,
+      rentals: [],
+      shopping: false,
+      dining: false,
+      restrooms: false,
+      storage: false,
+      wifi: false,
+    },
     contactInfo: {},
-    safety: { level: 'safe', guidelines: [], restrictions: [], equipment: [], insurance: true, emergencyServices: true },
+    safety: {
+      level: 'safe',
+      guidelines: [],
+      restrictions: [],
+      equipment: [],
+      insurance: true,
+      emergencyServices: true,
+    },
     sustainability: {} as any,
-    weather: { 
-      dependent: true, 
-      closureConditions: ['strong winds', 'heavy rain'], 
+    weather: {
+      dependent: true,
+      closureConditions: ['strong winds', 'heavy rain'],
       optimalConditions: ['clear sky', 'light winds'],
       seasonalAccess: {
-        'spring': true,
-        'summer': true,
-        'autumn': true,
-        'winter': false
-      }
+        spring: true,
+        summer: true,
+        autumn: true,
+        winter: false,
+      },
     },
     ai: {} as any,
     metadata: {
-      createdAt: '2025-01-01T00:00:00Z', updatedAt: '2025-07-05T10:30:00Z',
-      version: 2, dataSource: 'Multiple Sources', verified: true, lastVerified: '2025-06-01T00:00:00Z',
+      createdAt: '2025-01-01T00:00:00Z',
+      updatedAt: '2025-07-05T10:30:00Z',
+      version: 2,
+      dataSource: 'Multiple Sources',
+      verified: true,
+      lastVerified: '2025-06-01T00:00:00Z',
       quality: { score: 92, completeness: 85, accuracy: 94, freshness: 96 },
-      contributors: ['admin', 'local_guide']
+      contributors: ['admin', 'local_guide'],
     },
     status: {
-      operational: 'open', isActive: true, isFeatured: true, isPromoted: true,
-      seasonalAvailability: { spring: true, summer: true, autumn: true, winter: false },
-      lastStatusUpdate: '2025-07-05T09:00:00Z'
-    }
-  }
+      operational: 'open',
+      isActive: true,
+      isFeatured: true,
+      isPromoted: true,
+      seasonalAvailability: {
+        spring: true,
+        summer: true,
+        autumn: true,
+        winter: false,
+      },
+      lastStatusUpdate: '2025-07-05T09:00:00Z',
+    },
+  },
 
-  // Note: For brevity, I'm showing only 2 detailed examples. 
+  // Note: For brevity, I'm showing only 2 detailed examples.
   // The remaining 18 places would follow similar structure with appropriate data.
   // Each would have unique characteristics based on their type and location.
 ];
@@ -815,7 +919,7 @@ export const enhancedCategories = [
     color: '#8B4513',
     themes: ['educational', 'cultural', 'traditional'],
     difficulty: ['easy', 'moderate'],
-    avgDuration: 120 // minutes
+    avgDuration: 120, // minutes
   },
   {
     id: 'natural',
@@ -825,7 +929,7 @@ export const enhancedCategories = [
     color: '#228B22',
     themes: ['adventure', 'peaceful', 'photogenic'],
     difficulty: ['easy', 'moderate', 'challenging'],
-    avgDuration: 240
+    avgDuration: 240,
   },
   // ... other categories
 ];
@@ -843,8 +947,8 @@ export const enhancedCities = [
     placesCount: 45,
     isPopular: true,
     sustainabilityScore: 72,
-    accessibilityScore: 78
-  }
+    accessibilityScore: 78,
+  },
   // ... other cities
 ];
 
