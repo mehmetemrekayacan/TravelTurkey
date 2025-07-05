@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { GlobalStyles } from '../../styles/GlobalStyles';
-import BadgeDemo from '../../components/debug/BadgeDemo';
+
 
 // Types
 interface Plan {
@@ -156,7 +156,7 @@ export default function PlansScreen() {
 
       <ScrollView style={GlobalStyles.container}>
         {/* Badge Demo for testing */}
-        <BadgeDemo />
+
 
         {/* Quick Actions */}
         <View style={GlobalStyles.card}>

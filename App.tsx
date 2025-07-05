@@ -34,7 +34,7 @@ import type {
 
 // Import navigators and screens
 import BottomTabNavigator from './src/navigation/BottomTabNavigator';
-import PerformanceMonitor from './src/components/debug/PerformanceMonitor';
+
 import { BadgeProvider } from './src/context/BadgeContext';
 
 // Constants
@@ -303,7 +303,7 @@ function App(): React.JSX.Element {
             </RootStack.Navigator>
 
             {/* Performance Monitor - only in development */}
-            {__DEV__ && <PerformanceMonitor />}
+    
           </NavigationContainer>
         </BadgeProvider>
       </SafeAreaProvider>

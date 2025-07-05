@@ -1,13 +1,12 @@
 /**
- * TravelTurkey - Navigation Components Index
- * Barrel export for easier imports
+ * TravelTurkey - Navigation Components
+ * Tab navigation and custom tab bar components
  */
 
-// Tab icons (using emoji for now, can be upgraded to vector icons later)
+export { default as CustomTabBar } from './CustomTabBar';
 export {
-  TabIcon,
-  HomeTabIcon,
   ExploreTabIcon,
   PlansTabIcon,
   ProfileTabIcon,
-} from './TabIcons';
+  HomeTabIcon,
+} from './VectorTabIcons';
