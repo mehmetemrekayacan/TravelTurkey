@@ -1,0 +1,727 @@
+/**
+ * TravelTurkey - Enhanced Tourist Places Types (2025)
+ * Modern data structures with AI, sustainability, and accessibility enhancements
+ */
+
+// Enhanced coordinate system with elevation and precision
+export interface EnhancedCoordinates {
+  latitude: number;
+  longitude: number;
+  elevation?: number; // meters above sea level
+  precision?: number; // GPS accuracy in meters
+  lastUpdated?: string; // ISO 8601 timestamp
+  mapProvider?: 'google' | 'apple' | 'openstreetmap';
+}
+
+// Multi-language support for address
+export interface MultilingualAddress {
+  city: string;
+  district: string;
+  neighborhood?: string;
+  fullAddress: string;
+  postalCode?: string;
+  countryCode: string; // ISO 3166-1 alpha-2
+  translations?: {
+    [languageCode: string]: {
+      city: string;
+      district: string;
+      neighborhood?: string;
+      fullAddress: string;
+    };
+  };
+  geocoding?: {
+    formatted: string;
+    components: {
+      [key: string]: string;
+    };
+  };
+}
+
+// Dynamic pricing with seasonal variations and real-time updates
+export interface DynamicPriceInfo {
+  currency: string;
+  basePrices: {
+    adult: number;
+    child?: number;
+    student?: number;
+    senior?: number;
+    family?: number;
+    group?: number; // per person in group of 10+
+  };
+  seasonalMultipliers?: {
+    high: number; // peak season (1.5x, 2x, etc.)
+    medium: number; // regular season (1x)
+    low: number; // off season (0.7x, 0.8x, etc.)
+  };
+  discounts?: {
+    group?: number; // percentage discount for groups
+    early?: number; // early booking discount
+    local?: number; // local resident discount
+    loyalty?: number; // returning visitor discount
+    package?: number; // combined ticket discount
+  };
+  dynamicPricing?: {
+    enabled: boolean;
+    factors: ('demand' | 'weather' | 'events' | 'capacity')[];
+    currentMultiplier?: number;
+  };
+  isFree: boolean;
+  paymentMethods?: ('cash' | 'card' | 'mobile' | 'crypto')[];
+  refundPolicy?: string;
+  lastUpdated: string;
+}
+
+// Flexible working hours with exceptions and real-time status
+export interface FlexibleWorkingHours {
+  regular: {
+    [day: string]: string | null; // null for closed
+  };
+  exceptions?: {
+    date: string; // YYYY-MM-DD
+    hours: string | null;
+    reason?: string;
+    type?: 'holiday' | 'maintenance' | 'event' | 'weather';
+  }[];
+  seasonalChanges?: {
+    season: 'summer' | 'winter' | 'ramadan' | 'special';
+    startDate: string;
+    endDate: string;
+    hours: { [day: string]: string | null };
+  }[];
+  realTimeStatus?: {
+    isOpen: boolean;
+    nextChange: string; // ISO 8601 timestamp
+    estimatedCapacity?: 'low' | 'medium' | 'high' | 'full';
+    waitTime?: number; // minutes
+  };
+  timezone: string; // IANA timezone
+  bookingRequired?: boolean;
+  lastUpdated: string;
+}
+
+// Advanced rating system with AI sentiment analysis
+export interface AdvancedRating {
+  overall: {
+    average: number;
+    count: number;
+    distribution: number[]; // [1-star, 2-star, 3-star, 4-star, 5-star] counts
+  };
+  aspects: {
+    location: number;
+    service: number;
+    value: number;
+    cleanliness: number;
+    atmosphere: number;
+    accessibility?: number;
+    familyFriendly?: number;
+    safety?: number;
+    authenticity?: number;
+  };
+  demographics?: {
+    byAge: { [ageGroup: string]: number };
+    byGender: { [gender: string]: number };
+    byNationality: { [country: string]: number };
+    byTravelType: { [type: string]: number }; // solo, couple, family, group
+  };
+  sentiment?: {
+    positive: number;
+    neutral: number;
+    negative: number;
+    keywords: {
+      positive: string[];
+      negative: string[];
+    };
+  };
+  trending?: {
+    direction: 'up' | 'down' | 'stable';
+    changeRate: number; // percentage change over time
+    period: string; // time period for the change
+  };
+  verification?: {
+    verifiedCount: number;
+    photosCount: number;
+    videoCount: number;
+  };
+  lastCalculated: string;
+  aiGenerated?: boolean;
+}
+
+// Rich media support with modern formats
+export interface RichMedia {
+  id: string;
+  type: 'image' | 'video' | '360' | 'vr' | 'ar' | 'live_stream';
+  url: string;
+  thumbnail: string;
+  caption?: string;
+  altText: string; // for accessibility
+  photographer?: string;
+  license?: 'cc' | 'proprietary' | 'public_domain';
+  isPrimary: boolean;
+  quality: 'low' | 'medium' | 'high' | 'ultra';
+  metadata?: {
+    width?: number;
+    height?: number;
+    duration?: number; // for videos
+    fileSize?: number;
+    format?: string;
+    colorSpace?: string;
+    bitRate?: number;
+    frameRate?: number;
+  };
+  accessibility?: {
+    audioDescription?: string;
+    subtitles?: { [language: string]: string };
+    signLanguage?: boolean;
+  };
+  translations?: {
+    [languageCode: string]: {
+      caption?: string;
+      altText: string;
+    };
+  };
+  ai?: {
+    autoGenerated: boolean;
+    objects: string[]; // detected objects
+    faces: number; // number of faces detected
+    sentiment?: 'positive' | 'neutral' | 'negative';
+    quality: number; // 0-1 quality score
+  };
+  cdn?: {
+    regions: string[];
+    optimized: boolean;
+    webp: boolean;
+    avif: boolean;
+  };
+  userGenerated?: {
+    userId?: string;
+    approved: boolean;
+    moderationScore?: number;
+  };
+}
+
+// Comprehensive accessibility with certification tracking
+export interface ComprehensiveAccessibility {
+  physical: {
+    wheelchairAccessible: boolean;
+    mobilityAidFriendly: boolean;
+    stepFree: boolean;
+    elevatorAccess: boolean;
+    accessibleParking: boolean;
+    accessibleRestrooms: boolean;
+    wheelchairRental?: boolean;
+  };
+  sensory: {
+    visuallyImpairedSupport: boolean;
+    hearingImpairedSupport: boolean;
+    tactileGuidance: boolean;
+    brailleSignage: boolean;
+    audioDescriptions: boolean;
+    signLanguageServices: boolean;
+    inductionLoops: boolean;
+  };
+  cognitive: {
+    easyReadMaterials: boolean;
+    quietSpaces: boolean;
+    simplifiedNavigation: boolean;
+    pictorialSigns: boolean;
+  };
+  transportation: {
+    publicTransport: {
+      accessible: boolean;
+      routes: string[];
+      nearestStation?: string;
+      distance?: number; // meters
+    };
+    parking: {
+      available: boolean;
+      accessible: boolean;
+      free: boolean;
+      spaces: number;
+      electricCharging?: boolean;
+    };
+  };
+  services: {
+    guidedTours: {
+      available: boolean;
+      languages: string[];
+      signLanguage: boolean;
+      audioGuide: boolean;
+      touchTours?: boolean;
+      virtualTours?: boolean;
+    };
+    assistance: {
+      personalAssistance: boolean;
+      companionFree: boolean;
+      serviceAnimals: boolean;
+    };
+  };
+  certifications?: {
+    name: string;
+    level: string;
+    validUntil?: string;
+    verifiedBy: string;
+  }[];
+  lastAudited?: string;
+  userFeedback?: {
+    helpful: number;
+    notHelpful: number;
+    comments: string[];
+  };
+  digitalAccessibility?: {
+    websiteCompliant: boolean;
+    appCompliant: boolean;
+    wcagLevel?: 'A' | 'AA' | 'AAA';
+  };
+}
+
+// Sustainability and environmental impact tracking
+export interface SustainabilityInfo {
+  environmental: {
+    carbonFootprint: 'very_low' | 'low' | 'medium' | 'high' | 'very_high';
+    energySource: ('renewable' | 'grid' | 'mixed')[];
+    wasteManagement: boolean;
+    waterConservation: boolean;
+    biodiversityProtection: boolean;
+  };
+  social: {
+    localEmployment: number; // percentage
+    communityInvolvement: boolean;
+    culturalPreservation: boolean;
+    accessiblePricing: boolean;
+  };
+  economic: {
+    localSuppliers: number; // percentage
+    revenueToLocal: number; // percentage
+    fairWages: boolean;
+  };
+  certifications: {
+    name: string;
+    level?: string;
+    validUntil?: string;
+    verifiedBy: string;
+    url?: string;
+  }[];
+  initiatives: string[];
+  impact: {
+    positive: string[];
+    negative: string[];
+    mitigation: string[];
+  };
+  score: number; // 0-100 sustainability score
+  lastAssessed: string;
+}
+
+// AI and machine learning enhancements
+export interface AIEnhancements {
+  recommendations: {
+    similar: string[]; // place IDs
+    complementary: string[]; // places that go well together
+    seasonal: { [season: string]: string[] };
+    timeOfDay: { [period: string]: string[] };
+  };
+  personalization: {
+    userTypes: string[]; // adventure, cultural, family, etc.
+    interests: string[];
+    difficulty: 'easy' | 'moderate' | 'challenging';
+    duration: 'quick' | 'half_day' | 'full_day' | 'multi_day';
+  };
+  predictions: {
+    crowding: {
+      date: string;
+      period: string; // morning, afternoon, evening
+      level: 'low' | 'medium' | 'high' | 'very_high';
+      confidence: number; // 0-1
+    }[];
+    weather: {
+      impact: 'positive' | 'neutral' | 'negative';
+      recommendation: string;
+    };
+    pricing: {
+      predicted: number;
+      trend: 'rising' | 'stable' | 'falling';
+      bestTime: string; // when to book for best price
+    };
+  };
+  content: {
+    autoGeneratedDescription?: boolean;
+    translatedContent?: { [language: string]: boolean };
+    summarizedReviews?: string;
+    extractedHighlights?: string[];
+  };
+  analytics: {
+    popularTimes: { [hour: string]: number }; // 0-23 hours
+    visitDuration: {
+      average: number; // minutes
+      distribution: number[]; // time buckets
+    };
+    returnVisitorRate: number; // percentage
+    conversionRate: number; // view to visit rate
+  };
+  moderationScores?: {
+    content: number; // 0-1, appropriateness of content
+    images: number; // 0-1, quality and appropriateness
+    reviews: number; // 0-1, authenticity of reviews
+  };
+}
+
+// Enhanced main TouristPlace interface
+export interface EnhancedTouristPlace {
+  // Core identification
+  id: string;
+  uuid: string; // for cross-platform sync
+  name: string;
+  slug: string;
+  
+  // Multi-language content
+  content: {
+    description: string;
+    shortDescription: string;
+    highlights: string[];
+    history?: string;
+    significance?: string;
+    translations?: {
+      [languageCode: string]: {
+        name: string;
+        description: string;
+        shortDescription: string;
+        highlights: string[];
+        history?: string;
+        significance?: string;
+      };
+    };
+  };
+
+  // Enhanced categorization
+  category: ExtendedPlaceCategory;
+  subcategory: string;
+  tags: string[];
+  themes: PlaceTheme[];
+  difficulty: 'easy' | 'moderate' | 'challenging' | 'expert';
+  
+  // Location and geography
+  coordinates: EnhancedCoordinates;
+  address: MultilingualAddress;
+  region: TurkeyRegion;
+  climaticZone: 'mediterranean' | 'continental' | 'black_sea' | 'eastern';
+  altitude?: number;
+  area?: number; // square meters
+  
+  // Rich media and virtual experiences
+  media: RichMedia[];
+  virtualExperiences?: {
+    virtualTour?: string;
+    arExperience?: string;
+    liveWebcam?: string;
+    timelapse?: string;
+  };
+  
+  // Social proof and analytics
+  rating: AdvancedRating;
+  popularity: {
+    score: number; // 0-100
+    ranking: {
+      global?: number;
+      national?: number;
+      regional?: number;
+      category?: number;
+    };
+    trends: {
+      daily: number[];
+      weekly: number[];
+      monthly: number[];
+      yearly: number[];
+    };
+  };
+  
+  // Visitor information
+  priceInfo: DynamicPriceInfo;
+  schedule: {
+    workingHours: FlexibleWorkingHours;
+    bestTimeToVisit: {
+      seasons: string[];
+      months: number[];
+      days: string[];
+      hours: string[];
+    };
+    crowdingPatterns: {
+      [period: string]: 'low' | 'medium' | 'high';
+    };
+  };
+  
+  // Visit planning
+  experience: {
+    estimatedDuration: {
+      minimum: number; // minutes
+      recommended: number; // minutes
+      maximum: number; // minutes
+    };
+    physicalDemand: 'low' | 'moderate' | 'high' | 'extreme';
+    ageRecommendation: {
+      minimum?: number;
+      maximum?: number;
+      optimal: string; // "all ages", "adults", "children", etc.
+    };
+    groupSize: {
+      minimum?: number;
+      maximum?: number;
+      optimal: number;
+    };
+  };
+  
+  // Accessibility and inclusivity
+  accessibility: ComprehensiveAccessibility;
+  inclusivity: {
+    lgbtqFriendly: boolean;
+    familyFriendly: boolean;
+    petFriendly: boolean;
+    soloTravelerFriendly: boolean;
+    seniorFriendly: boolean;
+    childFriendly: boolean;
+  };
+  
+  // Connections and recommendations
+  connections: {
+    nearbyPlaces: string[];
+    suggestedCombinations: {
+      name: string;
+      places: string[];
+      duration: string;
+      theme: string;
+    }[];
+    similarPlaces: string[];
+    alternativePlaces: string[]; // similar experience, different location
+  };
+  
+  // Practical information
+  facilities: {
+    available: string[];
+    planned: string[];
+    accessibility: { [facility: string]: boolean };
+  };
+  services: {
+    guidedTours: boolean;
+    audioGuides: boolean;
+    rentals: string[]; // equipment, bikes, etc.
+    shopping: boolean;
+    dining: boolean;
+    restrooms: boolean;
+    storage: boolean;
+    wifi: boolean;
+  };
+  
+  // Contact and booking
+  contactInfo: {
+    phone?: string;
+    whatsapp?: string;
+    email?: string;
+    website?: string;
+    booking?: {
+      required: boolean;
+      platforms: string[];
+      advanceNotice?: string;
+    };
+    socialMedia?: {
+      instagram?: string;
+      facebook?: string;
+      twitter?: string;
+      tiktok?: string;
+      youtube?: string;
+    };
+    emergencyContact?: string;
+  };
+  
+  // Safety and guidelines
+  safety: {
+    level: 'very_safe' | 'safe' | 'moderate' | 'caution' | 'high_risk';
+    guidelines: string[];
+    restrictions: string[];
+    equipment: string[]; // required equipment
+    insurance: boolean; // insurance recommended/required
+    emergencyServices: boolean;
+  };
+  
+  // Sustainability and impact
+  sustainability: SustainabilityInfo;
+  
+  // Weather dependency
+  weather: {
+    dependent: boolean;
+    closureConditions: string[];
+    optimalConditions: string[];
+    seasonalAccess: { [season: string]: boolean };
+  };
+  
+  // AI and personalization
+  ai: AIEnhancements;
+  
+  // Technical metadata
+  metadata: {
+    createdAt: string;
+    updatedAt: string;
+    version: number;
+    dataSource: string;
+    verified: boolean;
+    lastVerified: string;
+    quality: {
+      score: number; // 0-100
+      completeness: number; // 0-100
+      accuracy: number; // 0-100
+      freshness: number; // 0-100
+    };
+    contributors: string[];
+  };
+  
+  // Status and availability
+  status: {
+    operational: 'open' | 'closed' | 'limited' | 'seasonal' | 'maintenance';
+    isActive: boolean;
+    isFeatured: boolean;
+    isPromoted: boolean;
+    temporaryStatus?: {
+      status: string;
+      reason: string;
+      until?: string;
+    };
+    seasonalAvailability: {
+      [season: string]: boolean;
+    };
+    lastStatusUpdate: string;
+  };
+  
+  // Performance tracking
+  performance?: {
+    views: number;
+    visits: number;
+    bookings: number;
+    reviews: number;
+    shares: number;
+    saves: number;
+    conversionRate: number;
+    bounceRate: number;
+    avgTimeOnPage: number;
+  };
+}
+
+// Supporting types
+export type ExtendedPlaceCategory = 
+  | 'historical' 
+  | 'natural' 
+  | 'cultural' 
+  | 'religious' 
+  | 'entertainment' 
+  | 'beach' 
+  | 'adventure' 
+  | 'shopping'
+  | 'wellness'
+  | 'culinary'
+  | 'nightlife'
+  | 'sports'
+  | 'educational'
+  | 'spiritual'
+  | 'romantic'
+  | 'luxury'
+  | 'budget'
+  | 'family'
+  | 'solo'
+  | 'group'
+  | 'accessible'
+  | 'eco'
+  | 'digital';
+
+export type PlaceTheme = 
+  | 'romantic'
+  | 'adventure'
+  | 'family'
+  | 'luxury'
+  | 'budget'
+  | 'authentic'
+  | 'modern'
+  | 'traditional'
+  | 'peaceful'
+  | 'energetic'
+  | 'educational'
+  | 'spiritual'
+  | 'social'
+  | 'solitary'
+  | 'accessible'
+  | 'sustainable'
+  | 'digital'
+  | 'experiential'
+  | 'photogenic'
+  | 'unique';
+
+export type TurkeyRegion = 
+  | 'marmara' 
+  | 'ege' 
+  | 'akdeniz' 
+  | 'ic_anadolu' 
+  | 'karadeniz' 
+  | 'dogu_anadolu' 
+  | 'guneydogu_anadolu';
+
+// Pagination and query interfaces for 2025
+export interface AdvancedPagination {
+  strategy: 'offset' | 'cursor' | 'hybrid';
+  pageSize: number;
+  currentPage?: number;
+  cursor?: string;
+  prefetchPages: number;
+  virtualScrolling: boolean;
+  totalCount?: number;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+}
+
+export interface SmartQuery {
+  filters: {
+    category?: ExtendedPlaceCategory[];
+    themes?: PlaceTheme[];
+    region?: TurkeyRegion[];
+    priceRange?: [number, number];
+    rating?: [number, number];
+    accessibility?: string[];
+    duration?: string[];
+    difficulty?: string[];
+  };
+  search?: {
+    query: string;
+    fuzzy: boolean;
+    semantic: boolean;
+    multilingual: boolean;
+  };
+  sort: {
+    field: string;
+    direction: 'asc' | 'desc';
+    secondary?: {
+      field: string;
+      direction: 'asc' | 'desc';
+    };
+  };
+  personalization?: {
+    userId?: string;
+    preferences?: string[];
+    location?: EnhancedCoordinates;
+    travelStyle?: string;
+  };
+  ai?: {
+    recommendations: boolean;
+    predictions: boolean;
+    autoComplete: boolean;
+  };
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: AdvancedPagination;
+  metadata: {
+    totalTime: number;
+    cacheHit: boolean;
+    aiEnhanced: boolean;
+    quality: number;
+  };
+  suggestions?: {
+    relatedQueries: string[];
+    alternatives: string[];
+    corrections?: string;
+  };
+}
