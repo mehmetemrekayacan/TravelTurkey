@@ -37,6 +37,16 @@ import BottomTabNavigator from './src/navigation/BottomTabNavigator';
 
 import { BadgeProvider } from './src/context/BadgeContext';
 
+import SearchScreen from './src/screens/search/SearchScreen';
+import SettingsScreen from './src/screens/settings/SettingsScreen';
+import AboutScreen from './src/screens/about/AboutScreen';
+import OnboardingScreen from './src/screens/onboarding/OnboardingScreen';
+import LoginScreen from './src/screens/auth/LoginScreen';
+import RegisterScreen from './src/screens/auth/RegisterScreen';
+import PlaceDetailScreen from './src/screens/detail/PlaceDetailScreen';
+import ImageViewerScreen from './src/screens/gallery/ImageViewerScreen';
+import ShareModalScreen from './src/screens/share/ShareModalScreen';
+
 // Constants
 const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
 const STATE_VERSION = 1;
@@ -221,7 +231,7 @@ function App(): React.JSX.Element {
               >
                 <RootStack.Screen
                   name='Search'
-                  component={BottomTabNavigator} // TODO: Create SearchScreen
+                  component={SearchScreen}
                   options={{
                     title: 'Arama',
                     headerShown: true,
@@ -229,7 +239,7 @@ function App(): React.JSX.Element {
                 />
                 <RootStack.Screen
                   name='ImageViewer'
-                  component={BottomTabNavigator} // TODO: Create ImageViewerScreen
+                  component={ImageViewerScreen}
                   options={{
                     title: 'Galeri',
                     headerShown: false,
@@ -237,7 +247,7 @@ function App(): React.JSX.Element {
                 />
                 <RootStack.Screen
                   name='ShareModal'
-                  component={BottomTabNavigator} // TODO: Create ShareModalScreen
+                  component={ShareModalScreen}
                   options={{
                     title: 'Paylaş',
                     headerShown: true,
@@ -254,7 +264,7 @@ function App(): React.JSX.Element {
               >
                 <RootStack.Screen
                   name='Settings'
-                  component={BottomTabNavigator} // TODO: Create SettingsScreen
+                  component={SettingsScreen}
                   options={{
                     title: 'Ayarlar',
                     headerShown: true,
@@ -262,7 +272,7 @@ function App(): React.JSX.Element {
                 />
                 <RootStack.Screen
                   name='About'
-                  component={BottomTabNavigator} // TODO: Create AboutScreen
+                  component={AboutScreen}
                   options={{
                     title: 'Hakkında',
                     headerShown: true,
@@ -279,22 +289,22 @@ function App(): React.JSX.Element {
               >
                 <RootStack.Screen
                   name='Onboarding'
-                  component={BottomTabNavigator} // TODO: Create OnboardingScreen
+                  component={OnboardingScreen}
                 />
                 <RootStack.Screen
                   name='Login'
-                  component={BottomTabNavigator} // TODO: Create LoginScreen
+                  component={LoginScreen}
                 />
                 <RootStack.Screen
                   name='Register'
-                  component={BottomTabNavigator} // TODO: Create RegisterScreen
+                  component={RegisterScreen}
                 />
               </RootStack.Group>
 
               {/* Detail Screens */}
               <RootStack.Screen
                 name='PlaceDetail'
-                component={BottomTabNavigator} // TODO: Create PlaceDetailScreen
+                component={PlaceDetailScreen}
                 options={{
                   headerShown: false,
                   gestureEnabled: true,

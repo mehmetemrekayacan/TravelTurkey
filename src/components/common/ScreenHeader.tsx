@@ -6,6 +6,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { GlobalStyles } from '../../styles/GlobalStyles';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface ScreenHeaderProps {
   title: string;
@@ -24,8 +25,9 @@ export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
   rightIcon,
   onRightPress,
 }) => {
+  const insets = useSafeAreaInsets();
   return (
-    <View style={GlobalStyles.header}>
+    <View style={[GlobalStyles.header, { paddingTop: insets.top }]}>
       {showBackButton && (
         <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
           <Text style={GlobalStyles.iconMedium}>←</Text>

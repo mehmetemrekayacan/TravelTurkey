@@ -12,6 +12,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { GlobalStyles } from '../../styles/GlobalStyles';
+import ScreenHeader from '../../components/common/ScreenHeader';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 // Types
@@ -108,6 +110,8 @@ const quickActions: QuickAction[] = [
 ];
 
 export default function PlansScreen() {
+  const insets = useSafeAreaInsets();
+
   const handlePlanPress = (plan: Plan) => {
     console.log(`${plan.title} planı seçildi`);
   };
@@ -150,9 +154,7 @@ export default function PlansScreen() {
 
   return (
     <SafeAreaView style={GlobalStyles.safeArea}>
-      <View style={GlobalStyles.header}>
-        <Text style={GlobalStyles.headerTitle}>📋 Planlarım</Text>
-      </View>
+      <ScreenHeader title='Planlarım' icon='📋' />
 
       <ScrollView style={GlobalStyles.container}>
         {/* Badge Demo for testing */}

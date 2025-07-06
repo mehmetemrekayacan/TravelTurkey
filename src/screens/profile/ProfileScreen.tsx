@@ -12,6 +12,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { GlobalStyles } from '../../styles/GlobalStyles';
+import ScreenHeader from '../../components/common/ScreenHeader';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Profil menü öğeleri
 const profileMenuItems = [
@@ -34,15 +36,15 @@ const userStats = [
 ];
 
 export default function ProfileScreen() {
+  const insets = useSafeAreaInsets();
+
   const handleMenuPress = (_action: string) => {
     // TODO: Handle menu action
   };
 
   return (
     <SafeAreaView style={GlobalStyles.safeArea}>
-      <View style={GlobalStyles.header}>
-        <Text style={GlobalStyles.headerTitle}>👤 Profil</Text>
-      </View>
+      <ScreenHeader title='Profil' icon='👤' />
 
       <ScrollView style={GlobalStyles.container}>
         {/* User Info Card */}
