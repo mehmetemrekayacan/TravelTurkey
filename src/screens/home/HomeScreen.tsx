@@ -13,13 +13,10 @@ import {
   ActionCard,
   InfoCard,
 } from '../../components/common/Cards';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type HomeScreenProps = BottomTabScreenProps<'ExploreTab'>;
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
-  const insets = useSafeAreaInsets();
-
   // Event handlers
   const handleExplorePress = () => {
     navigation.navigate({ name: 'ExploreTab', params: {} });

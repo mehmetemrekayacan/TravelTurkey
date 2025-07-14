@@ -47,6 +47,10 @@ import PlaceDetailScreen from './src/screens/detail/PlaceDetailScreen';
 import ImageViewerScreen from './src/screens/gallery/ImageViewerScreen';
 import ShareModalScreen from './src/screens/share/ShareModalScreen';
 
+// Import performance monitoring and error boundary
+import ErrorBoundary from './src/components/common/ErrorBoundary';
+import { usePerformanceMonitor } from './src/hooks/usePerformanceMonitor';
+
 // Constants
 const PERSISTENCE_KEY = 'NAVIGATION_STATE_V1';
 const STATE_VERSION = 1;
@@ -183,141 +187,166 @@ function App(): React.JSX.Element {
     [],
   );
 
+  // Add performance monitoring
+  const { trackScreenLoad, reportCrash, getPerformanceReport } =
+    usePerformanceMonitor();
+
+  // Performance monitoring effect
+  useEffect(() => {
+    const cleanup = trackScreenLoad('App');
+
+    // Log performance report in development
+    if (__DEV__) {
+      setTimeout(() => {
+        console.log(getPerformanceReport());
+      }, 5000);
+    }
+
+    return cleanup;
+  }, [trackScreenLoad, getPerformanceReport]);
+
+  // Error handler for error boundary
+  const handleGlobalError = useCallback(
+    (error: Error, errorInfo: any) => {
+      reportCrash(error);
+      console.error('Global error caught:', error, errorInfo);
+    },
+    [reportCrash],
+  );
+
   // Show loading screen while restoring state
   if (!isReady) {
     return <></>;
   }
 
   return (
-    <GestureHandlerRootView style={styles.container}>
-      <SafeAreaProvider>
-        <BadgeProvider>
-          <NavigationContainer
-            linking={linking}
-            theme={navigationTheme}
-            initialState={initialState}
-            onStateChange={onStateChange}
-            onReady={() => {
-              // Navigation is ready - good place for analytics, crashlytics, etc.
-              console.log('Navigation is ready');
-            }}
-            fallback={null} // Custom loading component
-          >
-            <StatusBar
-              barStyle={
-                Platform.OS === 'ios' ? 'dark-content' : 'light-content'
-              }
-              backgroundColor={Theme.colors.primary[500]}
-              translucent={false}
-            />
-
-            <RootStack.Navigator screenOptions={stackScreenOptions}>
-              {/* Main App */}
-              <RootStack.Screen
-                name='Main'
-                component={BottomTabNavigator}
-                options={{
-                  headerShown: false,
-                }}
+    <ErrorBoundary onError={handleGlobalError}>
+      <GestureHandlerRootView style={styles.container}>
+        <SafeAreaProvider>
+          <BadgeProvider>
+            <NavigationContainer
+              linking={linking}
+              theme={navigationTheme}
+              initialState={initialState}
+              onStateChange={onStateChange}
+              onReady={() => {
+                // Navigation is ready - good place for analytics, crashlytics, etc.
+                console.log('Navigation is ready');
+              }}
+              fallback={null} // Custom loading component
+            >
+              <StatusBar
+                barStyle={
+                  Platform.OS === 'ios' ? 'dark-content' : 'light-content'
+                }
+                backgroundColor={Theme.colors.primary[500]}
+                translucent={false}
               />
 
-              {/* Modal Screens */}
-              <RootStack.Group
-                screenOptions={{
-                  presentation: 'modal',
-                  gestureEnabled: true,
-                  gestureDirection: 'vertical',
-                }}
-              >
+              <RootStack.Navigator screenOptions={stackScreenOptions}>
+                {/* Main App */}
                 <RootStack.Screen
-                  name='Search'
-                  component={SearchScreen}
+                  name='Main'
+                  component={BottomTabNavigator}
                   options={{
-                    title: 'Arama',
-                    headerShown: true,
-                  }}
-                />
-                <RootStack.Screen
-                  name='ImageViewer'
-                  component={ImageViewerScreen}
-                  options={{
-                    title: 'Galeri',
                     headerShown: false,
                   }}
                 />
+
+                {/* Modal Screens */}
+                <RootStack.Group
+                  screenOptions={{
+                    presentation: 'modal',
+                    gestureEnabled: true,
+                    gestureDirection: 'vertical',
+                  }}
+                >
+                  <RootStack.Screen
+                    name='Search'
+                    component={SearchScreen}
+                    options={{
+                      title: 'Arama',
+                      headerShown: true,
+                    }}
+                  />
+                  <RootStack.Screen
+                    name='ImageViewer'
+                    component={ImageViewerScreen}
+                    options={{
+                      title: 'Galeri',
+                      headerShown: false,
+                    }}
+                  />
+                  <RootStack.Screen
+                    name='ShareModal'
+                    component={ShareModalScreen}
+                    options={{
+                      title: 'Paylaş',
+                      headerShown: true,
+                    }}
+                  />
+                </RootStack.Group>
+
+                {/* Full Screen Modals */}
+                <RootStack.Group
+                  screenOptions={{
+                    presentation: 'modal',
+                    gestureEnabled: true,
+                  }}
+                >
+                  <RootStack.Screen
+                    name='Settings'
+                    component={SettingsScreen}
+                    options={{
+                      title: 'Ayarlar',
+                      headerShown: true,
+                    }}
+                  />
+                  <RootStack.Screen
+                    name='About'
+                    component={AboutScreen}
+                    options={{
+                      title: 'Hakkında',
+                      headerShown: true,
+                    }}
+                  />
+                </RootStack.Group>
+
+                {/* Auth Screens */}
+                <RootStack.Group
+                  screenOptions={{
+                    headerShown: false,
+                    gestureEnabled: false, // Disable gestures for auth screens
+                  }}
+                >
+                  <RootStack.Screen
+                    name='Onboarding'
+                    component={OnboardingScreen}
+                  />
+                  <RootStack.Screen name='Login' component={LoginScreen} />
+                  <RootStack.Screen
+                    name='Register'
+                    component={RegisterScreen}
+                  />
+                </RootStack.Group>
+
+                {/* Detail Screens */}
                 <RootStack.Screen
-                  name='ShareModal'
-                  component={ShareModalScreen}
+                  name='PlaceDetail'
+                  component={PlaceDetailScreen}
                   options={{
-                    title: 'Paylaş',
-                    headerShown: true,
+                    headerShown: false,
+                    gestureEnabled: true,
                   }}
                 />
-              </RootStack.Group>
+              </RootStack.Navigator>
 
-              {/* Full Screen Modals */}
-              <RootStack.Group
-                screenOptions={{
-                  presentation: 'modal',
-                  gestureEnabled: true,
-                }}
-              >
-                <RootStack.Screen
-                  name='Settings'
-                  component={SettingsScreen}
-                  options={{
-                    title: 'Ayarlar',
-                    headerShown: true,
-                  }}
-                />
-                <RootStack.Screen
-                  name='About'
-                  component={AboutScreen}
-                  options={{
-                    title: 'Hakkında',
-                    headerShown: true,
-                  }}
-                />
-              </RootStack.Group>
-
-              {/* Auth Screens */}
-              <RootStack.Group
-                screenOptions={{
-                  headerShown: false,
-                  gestureEnabled: false, // Disable gestures for auth screens
-                }}
-              >
-                <RootStack.Screen
-                  name='Onboarding'
-                  component={OnboardingScreen}
-                />
-                <RootStack.Screen
-                  name='Login'
-                  component={LoginScreen}
-                />
-                <RootStack.Screen
-                  name='Register'
-                  component={RegisterScreen}
-                />
-              </RootStack.Group>
-
-              {/* Detail Screens */}
-              <RootStack.Screen
-                name='PlaceDetail'
-                component={PlaceDetailScreen}
-                options={{
-                  headerShown: false,
-                  gestureEnabled: true,
-                }}
-              />
-            </RootStack.Navigator>
-
-            {/* Performance Monitor - only in development */}
-    
-          </NavigationContainer>
-        </BadgeProvider>
-      </SafeAreaProvider>
-    </GestureHandlerRootView>
+              {/* Performance Monitor - only in development */}
+            </NavigationContainer>
+          </BadgeProvider>
+        </SafeAreaProvider>
+      </GestureHandlerRootView>
+    </ErrorBoundary>
   );
 }
 
