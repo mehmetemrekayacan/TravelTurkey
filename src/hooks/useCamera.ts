@@ -1,74 +1,80 @@
 /**
- * TravelTurkey - Camera Hook (2025)
+ * TravelTurkey - Camera Hook (2025) - Stub Implementation
  * React hook for camera functionality in profile screens
  */
 
 import { useState, useCallback } from 'react';
 import { Alert } from 'react-native';
-import {
-  showPhotoOptions,
-  takePhoto,
-  selectFromGallery,
-  savePhotoToAppDirectory,
-  PhotoResult,
-  CameraOptions,
-} from '../services/camera/CameraService';
+
+// Placeholder types
+interface PhotoResult {
+  uri: string;
+  type?: string;
+  fileName?: string;
+  fileSize?: number;
+}
+
+interface CameraOptions {
+  mediaType?: 'photo' | 'video';
+  quality?: number;
+  maxWidth?: number;
+  maxHeight?: number;
+}
 
 interface UseCameraReturn {
   isLoading: boolean;
   selectedPhoto: PhotoResult | null;
   showPhotoSelector: () => Promise<void>;
-  takeNewPhoto: (options?: CameraOptions) => Promise<void>;
-  selectFromGalleryDirect: (options?: CameraOptions) => Promise<void>;
-  clearPhoto: () => void;
-  savePhoto: (fileName?: string) => Promise<string | null>;
+  takePhotoFromCamera: (options?: CameraOptions) => Promise<void>;
+  selectPhotoFromGallery: (options?: CameraOptions) => Promise<void>;
+  savePhoto: (fileName?: string) => Promise<boolean>;
+  clearSelectedPhoto: () => void;
+  error: string | null;
 }
 
 export const useCamera = (): UseCameraReturn => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<PhotoResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const showPhotoSelector = useCallback(async () => {
-    setIsLoading(true);
     try {
-      const result = await showPhotoOptions();
-      if (result) {
-        setSelectedPhoto(result);
-      }
-    } catch (error) {
-      console.error('Error selecting photo:', error);
-      Alert.alert('Hata', 'Fotoğraf seçilirken bir hata oluştu.');
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  const takeNewPhoto = useCallback(async (options?: CameraOptions) => {
-    setIsLoading(true);
-    try {
-      const result = await takePhoto(options);
-      if (result) {
-        setSelectedPhoto(result);
-      }
-    } catch (error) {
-      console.error('Error taking photo:', error);
-      Alert.alert('Hata', 'Fotoğraf çekilirken bir hata oluştu.');
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  const selectFromGalleryDirect = useCallback(
-    async (options?: CameraOptions) => {
       setIsLoading(true);
+      setError(null);
+
+      Alert.alert('Select Photo', 'Camera functionality not implemented yet', [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'OK', style: 'default' },
+      ]);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const takePhotoFromCamera = useCallback(async (_options?: CameraOptions) => {
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      Alert.alert('Camera', 'Camera functionality not implemented yet');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Camera error occurred');
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const selectPhotoFromGallery = useCallback(
+    async (_options?: CameraOptions) => {
       try {
-        const result = await selectFromGallery(options);
-        if (result) {
-          setSelectedPhoto(result);
-        }
-      } catch (error) {
-        console.error('Error selecting from gallery:', error);
-        Alert.alert('Hata', 'Galeriden fotoğraf seçilirken bir hata oluştu.');
+        setIsLoading(true);
+        setError(null);
+
+        Alert.alert('Gallery', 'Gallery functionality not implemented yet');
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Gallery error occurred');
       } finally {
         setIsLoading(false);
       }
@@ -76,27 +82,24 @@ export const useCamera = (): UseCameraReturn => {
     [],
   );
 
-  const clearPhoto = useCallback(() => {
-    setSelectedPhoto(null);
-  }, []);
-
   const savePhoto = useCallback(
-    async (fileName?: string): Promise<string | null> => {
-      if (!selectedPhoto) {
-        return null;
-      }
-
-      setIsLoading(true);
+    async (_fileName?: string): Promise<boolean> => {
       try {
-        const savedPath = await savePhotoToAppDirectory(
-          selectedPhoto.uri,
-          fileName,
-        );
-        return savedPath;
-      } catch (error) {
-        console.error('Error saving photo:', error);
-        Alert.alert('Hata', 'Fotoğraf kaydedilirken bir hata oluştu.');
-        return null;
+        if (!selectedPhoto) {
+          setError('No photo selected to save');
+          return false;
+        }
+
+        setIsLoading(true);
+        setError(null);
+
+        // Placeholder implementation
+        console.log('Would save photo:', selectedPhoto);
+
+        return true;
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Save error occurred');
+        return false;
       } finally {
         setIsLoading(false);
       }
@@ -104,13 +107,21 @@ export const useCamera = (): UseCameraReturn => {
     [selectedPhoto],
   );
 
+  const clearSelectedPhoto = useCallback(() => {
+    setSelectedPhoto(null);
+    setError(null);
+  }, []);
+
   return {
     isLoading,
     selectedPhoto,
     showPhotoSelector,
-    takeNewPhoto,
-    selectFromGalleryDirect,
-    clearPhoto,
+    takePhotoFromCamera,
+    selectPhotoFromGallery,
     savePhoto,
+    clearSelectedPhoto,
+    error,
   };
 };
+
+export default useCamera;

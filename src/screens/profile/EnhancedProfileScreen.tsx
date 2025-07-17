@@ -22,7 +22,6 @@ import {
   generateRecommendations,
   updateUserPreferences,
 } from '../../services/ai/RecommendationEngine';
-import { GlobalStyles } from '../../styles/GlobalStyles';
 import { touristPlaces } from '../../data/touristPlaces';
 
 interface UserProfile {
@@ -33,6 +32,162 @@ interface UserProfile {
   visitedPlacesCount: number;
   favoriteCategories: string[];
 }
+
+// Separate component for profile header
+interface ProfileHeaderProps {
+  userProfile: UserProfile;
+  isCameraLoading: boolean;
+  selectedPhoto: any;
+  handlePhotoUpdate: () => void;
+  recommendations: any[];
+}
+
+const ProfileHeader: React.FC<ProfileHeaderProps> = ({
+  userProfile,
+  isCameraLoading,
+  selectedPhoto,
+  handlePhotoUpdate,
+  recommendations,
+}) => (
+  <Animated.View entering={FadeIn.duration(800)} style={styles.headerContainer}>
+    <TouchableOpacity
+      style={styles.photoContainer}
+      onPress={handlePhotoUpdate}
+      disabled={isCameraLoading}
+    >
+      {isCameraLoading ? (
+        <ActivityIndicator size='large' color={Theme.colors.primary[500]} />
+      ) : selectedPhoto ? (
+        <Image
+          source={{ uri: selectedPhoto.uri }}
+          style={styles.profilePhoto}
+        />
+      ) : userProfile.profilePhoto ? (
+        <Image
+          source={{ uri: userProfile.profilePhoto }}
+          style={styles.profilePhoto}
+        />
+      ) : (
+        <View style={styles.placeholderPhoto}>
+          <Text style={styles.placeholderText}>👤</Text>
+          <Text style={styles.photoHint}>Fotoğraf Ekle</Text>
+        </View>
+      )}
+      <View style={styles.cameraIcon}>
+        <Text style={styles.cameraIconText}>📷</Text>
+      </View>
+    </TouchableOpacity>
+
+    <Text style={styles.userName}>{userProfile.name}</Text>
+    <Text style={styles.userEmail}>{userProfile.email}</Text>
+
+    <View style={styles.statsContainer}>
+      <View style={styles.statItem}>
+        <Text style={styles.statNumber}>{userProfile.visitedPlacesCount}</Text>
+        <Text style={styles.statLabel}>Ziyaret Edilen</Text>
+      </View>
+      <View style={styles.statItem}>
+        <Text style={styles.statNumber}>
+          {userProfile.favoriteCategories.length}
+        </Text>
+        <Text style={styles.statLabel}>Favori Kategori</Text>
+      </View>
+      <View style={styles.statItem}>
+        <Text style={styles.statNumber}>{recommendations.length}</Text>
+        <Text style={styles.statLabel}>AI Önerisi</Text>
+      </View>
+    </View>
+  </Animated.View>
+);
+
+// Separate component for AI recommendations
+interface AIRecommendationsProps {
+  recommendations: any[];
+  isLoadingRecommendations: boolean;
+  loadRecommendations: () => void;
+  markPlaceAsVisited: (placeId: string) => void;
+}
+
+const AIRecommendations: React.FC<AIRecommendationsProps> = ({
+  recommendations,
+  isLoadingRecommendations,
+  loadRecommendations,
+  markPlaceAsVisited,
+}) => (
+  <Animated.View entering={SlideInDown.delay(400)} style={styles.section}>
+    <View style={styles.sectionHeader}>
+      <Text style={styles.sectionTitle}>🤖 AI Önerileri</Text>
+      <TouchableOpacity
+        onPress={loadRecommendations}
+        disabled={isLoadingRecommendations}
+      >
+        <Text style={styles.refreshText}>
+          {isLoadingRecommendations ? 'Yükleniyor...' : 'Yenile'}
+        </Text>
+      </TouchableOpacity>
+    </View>
+
+    {isLoadingRecommendations ? (
+      <ActivityIndicator
+        size='small'
+        color={Theme.colors.primary[500]}
+        style={styles.loader}
+      />
+    ) : (
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.recommendationsScroll}
+      >
+        {recommendations.map((rec, _index) => (
+          <TouchableOpacity
+            key={rec.place.id}
+            style={styles.recommendationCard}
+            onPress={() => markPlaceAsVisited(rec.place.id)}
+          >
+            <Text style={styles.recommendationIcon}>{rec.place.icon}</Text>
+            <Text style={styles.recommendationName}>{rec.place.name}</Text>
+            <Text style={styles.recommendationScore}>
+              Uyum: {Math.round(rec.score * 100)}%
+            </Text>
+            <Text style={styles.recommendationReason} numberOfLines={2}>
+              {rec.reasons[0] || 'Sizin için önerilen'}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    )}
+  </Animated.View>
+);
+
+// Separate component for quick actions
+const QuickActions: React.FC = () => (
+  <Animated.View entering={SlideInDown.delay(600)} style={styles.section}>
+    <Text style={styles.sectionTitle}>🚀 Hızlı İşlemler</Text>
+
+    <View style={styles.actionsGrid}>
+      <TouchableOpacity style={styles.actionCard}>
+        <Text style={styles.actionIcon}>📱</Text>
+        <Text style={styles.actionText}>Fotoğraf Çek</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.actionCard}>
+        <Text style={styles.actionIcon}>🎯</Text>
+        <Text style={styles.actionText}>Hedefler</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.actionCard}>
+        <Text style={styles.actionIcon}>📊</Text>
+        <Text style={styles.actionText}>İstatistikler</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.actionCard}>
+        <Text style={styles.actionIcon}>⚙️</Text>
+        <Text style={styles.actionText}>Ayarlar</Text>
+      </TouchableOpacity>
+    </View>
+  </Animated.View>
+);
 
 const EnhancedProfileScreen: React.FC = () => {
   const [userProfile, setUserProfile] = useState<UserProfile>({
@@ -51,7 +206,7 @@ const EnhancedProfileScreen: React.FC = () => {
     isLoading: isCameraLoading,
     selectedPhoto,
     showPhotoSelector,
-    clearPhoto,
+    clearSelectedPhoto,
     savePhoto,
   } = useCamera();
 
@@ -83,17 +238,19 @@ const EnhancedProfileScreen: React.FC = () => {
       'Profil Fotoğrafı',
       'Bu fotoğrafı profil resmi olarak kullanmak ister misiniz?',
       [
-        { text: 'İptal', style: 'cancel', onPress: clearPhoto },
+        { text: 'İptal', style: 'cancel', onPress: clearSelectedPhoto },
         {
           text: 'Kaydet',
           onPress: async () => {
             try {
-              const savedPath = await savePhoto(
+              const saveSuccess = await savePhoto(
                 `profile_${userProfile.id}.jpg`,
               );
-              if (savedPath) {
+              if (saveSuccess) {
+                // In a real implementation, this would be the actual saved path
+                const savedPath = selectedPhoto?.uri || '';
                 setUserProfile(prev => ({ ...prev, profilePhoto: savedPath }));
-                clearPhoto();
+                clearSelectedPhoto();
                 Alert.alert('Başarılı', 'Profil fotoğrafınız güncellendi!');
               }
             } catch (error) {
@@ -103,7 +260,13 @@ const EnhancedProfileScreen: React.FC = () => {
         },
       ],
     );
-  }, [selectedPhoto, showPhotoSelector, clearPhoto, savePhoto, userProfile.id]);
+  }, [
+    selectedPhoto,
+    showPhotoSelector,
+    clearSelectedPhoto,
+    savePhoto,
+    userProfile.id,
+  ]);
 
   // Handle place visit (for testing AI)
   const markPlaceAsVisited = useCallback(
@@ -123,146 +286,25 @@ const EnhancedProfileScreen: React.FC = () => {
     [loadRecommendations],
   );
 
-  const ProfileHeader = () => (
-    <Animated.View
-      entering={FadeIn.duration(800)}
-      style={styles.headerContainer}
-    >
-      <TouchableOpacity
-        style={styles.photoContainer}
-        onPress={handlePhotoUpdate}
-        disabled={isCameraLoading}
-      >
-        {isCameraLoading ? (
-          <ActivityIndicator size='large' color={Theme.colors.primary[500]} />
-        ) : selectedPhoto ? (
-          <Image
-            source={{ uri: selectedPhoto.uri }}
-            style={styles.profilePhoto}
-          />
-        ) : userProfile.profilePhoto ? (
-          <Image
-            source={{ uri: userProfile.profilePhoto }}
-            style={styles.profilePhoto}
-          />
-        ) : (
-          <View style={styles.placeholderPhoto}>
-            <Text style={styles.placeholderText}>👤</Text>
-            <Text style={styles.photoHint}>Fotoğraf Ekle</Text>
-          </View>
-        )}
-        <View style={styles.cameraIcon}>
-          <Text style={styles.cameraIconText}>📷</Text>
-        </View>
-      </TouchableOpacity>
-
-      <Text style={styles.userName}>{userProfile.name}</Text>
-      <Text style={styles.userEmail}>{userProfile.email}</Text>
-
-      <View style={styles.statsContainer}>
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>
-            {userProfile.visitedPlacesCount}
-          </Text>
-          <Text style={styles.statLabel}>Ziyaret Edilen</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>
-            {userProfile.favoriteCategories.length}
-          </Text>
-          <Text style={styles.statLabel}>Favori Kategori</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>{recommendations.length}</Text>
-          <Text style={styles.statLabel}>AI Önerisi</Text>
-        </View>
-      </View>
-    </Animated.View>
-  );
-
-  const AIRecommendations = () => (
-    <Animated.View entering={SlideInDown.delay(400)} style={styles.section}>
-      <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>🤖 AI Önerileri</Text>
-        <TouchableOpacity
-          onPress={loadRecommendations}
-          disabled={isLoadingRecommendations}
-        >
-          <Text style={styles.refreshText}>
-            {isLoadingRecommendations ? 'Yükleniyor...' : 'Yenile'}
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      {isLoadingRecommendations ? (
-        <ActivityIndicator
-          size='small'
-          color={Theme.colors.primary[500]}
-          style={styles.loader}
-        />
-      ) : (
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={styles.recommendationsScroll}
-        >
-          {recommendations.map((rec, index) => (
-            <TouchableOpacity
-              key={rec.place.id}
-              style={styles.recommendationCard}
-              onPress={() => markPlaceAsVisited(rec.place.id)}
-            >
-              <Text style={styles.recommendationIcon}>{rec.place.icon}</Text>
-              <Text style={styles.recommendationName}>{rec.place.name}</Text>
-              <Text style={styles.recommendationScore}>
-                Uyum: {Math.round(rec.score * 100)}%
-              </Text>
-              <Text style={styles.recommendationReason} numberOfLines={2}>
-                {rec.reasons[0] || 'Sizin için önerilen'}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      )}
-    </Animated.View>
-  );
-
-  const QuickActions = () => (
-    <Animated.View entering={SlideInDown.delay(600)} style={styles.section}>
-      <Text style={styles.sectionTitle}>🚀 Hızlı İşlemler</Text>
-
-      <View style={styles.actionsGrid}>
-        <TouchableOpacity style={styles.actionCard}>
-          <Text style={styles.actionIcon}>📱</Text>
-          <Text style={styles.actionText}>Fotoğraf Çek</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.actionCard}>
-          <Text style={styles.actionIcon}>🎯</Text>
-          <Text style={styles.actionText}>Hedefler</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.actionCard}>
-          <Text style={styles.actionIcon}>📊</Text>
-          <Text style={styles.actionText}>İstatistikler</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.actionCard}>
-          <Text style={styles.actionIcon}>⚙️</Text>
-          <Text style={styles.actionText}>Ayarlar</Text>
-        </TouchableOpacity>
-      </View>
-    </Animated.View>
-  );
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
       >
-        <ProfileHeader />
-        <AIRecommendations />
+        <ProfileHeader
+          userProfile={userProfile}
+          isCameraLoading={isCameraLoading}
+          selectedPhoto={selectedPhoto}
+          handlePhotoUpdate={handlePhotoUpdate}
+          recommendations={recommendations}
+        />
+        <AIRecommendations
+          recommendations={recommendations}
+          isLoadingRecommendations={isLoadingRecommendations}
+          loadRecommendations={loadRecommendations}
+          markPlaceAsVisited={markPlaceAsVisited}
+        />
         <QuickActions />
       </ScrollView>
     </SafeAreaView>
