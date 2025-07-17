@@ -14,12 +14,14 @@ import { BottomTabParamList } from '../types/navigation';
 import { AppColors } from '../constants/Colors';
 
 // Direct imports for better performance
+import HomeScreen from '../screens/home/HomeScreen';
 import OptimizedExploreScreen from '../screens/explore/OptimizedExploreScreen';
 import PlansScreen from '../screens/plans/PlansScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 
 // Modern vector icons (Material Icons)
 import {
+  HomeTabIcon,
   ExploreTabIcon,
   PlansTabIcon,
   ProfileTabIcon,
@@ -105,9 +107,20 @@ const BottomTabNavigator = React.memo(() => {
   return (
     <Tab.Navigator
       screenOptions={screenOptions}
-      initialRouteName='ExploreTab'
+      initialRouteName='HomeTab'
       tabBar={renderCustomTabBar}
     >
+      <Tab.Screen
+        name='HomeTab'
+        component={HomeScreen}
+        options={{
+          title: 'Ana Sayfa',
+          tabBarIcon: HomeTabIcon,
+          tabBarAccessibilityLabel:
+            'Ana Sayfa sekmesi - Türkiye gezileri ve öneriler',
+        }}
+      />
+
       <Tab.Screen
         name='ExploreTab'
         component={OptimizedExploreScreen}
