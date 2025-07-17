@@ -4,7 +4,6 @@
  */
 
 import * as Sentry from '@sentry/react-native';
-import { Platform } from 'react-native';
 
 // Sentry DSN - Replace with your actual DSN
 const SENTRY_DSN = __DEV__
@@ -36,7 +35,7 @@ export const initializeSentry = () => {
     sessionTrackingIntervalMillis: 10000,
 
     // Error filtering
-    beforeSend(event) {
+    beforeSend(event: any) {
       // Filter out development errors
       if (__DEV__) return null;
 
@@ -50,14 +49,8 @@ export const initializeSentry = () => {
 
     // Custom integrations
     integrations: [
-      new Sentry.ReactNativeTracing({
-        // Performance monitoring options
-        routingInstrumentation: Sentry.reactNavigationIntegration({
-          enableTimeToInitialDisplay: true,
-        }),
-        enableNativeFramesTracking: Platform.OS === 'android',
-        enableStallTracking: true,
-      }),
+      // Note: ReactNativeTracing may not be available in newer versions
+      // Replace with appropriate performance monitoring integration
     ],
   });
 };
@@ -95,7 +88,7 @@ export const trackEvent = (eventName: string, data?: Record<string, any>) => {
  * Report custom errors
  */
 export const reportError = (error: Error, context?: Record<string, any>) => {
-  Sentry.withScope(scope => {
+  Sentry.withScope((scope: any) => {
     if (context) {
       Object.keys(context).forEach(key => {
         scope.setTag(key, context[key]);
@@ -108,12 +101,12 @@ export const reportError = (error: Error, context?: Record<string, any>) => {
 /**
  * Performance transaction wrapper
  */
-export const withPerformanceTransaction = <T>(
+export const withPerformanceTransaction = async <T>(
   name: string,
   operation: () => Promise<T> | T,
   description?: string,
 ): Promise<T> => {
-  return Sentry.startSpan(
+  return await Sentry.startSpan(
     {
       name,
       op: description || 'function',

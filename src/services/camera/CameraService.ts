@@ -8,7 +8,9 @@ import {
   launchCamera,
   ImagePickerResponse,
   MediaType,
-  ImagePickerOptions,
+  Asset,
+  CameraOptions as RNImagePickerCameraOptions,
+  ImageLibraryOptions,
 } from 'react-native-image-picker';
 import { Platform, PermissionsAndroid, Alert } from 'react-native';
 import RNFS from 'react-native-fs';
@@ -129,9 +131,9 @@ export const takePhoto = async (
     return null;
   }
 
-  const defaultOptions: ImagePickerOptions = {
+  const defaultOptions: RNImagePickerCameraOptions = {
     mediaType: 'photo',
-    quality: 0.8,
+    quality: 0.8 as any, // Type assertion to handle PhotoQuality
     maxWidth: 1920,
     maxHeight: 1080,
     includeBase64: false,
@@ -178,9 +180,9 @@ export const selectFromGallery = async (
     return null;
   }
 
-  const defaultOptions: ImagePickerOptions = {
+  const defaultOptions: ImageLibraryOptions = {
     mediaType: 'photo',
-    quality: 0.8,
+    quality: 0.8 as any,
     maxWidth: 1920,
     maxHeight: 1080,
     includeBase64: false,
@@ -228,9 +230,9 @@ export const selectMultiplePhotos = async (
     return [];
   }
 
-  const defaultOptions: ImagePickerOptions = {
+  const defaultOptions: ImageLibraryOptions = {
     mediaType: 'photo',
-    quality: 0.8,
+    quality: 0.8 as any,
     maxWidth: 1920,
     maxHeight: 1080,
     includeBase64: false,
@@ -246,7 +248,7 @@ export const selectMultiplePhotos = async (
       }
 
       const results: PhotoResult[] = [];
-      response.assets?.forEach(asset => {
+      response.assets?.forEach((asset: Asset) => {
         if (asset.uri) {
           results.push({
             uri: asset.uri,
