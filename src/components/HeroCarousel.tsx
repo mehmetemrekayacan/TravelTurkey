@@ -96,6 +96,13 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
     setCurrentIndex(slideIndex);
   }, []);
 
+  const onScroll = useCallback((event: any) => {
+    const slideIndex = Math.round(
+      event.nativeEvent.contentOffset.x / SCREEN_WIDTH,
+    );
+    setCurrentIndex(slideIndex);
+  }, []);
+
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
     transform: [{ scale: scale.value }],
@@ -159,6 +166,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
+        onScroll={onScroll}
         onMomentumScrollEnd={onMomentumScrollEnd}
         scrollEventThrottle={16}
         decelerationRate='fast'
@@ -167,11 +175,11 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
         bounces={false}
       />
 
-      {/* Indicators */}
-      {renderIndicators()}
-
       {/* Bottom Fade */}
       <View style={styles.bottomFade} />
+
+      {/* Indicators */}
+      {renderIndicators()}
     </View>
   );
 };
@@ -201,7 +209,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     padding: 24,
-    paddingBottom: 40,
+    paddingBottom: 60,
   },
   textContainer: {
     alignItems: 'flex-start',
@@ -233,29 +241,37 @@ const styles = StyleSheet.create({
   },
   indicatorContainer: {
     position: 'absolute',
-    bottom: 16,
+    bottom: 32,
     alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
+    zIndex: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
   },
   indicator: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
     marginHorizontal: 4,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.6)',
   },
   indicatorActive: {
     backgroundColor: '#FFFFFF',
     width: 24,
+    borderColor: '#FFFFFF',
   },
   bottomFade: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    height: 60,
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    height: 80,
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
     pointerEvents: 'none',
   },
 });

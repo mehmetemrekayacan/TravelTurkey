@@ -187,7 +187,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.neutral.grayLightest,
+    backgroundColor: Colors.primary.blue,
   },
   header: {
     backgroundColor: Colors.primary.blue,
@@ -233,13 +233,14 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
+    backgroundColor: Colors.primary.blue,
   },
   scrollContent: {
     paddingBottom: 100,
   },
   content: {
     flex: 1,
-    marginTop: -20,
+    marginTop: -60,
     backgroundColor: Colors.neutral.grayLightest,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
