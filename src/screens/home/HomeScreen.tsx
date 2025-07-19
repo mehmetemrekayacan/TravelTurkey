@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { SafeAreaView, Text, View, StatusBar, StyleSheet } from 'react-native';
+import { Text, View, StatusBar, StyleSheet, Platform } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -109,10 +109,11 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
   const memoizedFloatingVisual = useMemo(() => <FloatingVisual />, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <StatusBar
         backgroundColor={Colors.primary.blue}
         barStyle='light-content'
+        translucent={false}
       />
 
       {/* Header */}
@@ -179,7 +180,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
           <View style={styles.bottomSpacing} />
         </Animated.View>
       </Animated.ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: Colors.primary.blue,
     paddingBottom: 16,
-    paddingTop: 8,
+    paddingTop: Platform.OS === 'android' ? 32 : 8,
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
   },

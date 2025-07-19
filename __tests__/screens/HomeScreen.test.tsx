@@ -15,8 +15,29 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeScreen from '../../src/screens/home/HomeScreenNew2025';
+import HomeScreen from '../../src/screens/home/HomeScreen';
 import * as asyncStorageUtils from '../../src/utils/asyncStorage';
+
+// Create mock components
+const MockHeroCarousel = ({ onSlidePress }: any) => (
+  <View testID='hero-carousel'>
+    <TouchableOpacity onPress={() => onSlidePress({ title: 'Test Slide' })}>
+      <Text>Hero Slide</Text>
+    </TouchableOpacity>
+  </View>
+);
+
+const MockFloatingVisual = () => (
+  <View testID='floating-visual'>
+    <Text>Türkiye'yi Keşfet</Text>
+  </View>
+);
+
+const MockCTAButton = ({ title, onPress }: any) => (
+  <TouchableOpacity testID='cta-button' onPress={onPress}>
+    <Text>{title}</Text>
+  </TouchableOpacity>
+);
 
 // Mock dependencies
 jest.mock('@react-native-async-storage/async-storage', () => ({
@@ -25,45 +46,28 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
 }));
 
 jest.mock('react-native-reanimated', () => {
-  const Reanimated = require('react-native-reanimated/mock');
-  Reanimated.default.call = () => {};
-  return Reanimated;
-});
+  const RNView = require('react-native').View;
+  const RNScrollView = require('react-native').ScrollView;
 
-jest.mock('../../src/components/HeroCarousel', () => {
-  return function MockHeroCarousel({ onSlidePress }: any) {
-    return (
-      <View testID='hero-carousel'>
-        <TouchableOpacity onPress={() => onSlidePress({ title: 'Test Slide' })}>
-          <Text>Hero Slide</Text>
-        </TouchableOpacity>
-      </View>
-    );
+  return {
+    useSharedValue: () => ({ value: 0 }),
+    useAnimatedStyle: () => ({}),
+    withTiming: (val: any) => val,
+    withSpring: (val: any) => val,
+    useAnimatedScrollHandler: () => () => {},
+    interpolate: () => 0,
+    View: RNView,
+    ScrollView: RNScrollView,
   };
 });
 
-jest.mock('../../src/components/QuickLinkCard', () => {
-  return function MockQuickLinkCard({ title, onPress }: any) {
-    return (
-      <TouchableOpacity
-        testID={`quick-link-${title.toLowerCase()}`}
-        onPress={onPress}
-      >
-        <Text>{title}</Text>
-      </TouchableOpacity>
-    );
-  };
-});
+jest.mock('../../src/components/HeroCarousel', () => MockHeroCarousel);
 
-jest.mock('../../src/components/CTAButton', () => {
-  return function MockCTAButton({ title, onPress }: any) {
-    return (
-      <TouchableOpacity testID='cta-button' onPress={onPress}>
-        <Text>{title}</Text>
-      </TouchableOpacity>
-    );
-  };
-});
+jest.mock('../../src/components/home/FloatingVisual', () => ({
+  FloatingVisual: MockFloatingVisual,
+}));
+
+jest.mock('../../src/components/CTAButton', () => MockCTAButton);
 
 jest.mock('../../src/utils/asyncStorage', () => ({
   getUserName: jest.fn(),
@@ -161,38 +165,21 @@ describe('HomeScreen', () => {
     });
   });
 
-  describe('Quick Links Navigation', () => {
-    it('navigates to ExploreTab when Keşfet is pressed', async () => {
+  describe('Floating Visual', () => {
+    it('renders floating visual component', async () => {
       render(<TestNavigator />);
 
       await waitFor(() => {
-        const exploreButton = screen.getByTestId('quick-link-keşfet');
-        fireEvent.press(exploreButton);
+        expect(screen.getByTestId('floating-visual')).toBeTruthy();
       });
-
-      expect(screen.getByTestId('quick-link-keşfet')).toBeTruthy();
     });
 
-    it('navigates to PlansTab when Planlarım is pressed', async () => {
+    it('displays main title in floating visual', async () => {
       render(<TestNavigator />);
 
       await waitFor(() => {
-        const plansButton = screen.getByTestId('quick-link-planlarım');
-        fireEvent.press(plansButton);
+        expect(screen.getByText("Türkiye'yi Keşfet")).toBeTruthy();
       });
-
-      expect(screen.getByTestId('quick-link-planlarım')).toBeTruthy();
-    });
-
-    it('navigates to ProfileTab when Profil is pressed', async () => {
-      render(<TestNavigator />);
-
-      await waitFor(() => {
-        const profileButton = screen.getByTestId('quick-link-profil');
-        fireEvent.press(profileButton);
-      });
-
-      expect(screen.getByTestId('quick-link-profil')).toBeTruthy();
     });
   });
 
@@ -263,12 +250,12 @@ describe('HomeScreen', () => {
   });
 
   describe('Accessibility', () => {
-    it('has proper accessibility labels for quick links', async () => {
+    it('renders floating visual with accessibility', async () => {
       render(<TestNavigator />);
 
       await waitFor(() => {
-        const exploreButton = screen.getByTestId('quick-link-keşfet');
-        expect(exploreButton).toBeTruthy();
+        const floatingVisual = screen.getByTestId('floating-visual');
+        expect(floatingVisual).toBeTruthy();
       });
     });
 
