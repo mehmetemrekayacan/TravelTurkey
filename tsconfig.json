@@ -1,17 +1,23 @@
 {
-  "extends": "@react-native/typescript-config",
   "compilerOptions": {
+    "target": "es2020",
+    "lib": ["es2020", "dom"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowJs": true,
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-native",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
@@ -23,7 +29,8 @@
       "@types/*": ["src/types/*"],
       "@styles/*": ["src/styles/*"],
       "@constants/*": ["src/constants/*"]
-    }
+    },
+    "typeRoots": ["node_modules/@types"]
   },
   "include": ["src/**/*", "App.tsx", "index.js", "__tests__/**/*"],
   "exclude": ["node_modules", "android", "ios", "coverage"]
