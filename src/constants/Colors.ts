@@ -61,12 +61,40 @@ export const Colors = {
     transparent: 'transparent',
   },
 
+  // Glassmorphism & Neumorphism (2025 UI Trends)
+  glass: {
+    background: 'rgba(255, 255, 255, 0.25)',
+    backgroundDark: 'rgba(0, 0, 0, 0.25)',
+    border: 'rgba(255, 255, 255, 0.18)',
+    blur: 'backdrop-filter: blur(20px)',
+    shadow: 'rgba(31, 38, 135, 0.37)',
+  },
+
+  neumorph: {
+    light: '#F0F0F3',
+    dark: '#E8E8EB',
+    shadowLight: '#FFFFFF',
+    shadowDark: '#D1D9E6',
+    insetShadowLight: 'inset 8px 8px 16px #D1D9E6',
+    insetShadowDark: 'inset -8px -8px 16px #FFFFFF',
+  },
+
+  // Modern Gradients
+  gradients: {
+    turkishSunset: ['#DC2626', '#F59E0B', '#1E3A8A'],
+    bosphorus: ['#0EA5E9', '#7DD3FC'],
+    cappadocia: ['#EA580C', '#F97316'],
+    emerald: ['#059669', '#10B981'],
+    golden: ['#F59E0B', '#FCD34D'],
+  },
+
   // Shadow & Overlay renkleri
   shadows: {
     light: 'rgba(0, 0, 0, 0.05)',
     medium: 'rgba(0, 0, 0, 0.1)',
     dark: 'rgba(0, 0, 0, 0.15)',
     black: '#000000',
+    neumorph: '8px 8px 16px #D1D9E6, -8px -8px 16px #FFFFFF',
   },
 };
 

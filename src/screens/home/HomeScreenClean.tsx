@@ -19,10 +19,38 @@ import { getUserName, updateLastVisit } from '../../utils/asyncStorage';
 
 // Components
 import HeroCarousel from '../../components/HeroCarousel';
-import { FloatingVisual } from '../../components/home/FloatingVisual';
+import QuickLinkCard from '../../components/QuickLinkCard';
 import CTAButton from '../../components/CTAButton';
 
 type HomeScreenProps = BottomTabScreenProps<'HomeTab'>;
+
+// Quick Links Configuration
+const QUICK_LINKS = [
+  {
+    id: '1',
+    title: 'Keşfet',
+    subtitle: "Türkiye'nin gizli cennetlerini keşfet",
+    icon: '🗺️',
+    color: Colors.primary.blue,
+    screen: 'ExploreTab' as const,
+  },
+  {
+    id: '2',
+    title: 'Planlarım',
+    subtitle: 'Seyahat planlarını oluştur ve yönet',
+    icon: '📋',
+    color: Colors.secondary.golden,
+    screen: 'PlansTab' as const,
+  },
+  {
+    id: '3',
+    title: 'Profil',
+    subtitle: 'Kişisel bilgilerin ve tercihlerin',
+    icon: '👤',
+    color: Colors.primary.red,
+    screen: 'ProfileTab' as const,
+  },
+];
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
   const [userName, setUserName] = useState<string>('Gezgin');
@@ -93,7 +121,34 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     transform: [{ scale: contentScale.value }],
   }));
 
+  const quickLinksAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateY: interpolate(scrollY.value, [0, 200], [0, -10], 'clamp'),
+      },
+    ],
+  }));
+
   // Event handlers
+  const handleQuickLinkPress = useCallback(
+    (screen: string) => {
+      switch (screen) {
+        case 'ExploreTab':
+          navigation.navigate('ExploreTab', { initialCategory: 'all' });
+          break;
+        case 'PlansTab':
+          navigation.navigate('PlansTab');
+          break;
+        case 'ProfileTab':
+          navigation.navigate('ProfileTab');
+          break;
+        default:
+          navigation.navigate('ExploreTab', { initialCategory: 'all' });
+      }
+    },
+    [navigation],
+  );
+
   const handleCTAPress = useCallback(() => {
     navigation.navigate('ExploreTab', { initialCategory: 'popular' });
   }, [navigation]);
@@ -105,8 +160,30 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     [navigation],
   );
 
-  // Memoized FloatingVisual for performance
-  const memoizedFloatingVisual = useMemo(() => <FloatingVisual />, []);
+  // Memoized components for performance
+  const memoizedQuickLinks = useMemo(
+    () => (
+      <Animated.View
+        style={[styles.quickLinksContainer, quickLinksAnimatedStyle]}
+      >
+        <Text style={styles.sectionTitle}>Hızlı Erişim</Text>
+        <View style={styles.quickLinksGrid}>
+          {QUICK_LINKS.map(link => (
+            <QuickLinkCard
+              key={link.id}
+              title={link.title}
+              subtitle={link.subtitle}
+              icon={link.icon}
+              color={link.color}
+              onPress={() => handleQuickLinkPress(link.screen)}
+              accessibilityLabel={`${link.title} sayfasına git`}
+            />
+          ))}
+        </View>
+      </Animated.View>
+    ),
+    [quickLinksAnimatedStyle, handleQuickLinkPress],
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -141,8 +218,8 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
 
         {/* Content Container */}
         <Animated.View style={[styles.content, contentAnimatedStyle]}>
-          {/* Floating Visual */}
-          {memoizedFloatingVisual}
+          {/* Quick Links */}
+          {memoizedQuickLinks}
 
           {/* CTA Button */}
           <View style={styles.ctaContainer}>
@@ -244,11 +321,20 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 24,
     paddingTop: 24,
   },
+  quickLinksContainer: {
+    paddingHorizontal: 20,
+    marginBottom: 32,
+  },
   sectionTitle: {
     fontSize: 22,
     fontWeight: 'bold',
     color: Colors.neutral.charcoal,
     marginBottom: 16,
+  },
+  quickLinksGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
   ctaContainer: {
     paddingHorizontal: 20,
