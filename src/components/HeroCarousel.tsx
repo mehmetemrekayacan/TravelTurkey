@@ -76,6 +76,7 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
       flatListRef.current?.scrollToIndex({
         index: nextIndex,
         animated: true,
+        viewPosition: 0.5, // Center the item
       });
     }, autoSlideInterval);
 
@@ -97,10 +98,17 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
   }, []);
 
   const onScroll = useCallback((event: any) => {
-    const slideIndex = Math.round(
-      event.nativeEvent.contentOffset.x / SCREEN_WIDTH,
-    );
-    setCurrentIndex(slideIndex);
+    // Only update indicator during slow scrolling, not fast swipes
+    const offsetX = event.nativeEvent.contentOffset.x;
+    const slideIndex = Math.round(offsetX / SCREEN_WIDTH);
+
+    // Only update if we're close to a slide boundary
+    const threshold = SCREEN_WIDTH * 0.5; // 50% of screen width
+    const distanceToSlide = Math.abs(offsetX - slideIndex * SCREEN_WIDTH);
+
+    if (distanceToSlide < threshold) {
+      setCurrentIndex(slideIndex);
+    }
   }, []);
 
   const animatedStyle = useAnimatedStyle(() => ({
@@ -164,15 +172,16 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({
         renderItem={renderSlide}
         keyExtractor={item => item.id}
         horizontal
-        pagingEnabled
+        pagingEnabled={false}
         showsHorizontalScrollIndicator={false}
         onScroll={onScroll}
         onMomentumScrollEnd={onMomentumScrollEnd}
         scrollEventThrottle={16}
-        decelerationRate='fast'
+        decelerationRate='normal'
         snapToInterval={SCREEN_WIDTH}
-        snapToAlignment='start'
+        snapToAlignment='center'
         bounces={false}
+        disableIntervalMomentum={true}
       />
 
       {/* Bottom Fade */}
