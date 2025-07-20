@@ -4,7 +4,14 @@
  */
 
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { Text, View, StatusBar, StyleSheet, Platform } from 'react-native';
+import {
+  Text,
+  View,
+  StatusBar,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -105,6 +112,10 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     [navigation],
   );
 
+  const handleMostVisitedPress = useCallback(() => {
+    navigation.navigate('ExploreTab', { initialCategory: 'historical' });
+  }, [navigation]);
+
   // Memoized FloatingVisual for performance
   const memoizedFloatingVisual = useMemo(() => <FloatingVisual />, []);
 
@@ -176,8 +187,40 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
             </View>
           </View>
 
-          {/* Bottom Spacing */}
-          <View style={styles.bottomSpacing} />
+          {/* Most Visited Place Section */}
+          <View style={styles.mostVisitedContainer}>
+            <Text style={styles.sectionTitle}>
+              Son Zamanlarda En Çok Ziyaret Edilen
+            </Text>
+            <TouchableOpacity
+              style={styles.mostVisitedCard}
+              onPress={handleMostVisitedPress}
+              activeOpacity={0.7}
+            >
+              <View style={styles.mostVisitedImageContainer}>
+                <Text style={styles.mostVisitedIcon}>🏛️</Text>
+              </View>
+              <View style={styles.mostVisitedContent}>
+                <Text style={styles.mostVisitedTitle}>Ayasofya Camii</Text>
+                <Text style={styles.mostVisitedSubtitle}>
+                  İstanbul, Sultanahmet
+                </Text>
+                <View style={styles.mostVisitedStats}>
+                  <View style={styles.mostVisitedStatItem}>
+                    <Text style={styles.mostVisitedStatIcon}>👥</Text>
+                    <Text style={styles.mostVisitedStatText}>2.3M ziyaret</Text>
+                  </View>
+                  <View style={styles.mostVisitedStatItem}>
+                    <Text style={styles.mostVisitedStatIcon}>⭐</Text>
+                    <Text style={styles.mostVisitedStatText}>4.8 puan</Text>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.mostVisitedArrow}>
+                <Text style={styles.mostVisitedArrowIcon}>▶</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </Animated.View>
       </Animated.ScrollView>
     </View>
@@ -233,10 +276,10 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
-    backgroundColor: Colors.primary.blue,
+    backgroundColor: Colors.neutral.grayLightest,
   },
   scrollContent: {
-    paddingBottom: 100,
+    paddingBottom: 20,
   },
   content: {
     flex: 1,
@@ -288,7 +331,77 @@ const styles = StyleSheet.create({
     color: Colors.neutral.grayMedium,
     textAlign: 'center',
   },
-  bottomSpacing: {
-    height: 40,
+  mostVisitedContainer: {
+    paddingHorizontal: 20,
+    marginBottom: 32,
+  },
+  mostVisitedCard: {
+    backgroundColor: Colors.neutral.white,
+    borderRadius: 20,
+    padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowColor: Colors.neutral.charcoal,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 3,
+  },
+  mostVisitedImageContainer: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: Colors.primary.blue,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 16,
+  },
+  mostVisitedIcon: {
+    fontSize: 28,
+    color: Colors.neutral.white,
+  },
+  mostVisitedContent: {
+    flex: 1,
+  },
+  mostVisitedTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: Colors.neutral.charcoal,
+    marginBottom: 4,
+  },
+  mostVisitedSubtitle: {
+    fontSize: 14,
+    color: Colors.neutral.grayMedium,
+    marginBottom: 8,
+  },
+  mostVisitedStats: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  mostVisitedStatItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  mostVisitedStatIcon: {
+    fontSize: 12,
+    marginRight: 4,
+  },
+  mostVisitedStatText: {
+    fontSize: 12,
+    color: Colors.neutral.grayMedium,
+    fontWeight: '500',
+  },
+  mostVisitedArrow: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: Colors.primary.blue,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  mostVisitedArrowIcon: {
+    fontSize: 12,
+    color: Colors.neutral.white,
   },
 });
