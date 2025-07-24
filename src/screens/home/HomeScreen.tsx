@@ -28,6 +28,7 @@ import { getUserName, updateLastVisit } from '../../utils/asyncStorage';
 import HeroCarousel from '../../components/HeroCarousel';
 import { FloatingVisual } from '../../components/home/FloatingVisual';
 import CTAButton from '../../components/CTAButton';
+import TravelTurkeyLogo from '../../components/common/TravelTurkeyLogo';
 
 type HomeScreenProps = BottomTabScreenProps<'HomeTab'>;
 
@@ -130,6 +131,9 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
       {/* Header */}
       <Animated.View style={[styles.header, headerAnimatedStyle]}>
         <View style={styles.headerContent}>
+          <View style={styles.logoContainer}>
+            <TravelTurkeyLogo variant='horizontal' size='small' />
+          </View>
           <View style={styles.greetingContainer}>
             <Text style={styles.timeGreeting}>{currentTime}</Text>
             <Text style={styles.userGreeting}>Hoş geldin, {userName}!</Text>
@@ -244,6 +248,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 8,
   },
   greetingContainer: {
     flex: 1,

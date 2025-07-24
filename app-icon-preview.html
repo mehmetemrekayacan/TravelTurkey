@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TravelTurkey App Icon Preview</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        margin: 0;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        color: #2d3748;
+        margin-bottom: 10px;
+        font-size: 2.5rem;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #718096;
+        margin-bottom: 40px;
+        font-size: 1.1rem;
+      }
+
+      .preview-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .preview-card {
+        background: #f7fafc;
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        border: 2px solid #e2e8f0;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .preview-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .preview-card h3 {
+        color: #2d3748;
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+      }
+
+      .icon-demo {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 15px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        color: white;
+        box-shadow: 0 8px 16px rgba(229, 62, 62, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .icon-demo::before {
+        content: '🌷';
+        position: absolute;
+        font-size: 2.5rem;
+        filter: brightness(0) invert(1);
+      }
+
+      .icon-demo::after {
+        content: '☪️';
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        font-size: 1rem;
+        color: #f6e05e;
+      }
+
+      .sizes-list {
+        list-style: none;
+        padding: 0;
+        margin: 15px 0;
+      }
+
+      .sizes-list li {
+        padding: 8px 0;
+        border-bottom: 1px solid #e2e8f0;
+        color: #4a5568;
+      }
+
+      .platform-demo {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .phone-mockup {
+        background: #2d3748;
+        border-radius: 25px;
+        padding: 20px;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .phone-mockup::before {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 4px;
+        background: #4a5568;
+        border-radius: 2px;
+      }
+
+      .home-screen {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        padding: 20px;
+        margin-top: 15px;
+        min-height: 300px;
+      }
+
+      .app-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .app-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .app-icon.travel-turkey {
+        background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        box-shadow: 0 4px 8px rgba(229, 62, 62, 0.4);
+        animation: pulse 2s infinite;
+      }
+
+      .app-icon.travel-turkey::before {
+        content: '🌷';
+        color: white;
+        filter: brightness(0) invert(1);
+      }
+
+      .app-icon.other {
+        background: #a0aec0;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .app-name {
+        font-size: 0.7rem;
+        margin-top: 5px;
+        text-align: center;
+        color: white;
+      }
+
+      .steps-section {
+        background: #f0fff4;
+        border-radius: 15px;
+        padding: 25px;
+        margin-top: 30px;
+        border-left: 4px solid #38a169;
+      }
+
+      .steps-section h3 {
+        color: #2f855a;
+        margin-bottom: 15px;
+      }
+
+      .step {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 15px;
+      }
+
+      .step-number {
+        background: #38a169;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        flex-shrink: 0;
+      }
+
+      .step-content {
+        flex: 1;
+      }
+
+      .cta-button {
+        background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 20px auto;
+        display: block;
+        transition: transform 0.3s ease;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🇹🇷 TravelTurkey App Icon</h1>
+      <p class="subtitle">Mobil uygulamanızda nasıl görüneceğinin önizlemesi</p>
+
+      <div class="preview-grid">
+        <div class="preview-card">
+          <h3>📱 Android Görünümü</h3>
+          <div class="icon-demo"></div>
+          <p><strong>Boyutlar:</strong></p>
+          <ul class="sizes-list">
+            <li>mdpi: 48×48px</li>
+            <li>hdpi: 72×72px</li>
+            <li>xhdpi: 96×96px</li>
+            <li>xxhdpi: 144×144px</li>
+            <li>xxxhdpi: 192×192px</li>
+          </ul>
+        </div>
+
+        <div class="preview-card">
+          <h3>🍎 iOS Görünümü</h3>
+          <div class="icon-demo"></div>
+          <p><strong>Boyutlar:</strong></p>
+          <ul class="sizes-list">
+            <li>40×40px (20pt @2x)</li>
+            <li>60×60px (20pt @3x)</li>
+            <li>58×58px (29pt @2x)</li>
+            <li>87×87px (29pt @3x)</li>
+            <li>120×120px (60pt @2x)</li>
+            <li>180×180px (60pt @3x)</li>
+            <li>1024×1024px (App Store)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="platform-demo">
+        <div class="phone-mockup">
+          <h4 style="text-align: center; margin-bottom: 10px">
+            Android Home Screen
+          </h4>
+          <div class="home-screen">
+            <div class="app-grid">
+              <div>
+                <div class="app-icon travel-turkey"></div>
+                <div class="app-name">TravelTurkey</div>
+              </div>
+              <div>
+                <div class="app-icon other">📱</div>
+                <div class="app-name">Phone</div>
+              </div>
+              <div>
+                <div class="app-icon other">✉️</div>
+                <div class="app-name">Mail</div>
+              </div>
+              <div>
+                <div class="app-icon other">🌐</div>
+                <div class="app-name">Browser</div>
+              </div>
+              <div>
+                <div class="app-icon other">📷</div>
+                <div class="app-name">Camera</div>
+              </div>
+              <div>
+                <div class="app-icon other">🎵</div>
+                <div class="app-name">Music</div>
+              </div>
+              <div>
+                <div class="app-icon other">⚙️</div>
+                <div class="app-name">Settings</div>
+              </div>
+              <div>
+                <div class="app-icon other">🗺️</div>
+                <div class="app-name">Maps</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone-mockup">
+          <h4 style="text-align: center; margin-bottom: 10px">
+            iOS Home Screen
+          </h4>
+          <div class="home-screen">
+            <div class="app-grid">
+              <div>
+                <div
+                  class="app-icon travel-turkey"
+                  style="border-radius: 22%"
+                ></div>
+                <div class="app-name">TravelTurkey</div>
+              </div>
+              <div>
+                <div class="app-icon other" style="border-radius: 22%">📱</div>
+                <div class="app-name">Phone</div>
+              </div>
+              <div>
+                <div class="app-icon other" style="border-radius: 22%">✉️</div>
+                <div class="app-name">Mail</div>
+              </div>
+              <div>
+                <div class="app-icon other" style="border-radius: 22%">🌐</div>
+                <div class="app-name">Safari</div>
+              </div>
+              <div>
+                <div class="app-icon other" style="border-radius: 22%">📷</div>
+                <div class="app-name">Camera</div>
+              </div>
+              <div>
+                <div class="app-icon other" style="border-radius: 22%">🎵</div>
+                <div class="app-name">Music</div>
+              </div>
+              <div>
+                <div class="app-icon other" style="border-radius: 22%">⚙️</div>
+                <div class="app-name">Settings</div>
+              </div>
+              <div>
+                <div class="app-icon other" style="border-radius: 22%">🗺️</div>
+                <div class="app-name">Maps</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps-section">
+        <h3>🚀 App Icon'unu Uygulamanıza Entegre Etme Adımları</h3>
+
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <strong>SVG'yi PNG'ye Çevirin</strong><br />
+            <code>src/assets/logos/app-icon.svg</code> dosyanızı 1024×1024
+            boyutunda PNG'ye çevirin. <br /><em
+              >Önerilen site:
+              <a href="https://appicon.co" target="_blank">appicon.co</a></em
+            >
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <strong>Tüm Boyutları İndirin</strong><br />
+            App Icon Generator sitesinden Android ve iOS için tüm gerekli
+            boyutları indirin.
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <strong>Android Dosyalarını Yerleştirin</strong><br />
+            <code>ic_launcher.png</code> dosyalarını ilgili
+            <code>mipmap-*</code> klasörlerine kopyalayın.
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <strong>iOS Dosyalarını Yerleştirin</strong><br />
+            Icon dosyalarını
+            <code>ios/TravelTurkey/Images.xcassets/AppIcon.appiconset/</code>
+            klasörüne kopyalayın.
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-number">5</div>
+          <div class="step-content">
+            <strong>Test Edin</strong><br />
+            <code>npm run android</code> ve <code>npm run ios</code> komutları
+            ile uygulamanızı test edin.
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="cta-button"
+        onclick="window.open('https://appicon.co', '_blank')"
+      >
+        🎨 App Icon Generator'a Git
+      </button>
+    </div>
+  </body>
+</html>

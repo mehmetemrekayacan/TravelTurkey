@@ -49,6 +49,7 @@ import ShareModalScreen from './src/screens/share/ShareModalScreen';
 
 // Import performance monitoring and error boundary
 import ErrorBoundary from './src/components/common/ErrorBoundary';
+import SplashScreen from './src/components/common/SplashScreen';
 import { usePerformanceMonitor } from './src/hooks/usePerformanceMonitor';
 
 // Constants
@@ -85,6 +86,7 @@ const styles = StyleSheet.create({
 
 function App(): React.JSX.Element {
   const [isReady, setIsReady] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
   const [initialState, setInitialState] = useState<InitialState>();
   const [appStateVisible, setAppStateVisible] = useState(AppState.currentState);
 
@@ -217,6 +219,11 @@ function App(): React.JSX.Element {
   // Show loading screen while restoring state
   if (!isReady) {
     return <></>;
+  }
+
+  // Show splash screen
+  if (showSplash) {
+    return <SplashScreen onComplete={() => setShowSplash(false)} />;
   }
 
   return (
