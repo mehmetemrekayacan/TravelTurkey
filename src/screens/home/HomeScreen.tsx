@@ -1,6 +1,7 @@
 /**
  * TravelTurkey - Modern Home Screen 2025
- * Redesigned with AI assets, glassmorphism, and neumorphism
+ * Redesigned with hero section, category grids, featured places carousel,
+ * quick actions, search suggestions, and modern glassmorphism effects
  */
 
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
@@ -21,13 +22,17 @@ import Animated, {
   interpolate,
 } from 'react-native-reanimated';
 import { BottomTabScreenProps } from '../../types/navigation';
-import { Colors } from '../../constants/Colors';
+import { Theme } from '../../styles/theme';
 import { getUserName, updateLastVisit } from '../../utils/asyncStorage';
 
 // Components
 import HeroCarousel from '../../components/HeroCarousel';
 import { FloatingVisual } from '../../components/home/FloatingVisual';
 import CTAButton from '../../components/CTAButton';
+import CategoryGrid from '../../components/home/CategoryGrid';
+import FeaturedPlacesCarousel from '../../components/home/FeaturedPlacesCarousel';
+import QuickActionsWidget from '../../components/home/QuickActionsWidget';
+import SearchSuggestionWidget from '../../components/home/SearchSuggestionWidget';
 
 type HomeScreenProps = BottomTabScreenProps<'HomeTab'>;
 
@@ -112,6 +117,55 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     [navigation],
   );
 
+  const handleCategoryPress = useCallback(
+    (category: any) => {
+      navigation.navigate('ExploreTab', { initialCategory: category.id });
+    },
+    [navigation],
+  );
+
+  const handleFeaturedPlacePress = useCallback(
+    (place: any) => {
+      // For now, navigate to ExploreTab since PlaceDetail expects different params
+      navigation.navigate('ExploreTab', { initialCategory: 'featured' });
+    },
+    [navigation],
+  );
+
+  const handleQuickActionPress = useCallback(
+    (action: any) => {
+      switch (action.action) {
+        case 'search':
+          // Navigate to ExploreTab for now since Search params don't match
+          navigation.navigate('ExploreTab', { initialCategory: 'search' });
+          break;
+        case 'map':
+          navigation.navigate('ExploreTab', { initialCategory: 'map' });
+          break;
+        case 'favorites':
+          navigation.navigate('ProfileTab');
+          break;
+        case 'weather':
+          // Handle weather action - could open weather modal or external app
+          break;
+        default:
+          break;
+      }
+    },
+    [navigation],
+  );
+
+  const handleSearchPress = useCallback(() => {
+    navigation.navigate('ExploreTab', { initialCategory: 'search' });
+  }, [navigation]);
+
+  const handleSearchSuggestionPress = useCallback(
+    (suggestion: any) => {
+      navigation.navigate('ExploreTab', { initialCategory: suggestion.id });
+    },
+    [navigation],
+  );
+
   const handleMostVisitedPress = useCallback(() => {
     navigation.navigate('ExploreTab', { initialCategory: 'historical' });
   }, [navigation]);
@@ -122,7 +176,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
   return (
     <View style={styles.container}>
       <StatusBar
-        backgroundColor={Colors.primary.blue}
+        backgroundColor={Theme.colors.primary[600]}
         barStyle='light-content'
         translucent={false}
       />
@@ -153,8 +207,20 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
 
         {/* Content Container */}
         <Animated.View style={[styles.content, contentAnimatedStyle]}>
-          {/* Floating Visual */}
-          {memoizedFloatingVisual}
+          {/* Search Suggestion Widget */}
+          <SearchSuggestionWidget
+            onSearchPress={handleSearchPress}
+            onSuggestionPress={handleSearchSuggestionPress}
+          />
+
+          {/* Quick Actions Widget */}
+          <QuickActionsWidget onActionPress={handleQuickActionPress} />
+
+          {/* Category Grid */}
+          <CategoryGrid onCategoryPress={handleCategoryPress} />
+
+          {/* Featured Places Carousel */}
+          <FeaturedPlacesCarousel onPlacePress={handleFeaturedPlacePress} />
 
           {/* CTA Button */}
           <View style={styles.ctaContainer}>
@@ -230,10 +296,10 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.primary.blue,
+    backgroundColor: Theme.colors.primary[600],
   },
   header: {
-    backgroundColor: Colors.primary.blue,
+    backgroundColor: Theme.colors.primary[600],
     paddingBottom: 16,
     paddingTop: Platform.OS === 'android' ? 32 : 8,
     borderBottomLeftRadius: 24,
@@ -256,7 +322,7 @@ const styles = StyleSheet.create({
   userGreeting: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: Colors.neutral.white,
+    color: Theme.colors.neutral[50],
   },
   weatherWidget: {
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
@@ -271,12 +337,12 @@ const styles = StyleSheet.create({
   },
   weatherText: {
     fontSize: 12,
-    color: Colors.neutral.white,
+    color: Theme.colors.neutral[50],
     fontWeight: '600',
   },
   scrollView: {
     flex: 1,
-    backgroundColor: Colors.neutral.grayLightest,
+    backgroundColor: Theme.colors.neutral[50],
   },
   scrollContent: {
     paddingBottom: 20,
@@ -284,7 +350,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     marginTop: -60,
-    backgroundColor: Colors.neutral.grayLightest,
+    backgroundColor: Theme.colors.neutral[50],
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     paddingTop: 24,
@@ -292,7 +358,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: Colors.neutral.charcoal,
+    color: Theme.colors.neutral[900],
     marginBottom: 16,
   },
   ctaContainer: {
@@ -308,27 +374,23 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   statCard: {
-    backgroundColor: Colors.neutral.white,
+    backgroundColor: Theme.colors.neutral[50],
     borderRadius: 16,
     padding: 16,
     alignItems: 'center',
     flex: 1,
     marginHorizontal: 4,
-    shadowColor: Colors.neutral.charcoal,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 2,
+    ...Theme.shadows.base,
   },
   statNumber: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: Colors.primary.blue,
+    color: Theme.colors.primary[600],
     marginBottom: 4,
   },
   statLabel: {
     fontSize: 12,
-    color: Colors.neutral.grayMedium,
+    color: Theme.colors.neutral[600],
     textAlign: 'center',
   },
   mostVisitedContainer: {
@@ -336,29 +398,25 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   mostVisitedCard: {
-    backgroundColor: Colors.neutral.white,
+    backgroundColor: Theme.colors.neutral[50],
     borderRadius: 20,
     padding: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    shadowColor: Colors.neutral.charcoal,
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 3,
+    ...Theme.shadows.md,
   },
   mostVisitedImageContainer: {
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: Colors.primary.blue,
+    backgroundColor: Theme.colors.primary[600],
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 16,
   },
   mostVisitedIcon: {
     fontSize: 28,
-    color: Colors.neutral.white,
+    color: Theme.colors.neutral[50],
   },
   mostVisitedContent: {
     flex: 1,
@@ -366,12 +424,12 @@ const styles = StyleSheet.create({
   mostVisitedTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: Colors.neutral.charcoal,
+    color: Theme.colors.neutral[900],
     marginBottom: 4,
   },
   mostVisitedSubtitle: {
     fontSize: 14,
-    color: Colors.neutral.grayMedium,
+    color: Theme.colors.neutral[600],
     marginBottom: 8,
   },
   mostVisitedStats: {
@@ -389,19 +447,19 @@ const styles = StyleSheet.create({
   },
   mostVisitedStatText: {
     fontSize: 12,
-    color: Colors.neutral.grayMedium,
+    color: Theme.colors.neutral[600],
     fontWeight: '500',
   },
   mostVisitedArrow: {
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: Colors.primary.blue,
+    backgroundColor: Theme.colors.primary[600],
     alignItems: 'center',
     justifyContent: 'center',
   },
   mostVisitedArrowIcon: {
     fontSize: 12,
-    color: Colors.neutral.white,
+    color: Theme.colors.neutral[50],
   },
 });

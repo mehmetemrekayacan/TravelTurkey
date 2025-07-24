@@ -104,6 +104,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       accessibilityRole='button'
       accessibilityLabel={accessibilityLabel || title}
       activeOpacity={0.8}
+      testID="cta-button"
     >
       <Animated.View
         style={[styles.button, animatedStyle, disabled && styles.disabled]}
