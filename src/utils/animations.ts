@@ -136,8 +136,7 @@ export const createBounceAnimation = (toValue: number) => {
 // Pulse animation factory
 export const createPulseAnimation = (
   scale = 1.05,
-  duration = 1000,
-  repeat = -1
+  duration = 1000
 ) => {
   return withSequence(
     withTiming(scale, { duration: duration / 2 }),

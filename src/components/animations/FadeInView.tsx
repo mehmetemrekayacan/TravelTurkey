@@ -6,7 +6,6 @@ import Animated, {
   withTiming,
   runOnJS,
 } from 'react-native-reanimated';
-import { createFadeAnimation } from '../../utils/animations';
 
 interface FadeInViewProps {
   children: React.ReactNode;

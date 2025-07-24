@@ -3,8 +3,6 @@ import {
   TouchableOpacity,
   Text,
   ActivityIndicator,
-  View,
-  AccessibilityRole,
 } from 'react-native';
 import Animated, {
   useSharedValue,

@@ -153,8 +153,6 @@ export const getTourismCardDimensions = () => {
  * Grid layout helper
  */
 export const getGridColumns = () => {
-  const screenSize = getScreenSize();
-  
   return screenSizeSelect({
     xs: 1,
     sm: 2,

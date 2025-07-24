@@ -67,7 +67,6 @@ export const Card: React.FC<CardProps> = ({
   imageStyle,
   lazyLoad = true,
   gradientOverlay = false,
-  gradientColors = ['transparent', 'rgba(0,0,0,0.7)'],
   tourismLayout = false,
   accessibilityLabel,
   testID,
