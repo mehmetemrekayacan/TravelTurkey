@@ -150,6 +150,7 @@ export const OptimizedSearchComponent: React.FC<OptimizedSearchProps> = memo(
             placeholderTextColor={AppColors.TEXT_SECONDARY}
             autoCorrect={false}
             autoCapitalize='none'
+            accessibilityLabel='Arama çubuğu'
           />
 
           {isLoading && (
