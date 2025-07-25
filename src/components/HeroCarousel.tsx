@@ -50,6 +50,14 @@ const HERO_SLIDES: HeroSlide[] = [
     id: '3',
     ...AI_GENERATED_ASSETS.heroImages.pamukkale,
   },
+  {
+    id: '4',
+    ...AI_GENERATED_ASSETS.heroImages.bosphorusBridge,
+  },
+  {
+    id: '5',
+    ...AI_GENERATED_ASSETS.heroImages.antalyaCoast,
+  },
 ];
 
 export const HeroCarousel: React.FC<HeroCarouselProps> = ({
