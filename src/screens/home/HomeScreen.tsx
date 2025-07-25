@@ -132,7 +132,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
       <Animated.View style={[styles.header, headerAnimatedStyle]}>
         <View style={styles.headerContent}>
           <View style={styles.logoContainer}>
-            <TravelTurkeyLogo variant='horizontal' size='small' />
+            <TravelTurkeyLogo size='medium' />
           </View>
           <View style={styles.greetingContainer}>
             <Text style={styles.timeGreeting}>{currentTime}</Text>
@@ -251,10 +251,12 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: 8,
+    justifyContent: 'center',
   },
   greetingContainer: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   timeGreeting: {
     fontSize: 14,

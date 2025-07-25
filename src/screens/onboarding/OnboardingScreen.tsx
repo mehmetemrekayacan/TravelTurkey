@@ -11,7 +11,7 @@ const OnboardingScreen: React.FC = () => {
 
       {/* Hero Logo Section */}
       <View style={styles.heroSection}>
-        <TravelTurkeyLogo variant='vertical' size='xlarge' />
+        <TravelTurkeyLogo size='xlarge' />
         <Text style={styles.heroTitle}>TravelTurkey'e Hoş Geldiniz!</Text>
         <Text style={styles.heroSubtitle}>
           Türkiye'nin en güzel yerlerini keşfetmek için uygulamayı kullanmaya

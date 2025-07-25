@@ -11,7 +11,7 @@ const LoginScreen: React.FC = () => {
 
       {/* Logo Section */}
       <View style={styles.logoSection}>
-        <TravelTurkeyLogo variant='vertical' size='large' />
+        <TravelTurkeyLogo size='large' />
         <Text style={styles.welcomeText}>Hoş Geldiniz</Text>
       </View>
 

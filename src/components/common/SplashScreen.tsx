@@ -58,7 +58,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
       <Animated.View style={[styles.container, backgroundAnimatedStyle]}>
         <View style={styles.logoContainer}>
           <Animated.View style={logoAnimatedStyle}>
-            <TravelTurkeyLogo variant='vertical' size='xlarge' />
+            <TravelTurkeyLogo size='xlarge' />
           </Animated.View>
         </View>
 
