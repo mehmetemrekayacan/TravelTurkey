@@ -13,8 +13,6 @@ import {
 } from 'react-native';
 import { GlobalStyles } from '../../styles/GlobalStyles';
 import ScreenHeader from '../../components/common/ScreenHeader';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
 
 // Types
 interface Plan {
@@ -110,8 +108,6 @@ const quickActions: QuickAction[] = [
 ];
 
 export default function PlansScreen() {
-  const insets = useSafeAreaInsets();
-
   const handlePlanPress = (plan: Plan) => {
     console.log(`${plan.title} planı seçildi`);
   };
@@ -158,7 +154,6 @@ export default function PlansScreen() {
 
       <ScrollView style={GlobalStyles.container}>
         {/* Badge Demo for testing */}
-
 
         {/* Quick Actions */}
         <View style={GlobalStyles.card}>
