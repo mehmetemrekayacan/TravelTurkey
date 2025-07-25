@@ -51,14 +51,15 @@ export const TravelTurkeyLogo: React.FC<LogoProps> = ({
     }
 
     const variantKey = variant === 'iconOnly' ? 'icon' : variant;
-    const dimensions = sizeMap[size][variantKey as keyof (typeof sizeMap)[typeof size]];
-    
+    const dimensions =
+      sizeMap[size][variantKey as keyof (typeof sizeMap)[typeof size]];
+
     // For horizontal and vertical variants, we show both icon and text
     // For icon and iconOnly variants, we show just the icon
     if (variant === 'icon' || variant === 'iconOnly') {
       return dimensions;
     }
-    
+
     // For horizontal and vertical, adjust dimensions appropriately
     return dimensions;
   };
@@ -75,7 +76,7 @@ export const TravelTurkeyLogo: React.FC<LogoProps> = ({
             width: dimensions.width,
             height: dimensions.height,
           }}
-          resizeMode="contain"
+          resizeMode='contain'
         />
       </View>
     );
@@ -84,30 +85,66 @@ export const TravelTurkeyLogo: React.FC<LogoProps> = ({
   // For horizontal and vertical variants with text
   return (
     <View style={[styles.container, style]}>
-      <View style={variant === 'vertical' ? styles.verticalLayout : styles.horizontalLayout}>
+      <View
+        style={
+          variant === 'vertical'
+            ? styles.verticalLayout
+            : styles.horizontalLayout
+        }
+      >
         <Image
           source={APP_ICON}
           style={{
-            width: variant === 'vertical' ? dimensions.height * 0.4 : dimensions.height * 0.8,
-            height: variant === 'vertical' ? dimensions.height * 0.4 : dimensions.height * 0.8,
+            width:
+              variant === 'vertical'
+                ? dimensions.height * 0.4
+                : dimensions.height * 0.8,
+            height:
+              variant === 'vertical'
+                ? dimensions.height * 0.4
+                : dimensions.height * 0.8,
           }}
-          resizeMode="contain"
+          resizeMode='contain'
         />
         {variant === 'vertical' ? (
           <View style={styles.verticalText}>
-            <Text style={[styles.text, styles.travelText, { fontSize: dimensions.height * 0.12 }]}>
+            <Text
+              style={[
+                styles.text,
+                styles.travelText,
+                { fontSize: dimensions.height * 0.12 },
+              ]}
+            >
               Travel
             </Text>
-            <Text style={[styles.text, styles.turkeyText, { fontSize: dimensions.height * 0.12 }]}>
+            <Text
+              style={[
+                styles.text,
+                styles.turkeyText,
+                { fontSize: dimensions.height * 0.12 },
+              ]}
+            >
               Turkey
             </Text>
           </View>
         ) : (
           <View style={styles.horizontalText}>
-            <Text style={[styles.text, styles.travelText, { fontSize: dimensions.height * 0.32 }]}>
+            <Text
+              style={[
+                styles.text,
+                styles.travelText,
+                { fontSize: dimensions.height * 0.32 },
+              ]}
+            >
               Travel
             </Text>
-            <Text style={[styles.text, styles.turkeyText, { fontSize: dimensions.height * 0.32 }]}>
+            <Text
+              style={[
+                styles.text,
+                styles.turkeyText,
+                { fontSize: dimensions.height * 0.32 },
+              ]}
+            >
               Turkey
             </Text>
           </View>
